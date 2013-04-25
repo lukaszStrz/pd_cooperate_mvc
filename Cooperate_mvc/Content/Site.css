@@ -1,12 +1,39 @@
 ﻿body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+    min-width: 1000px;
+    margin: 0;
 }
 
-header, footer, nav, section {
-    display: block;
+header {
+    width: 1000px;
+    margin: 0 auto;
+    display: table;
+}
+
+    header .logo {
+        float: left;
+        font-size: x-large;
+        font-family: 'Segoe Print';
+    }
+
+    header .login {
+        float: right;
+        font-size: large;
+        font-family: Calibri;
+    }
+
+footer {
+    width: 1000px;
+    margin: 0 auto;
+    display: table;
+    text-align: center;
+}
+
+content {
+    width: 1000px;
+    margin: 0 auto;
+    display: table;
 }
 
 

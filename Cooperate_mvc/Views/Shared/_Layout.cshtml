@@ -8,7 +8,16 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
+    <header>
+        <div class="logo">Cooperate!</div>
+        <div class="login">Zaloguj się</div>
+    </header>
+    <content>
+        @RenderBody()
+    </content>
+    <footer>
+        &copy; 2013
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
