@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="compact_dbModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="compact_dbModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="compact_dbModel.Store.Comment" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="compact_dbModel.Store.Group" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="compact_dbModel.Store.Message" store:Type="Tables" />
+          <EntitySet Name="Participation" EntityType="compact_dbModel.Store.Participation" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="compact_dbModel.Store.Post" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="compact_dbModel.Store.Task" store:Type="Tables" />
+          <EntitySet Name="TaskStatus" EntityType="compact_dbModel.Store.TaskStatus" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="compact_dbModel.Store.User" store:Type="Tables" />
+          <AssociationSet Name="FK_Comment_Comment" Association="compact_dbModel.Store.FK_Comment_Comment">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="Comment1" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Task" Association="compact_dbModel.Store.FK_Comment_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="compact_dbModel.Store.FK_Comment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User" Association="compact_dbModel.Store.FK_Message_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User1" Association="compact_dbModel.Store.FK_Message_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participation_Group" Association="compact_dbModel.Store.FK_Participation_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Participation" EntitySet="Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participation_User" Association="compact_dbModel.Store.FK_Participation_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Participation" EntitySet="Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Group" Association="compact_dbModel.Store.FK_Post_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Post" Association="compact_dbModel.Store.FK_Post_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Post1" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_User" Association="compact_dbModel.Store.FK_Post_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Group" Association="compact_dbModel.Store.FK_Task_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TaskStatus" Association="compact_dbModel.Store.FK_Task_TaskStatus">
+            <End Role="TaskStatus" EntitySet="TaskStatus" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="compact_dbModel.Store.FK_Task_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User1" Association="compact_dbModel.Store.FK_Task_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User2" Association="compact_dbModel.Store.FK_Task_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Comment_id" />
+          </Key>
+          <Property Name="Comment_id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Comment_text" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="User_author" Type="int" Nullable="false" />
+          <Property Name="Task_id" Type="bigint" Nullable="false" />
+          <Property Name="Comment_datetime" Type="datetime" Nullable="false" />
+          <Property Name="Comment_inResponseTo" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Group_id" />
+          </Key>
+          <Property Name="Group_id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Group_name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Group_description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Group_creationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Message_id" />
+          </Key>
+          <Property Name="Message_id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Message_text" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="Message_datetimt" Type="datetime" Nullable="false" />
+          <Property Name="User_from" Type="int" Nullable="false" />
+          <Property Name="User_to" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participation">
+          <Key>
+            <PropertyRef Name="User_id" />
+            <PropertyRef Name="Group_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Group_id" Type="bigint" Nullable="false" />
+          <Property Name="Participation_isAdmin" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Post_id" />
+          </Key>
+          <Property Name="Post_id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Post_text" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="User_author" Type="int" Nullable="false" />
+          <Property Name="Post_datetime" Type="datetime" Nullable="false" />
+          <Property Name="Post_inResponseTo" Type="bigint" />
+          <Property Name="Group_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Task_id" />
+          </Key>
+          <Property Name="Task_id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Task_title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Task_description" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Task_creationDate" Type="datetime" Nullable="false" />
+          <Property Name="Task_deadline" Type="datetime" Nullable="false" />
+          <Property Name="User_from" Type="int" Nullable="false" />
+          <Property Name="User_to" Type="int" Nullable="false" />
+          <Property Name="TaskStatus_id" Type="tinyint" Nullable="false" />
+          <Property Name="Task_statusLastChange" Type="datetime" Nullable="false" />
+          <Property Name="User_statusChangedBy" Type="int" Nullable="false" />
+          <Property Name="Group_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskStatus">
+          <Key>
+            <PropertyRef Name="TaskStatus_id" />
+          </Key>
+          <Property Name="TaskStatus_id" Type="tinyint" Nullable="false" />
+          <Property Name="TaskStatus_name" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="User_firstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="User_lastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="User_birth" Type="datetime" Nullable="false" />
+          <Property Name="User_email" Type="nvarchar" Nullable="false" MaxLength="254" />
+          <Property Name="User_pass" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_Comment_Comment">
+          <End Role="Comment" Type="compact_dbModel.Store.Comment" Multiplicity="0..1" />
+          <End Role="Comment1" Type="compact_dbModel.Store.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="Comment_id" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="Comment_inResponseTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Task">
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="1" />
+          <End Role="Comment" Type="compact_dbModel.Store.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Task_id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="Task_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Comment" Type="compact_dbModel.Store.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="User_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Message" Type="compact_dbModel.Store.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="User_from" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User1">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Message" Type="compact_dbModel.Store.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="User_to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participation_Group">
+          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="compact_dbModel.Store.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Group_id" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="Group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participation_User">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="compact_dbModel.Store.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Group">
+          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1" />
+          <End Role="Post" Type="compact_dbModel.Store.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Group_id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Post">
+          <End Role="Post" Type="compact_dbModel.Store.Post" Multiplicity="0..1" />
+          <End Role="Post1" Type="compact_dbModel.Store.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Post_id" />
+            </Principal>
+            <Dependent Role="Post1">
+              <PropertyRef Name="Post_inResponseTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_User">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Post" Type="compact_dbModel.Store.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="User_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Group">
+          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Group_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="Group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TaskStatus">
+          <End Role="TaskStatus" Type="compact_dbModel.Store.TaskStatus" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskStatus">
+              <PropertyRef Name="TaskStatus_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskStatus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="User_from" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User1">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="User_to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User2">
+          <End Role="User" Type="compact_dbModel.Store.User" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="User_statusChangedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="compact_dbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="compact_dbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="compact_dbModel.Comment" />
+          <EntitySet Name="Groups" EntityType="compact_dbModel.Group" />
+          <EntitySet Name="Messages" EntityType="compact_dbModel.Message" />
+          <EntitySet Name="Participations" EntityType="compact_dbModel.Participation" />
+          <EntitySet Name="Posts" EntityType="compact_dbModel.Post" />
+          <EntitySet Name="Tasks" EntityType="compact_dbModel.Task" />
+          <EntitySet Name="TaskStatus" EntityType="compact_dbModel.TaskStatu" />
+          <EntitySet Name="Users" EntityType="compact_dbModel.User" />
+          <AssociationSet Name="FK_Comment_Comment" Association="compact_dbModel.FK_Comment_Comment">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="Comment1" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Task" Association="compact_dbModel.FK_Comment_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_User" Association="compact_dbModel.FK_Comment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participation_Group" Association="compact_dbModel.FK_Participation_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Participation" EntitySet="Participations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Group" Association="compact_dbModel.FK_Post_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Group" Association="compact_dbModel.FK_Task_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User" Association="compact_dbModel.FK_Message_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User1" Association="compact_dbModel.FK_Message_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participation_User" Association="compact_dbModel.FK_Participation_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Participation" EntitySet="Participations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Post" Association="compact_dbModel.FK_Post_Post">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Post1" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_User" Association="compact_dbModel.FK_Post_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_TaskStatus" Association="compact_dbModel.FK_Task_TaskStatus">
+            <End Role="TaskStatus" EntitySet="TaskStatus" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User" Association="compact_dbModel.FK_Task_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User1" Association="compact_dbModel.FK_Task_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_User2" Association="compact_dbModel.FK_Task_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Comment_id" />
+          </Key>
+          <Property Name="Comment_id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment_text" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="User_author" Type="Int32" Nullable="false" />
+          <Property Name="Task_id" Type="Int64" Nullable="false" />
+          <Property Name="Comment_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment_inResponseTo" Type="Int64" />
+          <NavigationProperty Name="Comment1" Relationship="compact_dbModel.FK_Comment_Comment" FromRole="Comment" ToRole="Comment1" />
+          <NavigationProperty Name="Comment2" Relationship="compact_dbModel.FK_Comment_Comment" FromRole="Comment1" ToRole="Comment" />
+          <NavigationProperty Name="Task" Relationship="compact_dbModel.FK_Comment_Task" FromRole="Comment" ToRole="Task" />
+          <NavigationProperty Name="User" Relationship="compact_dbModel.FK_Comment_User" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Group_id" />
+          </Key>
+          <Property Name="Group_id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Group_description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Group_creationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Participations" Relationship="compact_dbModel.FK_Participation_Group" FromRole="Group" ToRole="Participation" />
+          <NavigationProperty Name="Posts" Relationship="compact_dbModel.FK_Post_Group" FromRole="Group" ToRole="Post" />
+          <NavigationProperty Name="Tasks" Relationship="compact_dbModel.FK_Task_Group" FromRole="Group" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Message_id" />
+          </Key>
+          <Property Name="Message_id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Message_text" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Message_datetimt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User_from" Type="Int32" Nullable="false" />
+          <Property Name="User_to" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="compact_dbModel.FK_Message_User" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="compact_dbModel.FK_Message_User1" FromRole="Message" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Participation">
+          <Key>
+            <PropertyRef Name="User_id" />
+            <PropertyRef Name="Group_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Group_id" Type="Int64" Nullable="false" />
+          <Property Name="Participation_isAdmin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="compact_dbModel.FK_Participation_Group" FromRole="Participation" ToRole="Group" />
+          <NavigationProperty Name="User" Relationship="compact_dbModel.FK_Participation_User" FromRole="Participation" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Post_id" />
+          </Key>
+          <Property Name="Post_id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_text" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="User_author" Type="Int32" Nullable="false" />
+          <Property Name="Post_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Post_inResponseTo" Type="Int64" />
+          <Property Name="Group_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="compact_dbModel.FK_Post_Group" FromRole="Post" ToRole="Group" />
+          <NavigationProperty Name="Post1" Relationship="compact_dbModel.FK_Post_Post" FromRole="Post" ToRole="Post1" />
+          <NavigationProperty Name="Post2" Relationship="compact_dbModel.FK_Post_Post" FromRole="Post1" ToRole="Post" />
+          <NavigationProperty Name="User" Relationship="compact_dbModel.FK_Post_User" FromRole="Post" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Task_id" />
+          </Key>
+          <Property Name="Task_id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Task_title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Task_description" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Task_creationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Task_deadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User_from" Type="Int32" Nullable="false" />
+          <Property Name="User_to" Type="Int32" Nullable="false" />
+          <Property Name="TaskStatus_id" Type="Byte" Nullable="false" />
+          <Property Name="Task_statusLastChange" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User_statusChangedBy" Type="Int32" Nullable="false" />
+          <Property Name="Group_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="compact_dbModel.FK_Comment_Task" FromRole="Task" ToRole="Comment" />
+          <NavigationProperty Name="Group" Relationship="compact_dbModel.FK_Task_Group" FromRole="Task" ToRole="Group" />
+          <NavigationProperty Name="TaskStatu" Relationship="compact_dbModel.FK_Task_TaskStatus" FromRole="Task" ToRole="TaskStatus" />
+          <NavigationProperty Name="User" Relationship="compact_dbModel.FK_Task_User" FromRole="Task" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="compact_dbModel.FK_Task_User1" FromRole="Task" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="compact_dbModel.FK_Task_User2" FromRole="Task" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TaskStatu">
+          <Key>
+            <PropertyRef Name="TaskStatus_id" />
+          </Key>
+          <Property Name="TaskStatus_id" Type="Byte" Nullable="false" />
+          <Property Name="TaskStatus_name" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Tasks" Relationship="compact_dbModel.FK_Task_TaskStatus" FromRole="TaskStatus" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="User_firstName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="User_lastName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="User_birth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User_email" Type="String" Nullable="false" MaxLength="254" Unicode="true" FixedLength="false" />
+          <Property Name="User_pass" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Comments" Relationship="compact_dbModel.FK_Comment_User" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Messages" Relationship="compact_dbModel.FK_Message_User" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="Messages1" Relationship="compact_dbModel.FK_Message_User1" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="Participations" Relationship="compact_dbModel.FK_Participation_User" FromRole="User" ToRole="Participation" />
+          <NavigationProperty Name="Posts" Relationship="compact_dbModel.FK_Post_User" FromRole="User" ToRole="Post" />
+          <NavigationProperty Name="Tasks" Relationship="compact_dbModel.FK_Task_User" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="Tasks1" Relationship="compact_dbModel.FK_Task_User1" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="Tasks2" Relationship="compact_dbModel.FK_Task_User2" FromRole="User" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_Comment_Comment">
+          <End Role="Comment" Type="compact_dbModel.Comment" Multiplicity="0..1" />
+          <End Role="Comment1" Type="compact_dbModel.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="Comment_id" />
+            </Principal>
+            <Dependent Role="Comment1">
+              <PropertyRef Name="Comment_inResponseTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Task">
+          <End Role="Task" Type="compact_dbModel.Task" Multiplicity="1" />
+          <End Role="Comment" Type="compact_dbModel.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Task_id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="Task_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_User">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Comment" Type="compact_dbModel.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="User_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participation_Group">
+          <End Role="Group" Type="compact_dbModel.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="compact_dbModel.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Group_id" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="Group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Group">
+          <End Role="Group" Type="compact_dbModel.Group" Multiplicity="1" />
+          <End Role="Post" Type="compact_dbModel.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Group_id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="Group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Group">
+          <End Role="Group" Type="compact_dbModel.Group" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Group_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="Group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Message" Type="compact_dbModel.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="User_from" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User1">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Message" Type="compact_dbModel.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="User_to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participation_User">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="compact_dbModel.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Post">
+          <End Role="Post" Type="compact_dbModel.Post" Multiplicity="0..1" />
+          <End Role="Post1" Type="compact_dbModel.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Post_id" />
+            </Principal>
+            <Dependent Role="Post1">
+              <PropertyRef Name="Post_inResponseTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_User">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Post" Type="compact_dbModel.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="User_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_TaskStatus">
+          <End Role="TaskStatus" Type="compact_dbModel.TaskStatu" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskStatus">
+              <PropertyRef Name="TaskStatus_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskStatus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="User_from" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User1">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="User_to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_User2">
+          <End Role="User" Type="compact_dbModel.User" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="User_statusChangedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="compact_dbModelStoreContainer" CdmEntityContainer="compact_dbEntities">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="compact_dbModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Comment_id" ColumnName="Comment_id" />
+                <ScalarProperty Name="Comment_text" ColumnName="Comment_text" />
+                <ScalarProperty Name="User_author" ColumnName="User_author" />
+                <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+                <ScalarProperty Name="Comment_datetime" ColumnName="Comment_datetime" />
+                <ScalarProperty Name="Comment_inResponseTo" ColumnName="Comment_inResponseTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="compact_dbModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+                <ScalarProperty Name="Group_name" ColumnName="Group_name" />
+                <ScalarProperty Name="Group_description" ColumnName="Group_description" />
+                <ScalarProperty Name="Group_creationDate" ColumnName="Group_creationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="compact_dbModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Message_id" ColumnName="Message_id" />
+                <ScalarProperty Name="Message_text" ColumnName="Message_text" />
+                <ScalarProperty Name="Message_datetimt" ColumnName="Message_datetimt" />
+                <ScalarProperty Name="User_from" ColumnName="User_from" />
+                <ScalarProperty Name="User_to" ColumnName="User_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participations">
+            <EntityTypeMapping TypeName="compact_dbModel.Participation">
+              <MappingFragment StoreEntitySet="Participation">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+                <ScalarProperty Name="Participation_isAdmin" ColumnName="Participation_isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="compact_dbModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="Post_id" ColumnName="Post_id" />
+                <ScalarProperty Name="Post_text" ColumnName="Post_text" />
+                <ScalarProperty Name="User_author" ColumnName="User_author" />
+                <ScalarProperty Name="Post_datetime" ColumnName="Post_datetime" />
+                <ScalarProperty Name="Post_inResponseTo" ColumnName="Post_inResponseTo" />
+                <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="compact_dbModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="Task_id" ColumnName="Task_id" />
+                <ScalarProperty Name="Task_title" ColumnName="Task_title" />
+                <ScalarProperty Name="Task_description" ColumnName="Task_description" />
+                <ScalarProperty Name="Task_creationDate" ColumnName="Task_creationDate" />
+                <ScalarProperty Name="Task_deadline" ColumnName="Task_deadline" />
+                <ScalarProperty Name="User_from" ColumnName="User_from" />
+                <ScalarProperty Name="User_to" ColumnName="User_to" />
+                <ScalarProperty Name="TaskStatus_id" ColumnName="TaskStatus_id" />
+                <ScalarProperty Name="Task_statusLastChange" ColumnName="Task_statusLastChange" />
+                <ScalarProperty Name="User_statusChangedBy" ColumnName="User_statusChangedBy" />
+                <ScalarProperty Name="Group_id" ColumnName="Group_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskStatus">
+            <EntityTypeMapping TypeName="compact_dbModel.TaskStatu">
+              <MappingFragment StoreEntitySet="TaskStatus">
+                <ScalarProperty Name="TaskStatus_id" ColumnName="TaskStatus_id" />
+                <ScalarProperty Name="TaskStatus_name" ColumnName="TaskStatus_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="compact_dbModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="User_firstName" ColumnName="User_firstName" />
+                <ScalarProperty Name="User_lastName" ColumnName="User_lastName" />
+                <ScalarProperty Name="User_birth" ColumnName="User_birth" />
+                <ScalarProperty Name="User_email" ColumnName="User_email" />
+                <ScalarProperty Name="User_pass" ColumnName="User_pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

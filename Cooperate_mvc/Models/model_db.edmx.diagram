@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71b3527be0ab4e1f9de8c6702685161b" Name="Diagram1">
+        <EntityTypeShape EntityType="compact_dbModel.Comment" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.Group" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.Message" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.Participation" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.Post" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.Task" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.TaskStatu" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="compact_dbModel.User" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="compact_dbModel.FK_Comment_Comment" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Comment_Task" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Comment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Participation_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Post_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Task_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Message_User" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Message_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Participation_User" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Post_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Post_User" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Task_TaskStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Task_User" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Task_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="compact_dbModel.FK_Task_User2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
