@@ -39,21 +39,37 @@ namespace Cooperate_mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                User u = new Models.User();
-                u.User_birth = user.Birth;
-                u.User_email = user.Email;
-                u.User_firstName = user.FirstName;
-                u.User_lastName = user.LastName;
-                u.User_login = user.Login;
-                u.User_pass = Hash.GetHash(user.Pass, HashType.SHA512);
+                User newUser = new Models.User();
+                newUser.User_birth = user.Birth;
+                newUser.User_email = user.Email;
+                newUser.User_firstName = user.FirstName;
+                newUser.User_lastName = user.LastName;
+                newUser.User_login = user.Login;
+                newUser.User_pass = Hash.GetHash(user.Pass, HashType.SHA512);
 
-                db.Users.Add(u);
+                db.Users.Add(newUser);
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
             }
 
             return View(user);
+        }
+
+        [HttpPost]
+        public JsonResult LoginExist(string Login)
+        {
+            var user = db.Users.Where(u => u.User_login.Equals(Login)).SingleOrDefault();
+
+            return Json(user == null);
+        }
+
+        [HttpPost]
+        public JsonResult MailExist(string Email)
+        {
+            var user = db.Users.Where(u => u.User_email.Equals(Email)).SingleOrDefault();
+
+            return Json(user == null);
         }
 
         //
