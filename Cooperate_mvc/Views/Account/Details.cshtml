@@ -1,0 +1,57 @@
+﻿@model Cooperate_mvc.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>User</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_firstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_firstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_lastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_lastName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_birth)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_birth)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_pass)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_pass)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

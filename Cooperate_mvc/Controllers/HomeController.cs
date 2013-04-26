@@ -26,6 +26,5 @@ namespace Cooperate_mvc.Controllers
         {
             return View();
         }
-
     }
 }

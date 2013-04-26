@@ -293,10 +293,12 @@ namespace Cooperate_mvc.Models
             using (compact_dbEntities db = new compact_dbEntities())
             {
                 User user = (from u in db.Users
-                                 where u.User_email.Equals(username) && Hash.CheckHash(password,u.User_pass,HashType.SHA512)
+                                 where u.User_email.Equals(username)
                                  select u).SingleOrDefault();
-                
-                return (user != null);
+
+                if (user == null)
+                    return false;
+                return Hash.CheckHash(password, user.User_pass, HashType.SHA512);
             }
         }
     }

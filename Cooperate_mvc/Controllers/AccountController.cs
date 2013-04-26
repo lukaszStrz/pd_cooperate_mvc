@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Cooperate_mvc.Models;
+using System.Web.Security;
+
+namespace Cooperate_mvc.Controllers
+{
+    public class AccountController : Controller
+    {
+        private compact_dbEntities db = new compact_dbEntities();
+
+        //
+        // GET: /Account/Details/5
+
+        public ActionResult Details(int id = 0)
+        {
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        //
+        // GET: /Account/Create
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Create
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                user.User_pass = Hash.GetHash(user.User_pass, HashType.SHA512);
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index","Home");
+            }
+
+            return View(user);
+        }
+
+        //
+        // GET: /Account/Delete/5
+
+        public ActionResult Delete(int id = 0)
+        {
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        //
+        // POST: /Account/Delete/5
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Account/Login
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(User user)
+        {
+            MyMembership membership = new MyMembership();
+            if (membership.ValidateUser(user.User_email, user.User_pass))
+            {
+                FormsAuthentication.SetAuthCookie(user.User_email, false);
+                return RedirectToAction("Wall", "Home");
+            }
+            return Login();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+    }
+}
