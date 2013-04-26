@@ -1,0 +1,9 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    @User.Identity.Name
+}
+else
+{
+    @Html.TextBox("txtMail")
+    @Html.Password("txtPass")
+}

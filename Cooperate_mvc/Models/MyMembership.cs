@@ -159,6 +159,8 @@ namespace Cooperate_mvc.Models
             }
         }
 
+        #region NotImplemented
+
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             throw new NotImplementedException();
@@ -283,6 +285,8 @@ namespace Cooperate_mvc.Models
         {
             throw new NotImplementedException();
         }
+
+        #endregion
 
         public override bool ValidateUser(string username, string password)
         {
