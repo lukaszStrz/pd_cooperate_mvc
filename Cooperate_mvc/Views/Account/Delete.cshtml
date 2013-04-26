@@ -18,6 +18,13 @@
     </div>
 
     <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_login)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_login)
+    </div>
+
+    <div class="display-label">
          @Html.DisplayNameFor(model => model.User_firstName)
     </div>
     <div class="display-field">
@@ -56,6 +63,5 @@
     @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
     </p>
 }

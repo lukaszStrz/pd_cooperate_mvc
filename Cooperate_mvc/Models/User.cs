@@ -32,6 +32,7 @@ namespace Cooperate_mvc.Models
         public System.DateTime User_birth { get; set; }
         public string User_email { get; set; }
         public string User_pass { get; set; }
+        public string User_login { get; set; }
     
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Message> Messages { get; set; }

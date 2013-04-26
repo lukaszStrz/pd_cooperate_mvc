@@ -14,6 +14,14 @@
         <legend>User</legend>
 
         <div class="editor-label">
+            @Html.LabelFor(model => model.User_login)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.User_login)
+            @Html.ValidationMessageFor(model => model.User_login)
+        </div>
+
+        <div class="editor-label">
             @Html.LabelFor(model => model.User_firstName)
         </div>
         <div class="editor-field">

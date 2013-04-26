@@ -10,7 +10,13 @@
 {
     @Html.AntiForgeryToken()
     <div>
-        @Html.TextBoxFor(model => model.User_email)
+        @Html.DisplayNameFor(model => model.User_login)
+    </div>
+    <div>
+        @Html.TextBoxFor(model => model.User_login)
+    </div>
+    <div>
+        @Html.DisplayNameFor(model => model.User_pass)
     </div>
     <div>
         @Html.PasswordFor(model => model.User_pass)

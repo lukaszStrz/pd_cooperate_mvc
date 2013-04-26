@@ -1,17 +1,21 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
+
     <div>
-        @User.Identity.Name
+        <a href="~/Account/Details/@HttpUtility.HtmlEncode(User.Identity.Name)">@User.Identity.Name</a>
     </div>
+
     <div>
         @Html.ActionLink("Wyloguj", "Logout", "Account")
     </div>
 }
 else
 {
+
     <div>
         @Html.ActionLink("Zaloguj", "Login", "Account")
     </div>
+
     <div>
         @Html.ActionLink("Zarejestruj", "Create", "Account")
     </div>

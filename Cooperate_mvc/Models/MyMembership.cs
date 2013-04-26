@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 
 namespace Cooperate_mvc.Models
 {
+    #region Hash
     /// <summary>
     /// Typ hashowania.
     /// </summary>
@@ -142,6 +143,8 @@ namespace Cooperate_mvc.Models
 
         #endregion
     }
+
+    #endregion
 
     public class MyMembership : MembershipProvider
     {
@@ -293,7 +296,7 @@ namespace Cooperate_mvc.Models
             using (compact_dbEntities db = new compact_dbEntities())
             {
                 User user = (from u in db.Users
-                                 where u.User_email.Equals(username)
+                             where u.User_login.Equals(username)
                                  select u).SingleOrDefault();
 
                 if (user == null)

@@ -15,11 +15,11 @@ namespace Cooperate_mvc.Controllers
         private compact_dbEntities db = new compact_dbEntities();
 
         //
-        // GET: /Account/Details/5
+        // GET: /Account/Details/login
 
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(string id = "")
         {
-            User user = db.Users.Find(id);
+            User user = db.Users.Where(u => u.User_login.Equals(id)).SingleOrDefault();
             if (user == null)
             {
                 return HttpNotFound();
@@ -92,9 +92,9 @@ namespace Cooperate_mvc.Controllers
         public ActionResult Login(User user, bool persistent)
         {
             MyMembership membership = new MyMembership();
-            if (membership.ValidateUser(user.User_email, user.User_pass))
+            if (membership.ValidateUser(user.User_login, user.User_pass))
             {
-                FormsAuthentication.SetAuthCookie(user.User_email, persistent);
+                FormsAuthentication.SetAuthCookie(user.User_login, persistent);
                 return RedirectToAction("Index", "Home");
             }
             return Login();
