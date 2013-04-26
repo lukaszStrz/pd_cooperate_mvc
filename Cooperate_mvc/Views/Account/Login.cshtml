@@ -3,26 +3,27 @@
 @{
     ViewBag.Title = "Login";
 }
+<div id="mainLoginForm">
+    <h2>Logowanie</h2>
 
-<h2>Login</h2>
-
-@using (@Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div>
-        @Html.DisplayNameFor(model => model.User_login)
-    </div>
-    <div>
-        @Html.TextBoxFor(model => model.User_login)
-    </div>
-    <div>
-        @Html.DisplayNameFor(model => model.User_pass)
-    </div>
-    <div>
-        @Html.PasswordFor(model => model.User_pass)
-    </div>
-    <div>
-        @Html.CheckBox("persistent") Zapamiętaj mnie
-    </div>
-    <input type="submit" value="Zaloguj" />
-}
+    @using (@Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            @Html.DisplayName("Login")
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.User_login)
+        </div>
+        <div>
+            @Html.DisplayName("Hasło")
+        </div>
+        <div>
+            @Html.PasswordFor(model => model.User_pass)
+        </div>
+        <div>
+            @Html.CheckBox("persistent") Zapamiętaj mnie
+        </div>
+        <input type="submit" value="Zaloguj" />
+    }
+</div>

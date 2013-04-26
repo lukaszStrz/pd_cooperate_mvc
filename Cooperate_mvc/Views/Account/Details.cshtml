@@ -3,62 +3,43 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="realContent">
+    <fieldset>
+        <legend>Profil użytkownika @Html.DisplayFor(model => model.User_login)</legend>
 
-<h2>Details</h2>
+        <div class="display-label">
+            @Html.DisplayName("Login")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.User_login)
+        </div>
 
-<fieldset>
-    <legend>User</legend>
+        <div class="display-label">
+            @Html.DisplayName("Imię")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.User_firstName)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_id)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_id)
-    </div>
+        <div class="display-label">
+            @Html.DisplayName("Nazwisko")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.User_lastName)
+        </div>
 
-     <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_login)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_login)
-    </div>
+        <div class="display-label">
+            @Html.DisplayName("Data urodzenia")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.User_birth)
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_firstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_firstName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_lastName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_lastName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_birth)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_birth)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_email)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User_pass)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User_pass)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <div class="display-label">
+            @Html.DisplayName("E-mail")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.User_email)
+        </div>
+    </fieldset>
+</div>
