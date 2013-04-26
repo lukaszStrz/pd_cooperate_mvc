@@ -1,8 +1,35 @@
 ﻿<nav>
-    <ul>
-        <li>asdf</li>
-        <li>wsad</li>
-        <li>dupa</li>
-        <li>lol</li>
-    </ul>
+    <div class="navItem">
+        Utwórz grupę
+    </div>
+    <div class="navItem">
+        Utwórz zadanie
+    </div>
+    <div class="navItem">
+        Wiadomości
+    </div>
+    <div class="navItem">
+        Twoje grupy
+        <ul>
+            @{
+                using (Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities())
+                {
+                    var groups = (from g in db.Groups
+                                  join p in db.Participations on g.Group_id equals p.Group_id
+                                  join u in db.Users on p.User_id equals u.User_id
+                                  where u.User_login.Equals(User.Identity.Name)
+                                  select g).ToArray();
+
+                    if (groups.Length == 0)
+                    {
+                <li>brak grup</li>
+                    }
+                    foreach (Cooperate_mvc.Models.Group g in groups)
+                    {
+                <li>@g.Group_name</li>
+                    }
+                }
+            }
+        </ul>
+    </div>
 </nav>

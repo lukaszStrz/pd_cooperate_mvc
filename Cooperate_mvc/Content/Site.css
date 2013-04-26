@@ -1,6 +1,6 @@
 ﻿body {
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: Calibri, "Segoe UI", Verdana, Helvetica, Sans-Serif;
     min-width: 1000px;
     margin: 0;
 }
@@ -20,7 +20,6 @@ header {
     header .login {
         float: right;
         font-size: large;
-        font-family: Calibri;
     }
 
 footer {
@@ -39,16 +38,21 @@ footer {
     #content .realContent {
         float: left;
         width: 800px;
-        /*display: table;*/
     }
 
 nav {
     float:left;
     width: 200px;
-    /*height: 100%;*/
-    font-family: Calibri;
-    /*display: table;*/
 }
+
+    nav .navItem {
+        margin-top: 1em;
+        font-size: large;
+    }
+
+        nav .navItem li {
+            font-size: medium;
+        }
 
 #mainLoginForm {
     width: 300px;
