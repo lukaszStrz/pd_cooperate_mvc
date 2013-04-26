@@ -47,7 +47,7 @@ namespace Cooperate_mvc.Controllers
                 user.User_pass = Hash.GetHash(user.User_pass, HashType.SHA512);
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(user);
@@ -88,15 +88,22 @@ namespace Cooperate_mvc.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User user, bool persistent)
         {
             MyMembership membership = new MyMembership();
             if (membership.ValidateUser(user.User_email, user.User_pass))
             {
-                FormsAuthentication.SetAuthCookie(user.User_email, false);
-                return RedirectToAction("Wall", "Home");
+                FormsAuthentication.SetAuthCookie(user.User_email, persistent);
+                return RedirectToAction("Index", "Home");
             }
             return Login();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         protected override void Dispose(bool disposing)

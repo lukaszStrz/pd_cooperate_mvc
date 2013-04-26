@@ -1,7 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cooperate!";
 }
 
-<div class="realContent">
-    <h2>Index</h2>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <nav>
+        @Html.Partial("_Nav")
+    </nav>
+    <div class="realContent">
+        <h2>Index</h2>
+    </div>
+}
+else
+{
+    <p>Nie jesteś zalogowany!</p>
+}

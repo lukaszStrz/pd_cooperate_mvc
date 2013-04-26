@@ -13,17 +13,6 @@ namespace Cooperate_mvc.Controllers
 
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-                return Wall();
-            return View();
-        }
-
-        //
-        // GET: /Home/Wall/
-
-        [Authorize]
-        public ActionResult Wall()
-        {
             return View();
         }
     }
