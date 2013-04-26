@@ -16,5 +16,10 @@ namespace Cooperate_mvc.Controllers
             return View();
         }
 
+        public ActionResult Wall()
+        {
+            return View();
+        }
+
     }
 }

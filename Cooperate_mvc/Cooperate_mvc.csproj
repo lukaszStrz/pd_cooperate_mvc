@@ -156,6 +156,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>model_db.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyMembership.cs" />
+    <Compile Include="Models\MyRole.cs" />
     <Compile Include="Models\Participation.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
@@ -276,6 +278,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Nav.cshtml" />
+    <Content Include="Views\Home\Wall.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

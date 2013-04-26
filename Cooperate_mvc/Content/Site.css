@@ -30,10 +30,23 @@ footer {
     text-align: center;
 }
 
-content {
+#content {
     width: 1000px;
     margin: 0 auto;
     display: table;
+}
+
+    #content .realContent {
+        float: left;
+        width: 900px;
+        /*display: table;*/
+    }
+
+nav {
+    float:left;
+    width: 100px;
+    font-family: Calibri;
+    /*display: table;*/
 }
 
 
