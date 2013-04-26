@@ -1,64 +1,72 @@
-﻿@model Cooperate_mvc.Models.User
+﻿@model Cooperate_mvc.Models.UserAccount
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Rejestracja";
 }
 
-<h2>Create</h2>
+<h2>Rejsetracja</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>User</legend>
+        <legend>Nowy użytkownik</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.User_login)
+            @Html.Label("Login")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.User_login)
-            @Html.ValidationMessageFor(model => model.User_login)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.User_firstName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.User_firstName)
-            @Html.ValidationMessageFor(model => model.User_firstName)
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.User_lastName)
+            @Html.Label("Imię")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.User_lastName)
-            @Html.ValidationMessageFor(model => model.User_lastName)
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.User_birth)
+            @Html.Label("Nazwisko")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.User_birth)
-            @Html.ValidationMessageFor(model => model.User_birth)
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.User_email)
+            @Html.Label("Data urodzenia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.User_email)
-            @Html.ValidationMessageFor(model => model.User_email)
+            @Html.EditorFor(model => model.Birth)
+            @Html.ValidationMessageFor(model => model.Birth)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.User_pass)
+            @Html.Label("E-mail")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.User_pass)
-            @Html.ValidationMessageFor(model => model.User_pass)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Hasło")
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Pass)
+            @Html.ValidationMessageFor(model => model.Pass)
+        </div>
+        <div class="editor-label">
+            @Html.Label("Powtórz hasło")
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.ComparePassword)
+            @Html.ValidationMessageFor(model => model.ComparePassword)
         </div>
 
         <p>
@@ -69,4 +77,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Birth").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 }

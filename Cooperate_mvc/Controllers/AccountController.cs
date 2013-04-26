@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using Cooperate_mvc.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Cooperate_mvc.Models;
 using System.Web.Security;
 
 namespace Cooperate_mvc.Controllers
@@ -40,43 +35,25 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
+        public ActionResult Create(UserAccount user)
         {
             if (ModelState.IsValid)
             {
-                user.User_pass = Hash.GetHash(user.User_pass, HashType.SHA512);
-                db.Users.Add(user);
+                User u = new Models.User();
+                u.User_birth = user.Birth;
+                u.User_email = user.Email;
+                u.User_firstName = user.FirstName;
+                u.User_lastName = user.LastName;
+                u.User_login = user.Login;
+                u.User_pass = Hash.GetHash(user.Pass, HashType.SHA512);
+
+                db.Users.Add(u);
                 db.SaveChanges();
+
                 return RedirectToAction("Index", "Home");
             }
 
             return View(user);
-        }
-
-        //
-        // GET: /Account/Delete/5
-
-        public ActionResult Delete(int id = 0)
-        {
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-        //
-        // POST: /Account/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         //
