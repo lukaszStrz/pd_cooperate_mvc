@@ -12,10 +12,14 @@
 </head>
 <body>
     <header>
-        <div class="logo">Cooperate!</div>
+        <div class="logo"><a href="~/">Cooperate!</a></div>
         <div class="login">@Html.Partial("_Login")</div>
     </header>
     <div id="content">
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.Partial("_Nav")
+        }
         @RenderBody()
     </div>
     <footer>

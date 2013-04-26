@@ -38,13 +38,13 @@ footer {
 
     #content .realContent {
         float: left;
-        width: 900px;
+        width: 800px;
         /*display: table;*/
     }
 
 nav {
     float:left;
-    width: 100px;
+    width: 200px;
     font-family: Calibri;
     /*display: table;*/
 }
