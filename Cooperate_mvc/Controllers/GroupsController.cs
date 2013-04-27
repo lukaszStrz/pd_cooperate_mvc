@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cooperate_mvc.Models;
+using System;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Cooperate_mvc.Models;
 
 namespace Cooperate_mvc.Controllers
 {
@@ -23,7 +20,7 @@ namespace Cooperate_mvc.Controllers
                           join p in db.Participations on g.Group_id equals p.Group_id
                           join u in db.Users on p.User_id equals u.User_id
                           where u.User_login.Equals(User.Identity.Name)
-                          select g);
+                          select new GroupModel() { Description = g.Group_description, Name = g.Group_name, Id = g.Group_id, CreationDate = g.Group_creationDate });
             return View(groups.ToList());
         }
 
@@ -38,7 +35,8 @@ namespace Cooperate_mvc.Controllers
             {
                 return HttpNotFound();
             }
-            return View(group);
+            GroupModel groupModel = new GroupModel() { Description = group.Group_description, Name = group.Group_name, CreationDate = group.Group_creationDate, Id = group.Group_id };
+            return View(groupModel);
         }
 
         //
@@ -56,21 +54,18 @@ namespace Cooperate_mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create(Group group)
+        public ActionResult Create(GroupModel group)
         {
             if (ModelState.IsValid)
             {
-                group.Group_creationDate = DateTime.Now;
-                db.Groups.Add(group);
+                Group newGroup = new Group() { Group_creationDate = DateTime.Now, Group_description = group.Description, Group_name = group.Name };
+                db.Groups.Add(newGroup);
 
                 int userId = (from u in db.Users
                               where u.User_login.Equals(User.Identity.Name)
                               select u.User_id).Single();
 
-                Participation participation = new Participation();
-                participation.User_id = userId;
-                participation.Group = group;
-                participation.Participation_isAdmin = true;
+                Participation participation = new Participation() { User_id = userId, Group = newGroup, Participation_isAdmin = true };
                 db.Participations.Add(participation);
 
                 db.SaveChanges();
@@ -91,7 +86,8 @@ namespace Cooperate_mvc.Controllers
             {
                 return HttpNotFound();
             }
-            return View(group);
+            GroupModel groupModel = new GroupModel() { Description = group.Group_description, Name = group.Group_name, CreationDate = group.Group_creationDate, Id = group.Group_id };
+            return View(groupModel);
         }
 
         //
@@ -100,11 +96,17 @@ namespace Cooperate_mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit(Group group)
+        public ActionResult Edit(GroupModel group)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(group).State = EntityState.Modified;
+                Group editGroup = db.Groups.Where(g => g.Group_id.Equals(group.Id)).SingleOrDefault();
+                if (editGroup == null)
+                {
+                    return HttpNotFound();
+                }
+                editGroup.Group_name = group.Name;
+                editGroup.Group_description = group.Description;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -122,7 +124,8 @@ namespace Cooperate_mvc.Controllers
             {
                 return HttpNotFound();
             }
-            return View(group);
+            GroupModel groupModel = new GroupModel() { CreationDate = group.Group_creationDate, Name = group.Group_name, Description = group.Group_description };
+            return View(groupModel);
         }
 
         //

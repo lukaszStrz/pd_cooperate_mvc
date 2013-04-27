@@ -25,6 +25,7 @@ header {
 footer {
     width: 1000px;
     margin: 0 auto;
+    padding: 15px;
     display: table;
     text-align: center;
 }
@@ -40,8 +41,18 @@ footer {
         width: 800px;
     }
 
+.indexList td {
+    border-collapse: collapse;
+    border: 1px solid black;
+    padding:15px;
+}
+
+    .indexList td:last-child {
+        border: none;
+    }
+
 nav {
-    float:left;
+    float: left;
     width: 200px;
 }
 
@@ -69,8 +80,9 @@ fieldset {
 }
 
 legend {
-    font-size: 1.2em;
+    font-size: large;
     font-weight: bold;
+    margin-bottom: 1em;
 }
 
 textarea {
@@ -86,8 +98,12 @@ textarea {
 }
 
 .display-label {
-   font-weight: bold;
-   margin-top: 1em;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+.display-label:first-of-type {
+    margin-top: 0;
 }
 
 .display-field {

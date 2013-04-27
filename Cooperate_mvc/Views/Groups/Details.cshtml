@@ -1,25 +1,25 @@
-﻿@model Cooperate_mvc.Models.Group
+﻿@model Cooperate_mvc.Models.GroupModel
 
 @{
-    ViewBag.Title = @Model.Group_name;
+    ViewBag.Title = @Model.Name;
 }
 <div class="realContent">
     <fieldset>
-        <legend>@Model.Group_name</legend>
+        <legend>@Model.Name</legend>
 
         <div class="display-field">
-            @Html.DisplayFor(model => model.Group_description)
+            @Html.DisplayFor(model => model.Description)
         </div>
 
         <div class="display-label">
             @Html.DisplayName("Data utworzenia")
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.Group_creationDate)
+            @Html.DisplayFor(model => model.CreationDate)
         </div>
     </fieldset>
     <p>
-        @Html.ActionLink("Edycja", "Edit", new { id = Model.Group_id }) |
+        @Html.ActionLink("Edycja", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Wróć do listy", "Index")
     </p>
 </div>
