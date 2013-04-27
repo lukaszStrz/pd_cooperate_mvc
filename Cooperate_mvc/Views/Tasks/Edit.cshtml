@@ -1,0 +1,116 @@
+﻿@model Cooperate_mvc.Models.Task
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Task</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Task_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Task_id)
+            @Html.ValidationMessageFor(model => model.Task_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Task_title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Task_title)
+            @Html.ValidationMessageFor(model => model.Task_title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Task_description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Task_description)
+            @Html.ValidationMessageFor(model => model.Task_description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Task_creationDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Task_creationDate)
+            @Html.ValidationMessageFor(model => model.Task_creationDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Task_deadline)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Task_deadline)
+            @Html.ValidationMessageFor(model => model.Task_deadline)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.User_from, "User")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("User_from", String.Empty)
+            @Html.ValidationMessageFor(model => model.User_from)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.User_to, "User1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("User_to", String.Empty)
+            @Html.ValidationMessageFor(model => model.User_to)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaskStatus_id, "TaskStatu")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TaskStatus_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.TaskStatus_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Task_statusLastChange)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Task_statusLastChange)
+            @Html.ValidationMessageFor(model => model.Task_statusLastChange)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.User_statusChangedBy, "User2")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("User_statusChangedBy", String.Empty)
+            @Html.ValidationMessageFor(model => model.User_statusChangedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Group_id, "Group")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Group_id", String.Empty)
+            @Html.ValidationMessageFor(model => model.Group_id)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

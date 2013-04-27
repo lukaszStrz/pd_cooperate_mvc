@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,6 +170,7 @@
     <Compile Include="Models\Task.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Models\TaskStatu.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
@@ -291,6 +293,11 @@
     <Content Include="Views\Groups\Create.cshtml" />
     <Content Include="Views\Groups\Edit.cshtml" />
     <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\Details.cshtml" />
+    <Content Include="Views\Tasks\Create.cshtml" />
+    <Content Include="Views\Tasks\Edit.cshtml" />
+    <Content Include="Views\Tasks\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

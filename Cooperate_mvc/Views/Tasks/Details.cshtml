@@ -1,0 +1,92 @@
+﻿@model Cooperate_mvc.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Task_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Task_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Task_title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Task_title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Task_description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Task_description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Task_creationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Task_creationDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Task_deadline)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Task_deadline)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.User_firstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.User_firstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User1.User_firstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User1.User_firstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TaskStatu.TaskStatus_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TaskStatu.TaskStatus_name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Task_statusLastChange)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Task_statusLastChange)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User2.User_firstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User2.User_firstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Group.Group_name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Group.Group_name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
