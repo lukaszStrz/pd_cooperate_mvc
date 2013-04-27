@@ -12,6 +12,7 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Account/Details/login
 
+        [Authorize]
         public ActionResult Details(string id = "")
         {
             User user = db.Users.Where(u => u.User_login.Equals(id)).SingleOrDefault();
@@ -93,6 +94,7 @@ namespace Cooperate_mvc.Controllers
             return Login();
         }
 
+        [Authorize]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

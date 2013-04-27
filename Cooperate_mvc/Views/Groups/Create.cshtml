@@ -1,0 +1,47 @@
+﻿@model Cooperate_mvc.Models.Group
+
+@{
+    ViewBag.Title = "Stwórz grupę";
+}
+
+<div class="realContent">
+    <h2>Utwórz grupę</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Grupa</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Group_name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Group_name)
+                @Html.ValidationMessageFor(model => model.Group_name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Group_description)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Group_description)
+                @Html.ValidationMessageFor(model => model.Group_description)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Wróć do listy", "Index")
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

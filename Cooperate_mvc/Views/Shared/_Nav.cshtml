@@ -9,8 +9,8 @@
         Wiadomości
     </div>
     <div class="navItem">
-        Twoje grupy
-        <ul>
+        @Html.ActionLink("Twoje grupy","Index","Groups")
+        @*<ul>
             @{
                 using (Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities())
                 {
@@ -30,6 +30,6 @@
                     }
                 }
             }
-        </ul>
+        </ul>*@
     </div>
 </nav>

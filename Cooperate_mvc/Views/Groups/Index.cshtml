@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Cooperate_mvc.Models.Group>
+
+@{
+    ViewBag.Title = "Twoje grupy";
+}
+
+<div class="realContent">
+    <p>
+        @Html.ActionLink("Utwórz nową", "Create")
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayName("Nazwa")
+            </th>
+            <th>
+                @Html.DisplayName("Opis")
+            </th>
+            <th>
+                @Html.DisplayName("Data utworzenia")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group_description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group_creationDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Group_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Group_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Group_id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

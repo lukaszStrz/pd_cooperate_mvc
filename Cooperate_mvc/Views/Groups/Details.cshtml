@@ -1,0 +1,25 @@
+﻿@model Cooperate_mvc.Models.Group
+
+@{
+    ViewBag.Title = @Model.Group_name;
+}
+<div class="realContent">
+    <fieldset>
+        <legend>@Model.Group_name</legend>
+
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Group_description)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayName("Data utworzenia")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Group_creationDate)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Edycja", "Edit", new { id = Model.Group_id }) |
+    @Html.ActionLink("Wróć do listy", "Index")
+    </p>
+</div>

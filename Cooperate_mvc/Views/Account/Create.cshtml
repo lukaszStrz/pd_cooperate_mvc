@@ -3,77 +3,78 @@
 @{
     ViewBag.Title = "Rejestracja";
 }
+<div class="realContent">
+    <h2>Rejestracja</h2>
 
-<h2>Rejsetracja</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        <fieldset>
+            <legend>Nowy użytkownik</legend>
 
-    <fieldset>
-        <legend>Nowy użytkownik</legend>
+            <div class="editor-label">
+                @Html.Label("Login")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Login)
+                @Html.ValidationMessageFor(model => model.Login)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Login")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Login)
-            @Html.ValidationMessageFor(model => model.Login)
-        </div>
+            <div class="editor-label">
+                @Html.Label("Imię")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Imię")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
-        </div>
+            <div class="editor-label">
+                @Html.Label("Nazwisko")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Nazwisko")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
-        </div>
+            <div class="editor-label">
+                @Html.Label("Data urodzenia")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Birth)
+                @Html.ValidationMessageFor(model => model.Birth)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Data urodzenia")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Birth)
-            @Html.ValidationMessageFor(model => model.Birth)
-        </div>
+            <div class="editor-label">
+                @Html.Label("E-mail")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("E-mail")
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
+            <div class="editor-label">
+                @Html.Label("Hasło")
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.Pass)
+                @Html.ValidationMessageFor(model => model.Pass)
+            </div>
+            <div class="editor-label">
+                @Html.Label("Powtórz hasło")
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(model => model.ComparePassword)
+                @Html.ValidationMessageFor(model => model.ComparePassword)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Hasło")
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(model => model.Pass)
-            @Html.ValidationMessageFor(model => model.Pass)
-        </div>
-        <div class="editor-label">
-            @Html.Label("Powtórz hasło")
-        </div>
-        <div class="editor-field">
-            @Html.PasswordFor(model => model.ComparePassword)
-            @Html.ValidationMessageFor(model => model.ComparePassword)
-        </div>
-
-        <p>
-            <input type="submit" value="Zarejestruj" />
-        </p>
-    </fieldset>
-}
+            <p>
+                <input type="submit" value="Zarejestruj" />
+            </p>
+        </fieldset>
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
