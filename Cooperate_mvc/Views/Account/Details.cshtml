@@ -1,45 +1,45 @@
-﻿@model Cooperate_mvc.Models.User
+﻿@model Cooperate_mvc.Models.UserModel
 
 @{
-    ViewBag.Title = @Model.User_login;
+    ViewBag.Title = @Model.Login;
 }
 <div class="realContent">
     <fieldset>
-        <legend>Profil użytkownika @Model.User_login</legend>
+        <legend>Profil użytkownika @Model.Login</legend>
 
         <div class="display-label">
-            @Html.DisplayName("Login")
+            @Html.DisplayNameFor(model => model.Login)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.User_login)
-        </div>
-
-        <div class="display-label">
-            @Html.DisplayName("Imię")
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.User_firstName)
+            @Html.DisplayFor(model => model.Login)
         </div>
 
         <div class="display-label">
-            @Html.DisplayName("Nazwisko")
+            @Html.DisplayNameFor(model => model.FirstName)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.User_lastName)
+            @Html.DisplayFor(model => model.FirstName)
         </div>
 
         <div class="display-label">
-            @Html.DisplayName("Data urodzenia")
+            @Html.DisplayNameFor(model => model.LastName)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.User_birth)
+            @Html.DisplayFor(model => model.LastName)
         </div>
 
         <div class="display-label">
-            @Html.DisplayName("E-mail")
+            @Html.DisplayNameFor(model => model.Birth)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.User_email)
+            @Html.DisplayFor(model => model.Birth)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Email)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Email)
         </div>
     </fieldset>
 </div>

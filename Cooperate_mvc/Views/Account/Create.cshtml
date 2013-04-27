@@ -1,11 +1,9 @@
-﻿@model Cooperate_mvc.Models.UserAccount
+﻿@model Cooperate_mvc.Models.UserModel
 
 @{
     ViewBag.Title = "Rejestracja";
 }
 <div class="realContent">
-    <h2>Rejestracja</h2>
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -15,7 +13,7 @@
             <legend>Nowy użytkownik</legend>
 
             <div class="editor-label">
-                @Html.Label("Login")
+                @Html.LabelFor(model => model.Login)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.Login)
@@ -23,7 +21,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.Label("Imię")
+                @Html.LabelFor(model => model.FirstName)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.FirstName)
@@ -31,7 +29,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.Label("Nazwisko")
+                @Html.LabelFor(model => model.LastName)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.LastName)
@@ -39,7 +37,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.Label("Data urodzenia")
+                @Html.LabelFor(model => model.Birth)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.Birth)
@@ -47,7 +45,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.Label("E-mail")
+                @Html.LabelFor(model => model.Email)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.Email)
@@ -55,18 +53,18 @@
             </div>
 
             <div class="editor-label">
-                @Html.Label("Hasło")
+                @Html.LabelFor(model => model.Pass)
             </div>
             <div class="editor-field">
                 @Html.PasswordFor(model => model.Pass)
                 @Html.ValidationMessageFor(model => model.Pass)
             </div>
             <div class="editor-label">
-                @Html.Label("Powtórz hasło")
+                @Html.LabelFor(model => model.ConfirmPassword)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(model => model.ComparePassword)
-                @Html.ValidationMessageFor(model => model.ComparePassword)
+                @Html.PasswordFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
             </div>
 
             <p>

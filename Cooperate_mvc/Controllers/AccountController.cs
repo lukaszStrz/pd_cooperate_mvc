@@ -1,9 +1,9 @@
 ﻿using Cooperate_mvc.Models;
+using HashLib;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using HashLib;
-using System.Web;
 
 namespace Cooperate_mvc.Controllers
 {
@@ -15,14 +15,15 @@ namespace Cooperate_mvc.Controllers
         // GET: /Account/Details/login
 
         [Authorize]
-        public ActionResult Details(string id = "")
+        public ActionResult Details(string login = "")
         {
-            User user = db.Users.Where(u => u.User_login.Equals(id)).SingleOrDefault();
+            User user = db.Users.Where(u => u.User_login.Equals(login)).SingleOrDefault();
             if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            UserModel userModel = new UserModel() { Birth = user.User_birth, Email = user.User_email, FirstName = user.User_firstName, LastName = user.User_lastName, Login = user.User_login };
+            return View(userModel);
         }
 
         //
@@ -38,7 +39,7 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserAccount user)
+        public ActionResult Create(UserModel user)
         {
             if (ModelState.IsValid)
             {

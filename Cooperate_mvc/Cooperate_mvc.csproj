@@ -141,6 +141,7 @@
     <Compile Include="Models\Group.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\Message.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
@@ -174,7 +175,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserAccount.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
