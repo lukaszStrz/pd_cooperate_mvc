@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using HashLib;
+using System.Web;
 
 namespace Cooperate_mvc.Controllers
 {
@@ -85,10 +87,11 @@ namespace Cooperate_mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user, bool persistent)
         {
-            MyMembership membership = new MyMembership();
-            if (membership.ValidateUser(user.User_login, user.User_pass))
+            if (ValidateUser(user.User_login, user.User_pass, persistent))
             {
-                FormsAuthentication.SetAuthCookie(user.User_login, persistent);
+                var returnUrl = HttpUtility.HtmlDecode(Request.QueryString["ReturnUrl"]);
+                if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    return Redirect(returnUrl);
                 return RedirectToAction("Index", "Home");
             }
             return Login();
@@ -105,6 +108,20 @@ namespace Cooperate_mvc.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private bool ValidateUser(string login, string password, bool persistent)
+        {
+            User user = (from u in db.Users
+                         where u.User_login.Equals(login)
+                         select u).SingleOrDefault();
+
+            if (user != null && Hash.CheckHash(password, user.User_pass, HashType.SHA512))
+            {
+                FormsAuthentication.SetAuthCookie(login, persistent);
+                return true;
+            }
+            return false;
         }
     }
 }
