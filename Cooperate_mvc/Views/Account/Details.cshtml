@@ -1,11 +1,11 @@
 ﻿@model Cooperate_mvc.Models.User
 
 @{
-    ViewBag.Title = @Html.DisplayFor(model => model.User_login);
+    ViewBag.Title = @Model.User_login;
 }
 <div class="realContent">
     <fieldset>
-        <legend>Profil użytkownika @Html.DisplayFor(model => model.User_login)</legend>
+        <legend>Profil użytkownika @Model.User_login</legend>
 
         <div class="display-label">
             @Html.DisplayName("Login")

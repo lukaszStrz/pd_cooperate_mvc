@@ -5,7 +5,7 @@
     using (Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities())
     {
         var user = db.Users.Where(u => u.User_login.Equals(User.Identity.Name)).Single();
-            <a href="~/Account/Details/@user.User_login">@user.User_firstName @user.User_lastName</a>
+            @Html.ActionLink(user.User_firstName + " " + user.User_lastName, "Details", "Account", new { id = user.User_login }, null)
     }
         }
     </div>
