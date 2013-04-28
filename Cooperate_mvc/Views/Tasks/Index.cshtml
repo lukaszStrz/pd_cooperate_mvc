@@ -5,10 +5,6 @@
 }
 
 <div class="realContent">
-    <p>
-        @Html.ActionLink("Utwórz", "Create")
-    </p>
-
     <div class="indexList">
         <table title="Zadania do wykonania">
             <tr>
@@ -58,7 +54,7 @@
                         @Html.DisplayFor(modelItem => item.Deadline)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.User_login_from)
+                        @Html.ActionLink(item.User_login_from, "Account", "Details", new { login = item.User_login_from }, null)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TaskStatus)
@@ -67,10 +63,86 @@
                         @Html.DisplayFor(modelItem => item.Task_statusLastChange)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.User_login_statusChangedBy)
+                        @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Group)
+                        @Html.ActionLink(item.Group, "Details", "Groups", new { id = item.Group_id }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Utwórz", "Create")
+    </p>
+    <div class="indexList">
+        <table title="Zlecone zadania">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User_login_to)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Task_statusLastChange)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User_login_statusChangedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Group)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Where(m => m.ToMe.Equals(false)))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.User_login_to, "Account", "Details", new { login = item.User_login_to }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Task_statusLastChange)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.Group, "Details", "Groups", new { id = item.Group_id }, null)
                     </td>
                     <td>
                         @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |

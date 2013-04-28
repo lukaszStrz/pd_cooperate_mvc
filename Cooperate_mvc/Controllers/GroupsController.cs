@@ -20,8 +20,30 @@ namespace Cooperate_mvc.Controllers
                           join p in db.Participations on g.Group_id equals p.Group_id
                           join u in db.Users on p.User_id equals u.User_id
                           where u.User_login.Equals(User.Identity.Name)
-                          select new GroupModel() { Description = g.Group_description, Name = g.Group_name, Id = g.Group_id, CreationDate = g.Group_creationDate });
+                          select new GroupModel()
+                          {
+                              Description = g.Group_description,
+                              Name = g.Group_name,
+                              Id = g.Group_id,
+                              CreationDate = g.Group_creationDate,
+                              IsAdmin = p.Participation_isAdmin
+                          });
             return View(groups.ToList());
+        }
+
+        //
+        // GET: /Groups/Join/5
+
+        [Authorize]
+        public ActionResult Join(long id)
+        {
+            Participation p = new Participation() { Group_id = id, Participation_isAdmin = false };
+            p.User_id = (from u in db.Users
+                         where u.User_login.Equals(User.Identity.Name)
+                         select u.User_id).Single();
+            db.Participations.Add(p);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = id });
         }
 
         //
@@ -30,7 +52,13 @@ namespace Cooperate_mvc.Controllers
         [Authorize]
         public ActionResult Details(long id = 0)
         {
-            Group group = db.Groups.Where(g => g.Group_id.Equals(id)).SingleOrDefault();
+            Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
+
+            Participation participation = group.Participations.SingleOrDefault(p => p.User.User_login.Equals(User.Identity.Name));
+
+            ViewBag.IsParticipant = (participation != null);
+            ViewBag.IsAdmin = (participation != null && participation.Participation_isAdmin);
+
             if (group == null)
             {
                 return HttpNotFound();

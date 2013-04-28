@@ -17,5 +17,7 @@ namespace Cooperate_mvc.Models
         public System.DateTime CreationDate { get; set; }
 
         public long Id { get; set; }
+
+        public bool IsAdmin { get; set; }
     }
 }

@@ -67,11 +67,12 @@ namespace Cooperate_mvc.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name");
-            ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name");
-            ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName");
-            ViewBag.User_to = new SelectList(db.Users, "User_id", "User_firstName");
-            ViewBag.User_statusChangedBy = new SelectList(db.Users, "User_id", "User_firstName");
+            //ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name");
+            //ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name");
+            //ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName");
+            //ViewBag.User_to = new SelectList(db.Users, "User_id", "User_firstName");
+            //ViewBag.User_statusChangedBy = new SelectList(db.Users, "User_id", "User_firstName");
+
             return View();
         }
 
@@ -80,20 +81,40 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Task task)
+        public ActionResult Create(TaskModel task)
         {
             if (ModelState.IsValid)
             {
-                db.Tasks.Add(task);
+                task.User_from = (from u in db.Users
+                                  where u.User_login.Equals(User.Identity.Name)
+                                  select u.User_id).Single();
+
+                task.User_statusChangedBy = task.User_from;
+
+                Task newTask = new Task()
+                {
+                    Group_id = task.Group_id,
+                    Task_creationDate = DateTime.Now,
+                    Task_deadline = task.Deadline,
+                    Task_description = task.Description,
+                    Task_statusLastChange = DateTime.Now,
+                    Task_title = task.Title,
+                    TaskStatus_id = task.TaskStatus_id,
+                    User_statusChangedBy = task.User_statusChangedBy,
+                    User_from = task.User_from,
+                    User_to = task.User_to
+                };
+
+                db.Tasks.Add(newTask);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name", task.Group_id);
-            ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name", task.TaskStatus_id);
-            ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName", task.User_from);
-            ViewBag.User_to = new SelectList(db.Users, "User_id", "User_firstName", task.User_to);
-            ViewBag.User_statusChangedBy = new SelectList(db.Users, "User_id", "User_firstName", task.User_statusChangedBy);
+            //ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name", task.Group_id);
+            //ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name", task.TaskStatus_id);
+            //ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName", task.User_from);
+            //ViewBag.User_to = new SelectList(db.Users, "User_id", "User_firstName", task.User_to);
+            //ViewBag.User_statusChangedBy = new SelectList(db.Users, "User_id", "User_firstName", task.User_statusChangedBy);
             return View(task);
         }
 
