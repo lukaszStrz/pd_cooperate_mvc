@@ -4,7 +4,9 @@
     min-width: 1000px;
     margin: 0;
 }
-
+.userList {
+display:none;
+}
 header {
     width: 1000px;
     margin: 0 auto;

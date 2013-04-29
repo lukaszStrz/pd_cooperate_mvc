@@ -4,6 +4,8 @@ namespace Cooperate_mvc.Models
 {
     public class UserModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Pole obowiązkowe")]
         [MaxLength(100, ErrorMessage = "Nie może być dłuższe niż 100 znaków")]
         [Display(Name = "Imię")]
