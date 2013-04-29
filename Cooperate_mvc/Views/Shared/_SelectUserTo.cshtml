@@ -1,0 +1,10 @@
+﻿@model Cooperate_mvc.Models.CreateTaskModel
+
+@if (Model.Users != null && Model.Users.Count() > 0)
+{
+    @Html.DropDownList(
+        "Users",
+            new SelectList(Model.Users, "Id", "Login"),
+            string.Empty
+            )
+}

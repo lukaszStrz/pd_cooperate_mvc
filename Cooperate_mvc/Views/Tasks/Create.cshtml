@@ -1,71 +1,60 @@
-﻿@model Cooperate_mvc.Models.TaskModel
+﻿@model Cooperate_mvc.Models.CreateTaskModel
 
 @{
     ViewBag.Title = "Utwórz zadanie";
 }
 
-@using (Html.BeginForm()) {
+@*@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    *@<fieldset>
         <legend>Nowe zadanie</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
+            @Html.LabelFor(model => model.Task.Title)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
-            @Html.ValidationMessageFor(model => model.Title)
+            @Html.EditorFor(model => model.Task.Title)
+            @Html.ValidationMessageFor(model => model.Task.Title)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
+            @Html.LabelFor(model => model.Task.Description)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
+            @Html.EditorFor(model => model.Task.Description)
+            @Html.ValidationMessageFor(model => model.Task.Description)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Deadline)
+            @Html.LabelFor(model => model.Task.Deadline)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Deadline)
-            @Html.ValidationMessageFor(model => model.Deadline)
-        </div>
-
-        ///////////////////////////////////////////////
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Group_id, "Group")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Group_id", String.Empty)
-            @Html.ValidationMessageFor(model => model.Group_id)
+            @Html.EditorFor(model => model.Task.Deadline)
+            @Html.ValidationMessageFor(model => model.Task.Deadline)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.User_to, "User1")
+            @Html.Label("Grupa")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("User_to", String.Empty)
-            @Html.ValidationMessageFor(model => model.User_to)
+            @Html.Partial("_SelectGroup", Model)
         </div>
-        ////////////////////////////////////////////////////////
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.TaskStatus_id, "TaskStatu")
+            @Html.Label("Użytkownik, do którego kierujemy zadanie")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("TaskStatus_id", String.Empty)
-            @Html.ValidationMessageFor(model => model.TaskStatus_id)
+            <div id="Users">@Html.Partial("_SelectUserTo", Model)</div>
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Utwórz" />
         </p>
     </fieldset>
-}
+@*}*@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -79,7 +68,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#Deadline").datepicker({
+            $("#Task_Deadline").datepicker({
                 changeMonth: true,
                 changeYear: true
             });

@@ -10,27 +10,9 @@ namespace Cooperate_mvc.Models
         /// </summary>
         public bool ToMe { get; set; }
 
+        #region Task
+
         public long Id { get; set; }
-        public int User_from { get; set; }
-        public int User_to { get; set; }
-        public byte TaskStatus_id { get; set; }
-        public long Group_id { get; set; }
-        public int User_statusChangedBy { get; set; }
-
-        [Display(Name = "W grupie")]
-        public string Group { get; set; }
-
-        [Display(Name = "Zlecone przez")]
-        public string User_login_from { get; set; }
-
-        [Display(Name = "Zlecone dla")]
-        public string User_login_to { get; set; }
-
-        [Display(Name = "Zmienione przez")]
-        public string User_login_statusChangedBy { get; set; }
-
-        [Display(Name = "Status")]
-        public string TaskStatus { get; set; }
 
         [Required(ErrorMessage = "Pole obowiązkowe")]
         [MaxLength(50, ErrorMessage = "Nie może być dłuższe niż 50 znaków")]
@@ -42,7 +24,6 @@ namespace Cooperate_mvc.Models
         [Display(Name = "Opis zadania")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Pole obowiązkowe")]
         [Display(Name = "Data utworzenia")]
         public DateTime CreationDate { get; set; }
 
@@ -51,6 +32,45 @@ namespace Cooperate_mvc.Models
         public DateTime Deadline { get; set; }
 
         [Display(Name = "Ostatnio zmienione")]
-        public DateTime Task_statusLastChange { get; set; }
+        public DateTime StatusLastChange { get; set; }
+
+        #endregion
+
+        #region User
+
+        public int UserFromId { get; set; }
+
+        [Display(Name = "Zlecone przez")]
+        public string UserFrom_login { get; set; }
+
+        public int UserTo_id { get; set; }
+
+        [Display(Name = "Zlecone dla")]
+        public string UserTo_login { get; set; }
+
+        public int UserStatusChangedBy_id { get; set; }
+
+        [Display(Name = "Zmienione przez")]
+        public string User_login_statusChangedBy { get; set; }
+
+        #endregion
+
+        #region Status
+
+        public byte TaskStatus_id { get; set; }
+
+        [Display(Name = "Status")]
+        public string TaskStatus_name { get; set; }
+
+        #endregion
+
+        #region Group
+
+        public long Group_id { get; set; }
+
+        [Display(Name = "W grupie")]
+        public string Group_name { get; set; }
+
+        #endregion
     }
 }
