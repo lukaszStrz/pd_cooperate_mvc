@@ -1,16 +1,17 @@
 ﻿@model Cooperate_mvc.Models.CreateTaskModel
 
-@using (Ajax.BeginForm("SelectGroup", "Tasks", new AjaxOptions { UpdateTargetId = "Users" }))
+@using (Ajax.BeginForm("SelectGroup", "Tasks", new AjaxOptions { UpdateTargetId = "UsersDropDown" }))
 { 
     @Html.DropDownListFor(
             m => m.SelectedGroupId,
             new SelectList(Model.Groups, "Id", "Name"),
-           string.Empty
+           "[Wybierz grupę]"
         )
+    <input type="submit" value="Wybierz" />
 }
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     $('#SelectedGroupId').change(function () {
         $(this).parents('form').submit();
     });
-</script>
+</script>*@

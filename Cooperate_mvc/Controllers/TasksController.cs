@@ -13,41 +13,57 @@ namespace Cooperate_mvc.Controllers
     {
         private compact_dbEntities db = new compact_dbEntities();
 
+        private List<GroupModel> GetGroups()
+        {
+            return (from g in db.Groups
+                            join p in db.Participations on g.Group_id equals p.Group_id
+                            join u in db.Users on p.User_id equals u.User_id
+                            where u.User_login.Equals(User.Identity.Name)
+                            select new GroupModel()
+                            {
+                                IsAdmin = p.Participation_isAdmin,
+                                CreationDate = g.Group_creationDate,
+                                Description = g.Group_description,
+                                Id = g.Group_id,
+                                Name = g.Group_name
+                            }).ToList();
+        }
+
         //
         // GET: /Tasks/
 
-        //public ActionResult Index()
-        //{
-        //    var tasks = (from t in db.Tasks
-        //                 join uFrom in db.Users on t.User_from equals uFrom.User_id
-        //                 join uTo in db.Users on t.User_to equals uTo.User_id
-        //                 join uChanged in db.Users on t.User_statusChangedBy equals uChanged.User_id
-        //                 join ts in db.TaskStatus on t.TaskStatus_id equals ts.TaskStatus_id
-        //                 join g in db.Groups on t.Group_id equals g.Group_id
-        //                 where uFrom.User_login.Equals(User.Identity.Name) || uTo.User_login.Equals(User.Identity.Name)
-        //                 select new TaskModel()
-        //                 {
-        //                     ToMe = uTo.User_login.Equals(User.Identity.Name),
-        //                     CreationDate = t.Task_creationDate,
-        //                     Deadline = t.Task_deadline,
-        //                     Description = t.Task_description,
-        //                     Group_id = t.Group_id,
-        //                     Id = t.Task_id,
-        //                     StatusLastChange = t.Task_statusLastChange,
-        //                     TaskStatus_id = t.TaskStatus_id,
-        //                     TaskStatus_name = ts.TaskStatus_name,
-        //                     Title = t.Task_title,
-        //                     UserFromId = t.User_from,
-        //                     UserFrom_login = uFrom.User_login,
-        //                     UserTo_id = t.User_to,
-        //                     UserTo_login = uTo.User_login,
-        //                     UserStatusChangedBy_id = t.User_statusChangedBy,
-        //                     User_login_statusChangedBy = uChanged.User_login,
-        //                     Group_name = g.Group_name
-        //                 });
+        public ActionResult Index()
+        {
+            var tasks = (from t in db.Tasks
+                         join uFrom in db.Users on t.User_from equals uFrom.User_id
+                         join uTo in db.Users on t.User_to equals uTo.User_id
+                         join uChanged in db.Users on t.User_statusChangedBy equals uChanged.User_id
+                         join ts in db.TaskStatus on t.TaskStatus_id equals ts.TaskStatus_id
+                         join g in db.Groups on t.Group_id equals g.Group_id
+                         where uFrom.User_login.Equals(User.Identity.Name) || uTo.User_login.Equals(User.Identity.Name)
+                         select new TaskModel()
+                         {
+                             ToMe = uTo.User_login.Equals(User.Identity.Name),
+                             CreationDate = t.Task_creationDate,
+                             Deadline = t.Task_deadline,
+                             Description = t.Task_description,
+                             Group_id = t.Group_id,
+                             Id = t.Task_id,
+                             StatusLastChange = t.Task_statusLastChange,
+                             TaskStatus_id = t.TaskStatus_id,
+                             TaskStatus_name = ts.TaskStatus_name,
+                             Title = t.Task_title,
+                             UserFromId = t.User_from,
+                             UserFrom_login = uFrom.User_login,
+                             UserTo_id = t.User_to,
+                             UserTo_login = uTo.User_login,
+                             UserStatusChangedBy_id = t.User_statusChangedBy,
+                             User_login_statusChangedBy = uChanged.User_login,
+                             Group_name = g.Group_name
+                         });
 
-        //    return View(tasks.ToList());
-        //}
+            return View(tasks.ToList());
+        }
 
         //
         // GET: /Tasks/Details/5
@@ -73,18 +89,7 @@ namespace Cooperate_mvc.Controllers
                 Users = null
             };
 
-            model.Groups = (from g in db.Groups
-                            join p in db.Participations on g.Group_id equals p.Group_id
-                            join u in db.Users on p.User_id equals u.User_id
-                            where u.User_login.Equals(User.Identity.Name)
-                            select new GroupModel()
-                            {
-                                IsAdmin = p.Participation_isAdmin,
-                                CreationDate = g.Group_creationDate,
-                                Description = g.Group_description,
-                                Id = g.Group_id,
-                                Name = g.Group_name
-                            }).ToList();
+            model.Groups = GetGroups();
 
             return View(model);
         }
@@ -128,7 +133,7 @@ namespace Cooperate_mvc.Controllers
         [HttpPost]
         public ActionResult SelectGroup(long SelectedGroupId)
         {
-            CreateTaskModel model = new CreateTaskModel();
+            CreateTaskModel model = new CreateTaskModel() { SelectedGroupId = SelectedGroupId, Groups = GetGroups() };
             model.Users = (from u in db.Users
                            join p in db.Participations on u.User_id equals p.User_id
                            join g in db.Groups on p.Group_id equals g.Group_id
@@ -141,8 +146,14 @@ namespace Cooperate_mvc.Controllers
                                LastName = u.User_lastName,
                                Login = u.User_login
                            }).ToList();
-
-            return PartialView("_SelectUserTo", model);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_SelectUserTo", model);
+            }
+            else
+            {
+                return RedirectToAction("Create");
+            }
         }
 
         //

@@ -46,13 +46,15 @@
         <div class="editor-label">
             @Html.Label("Użytkownik, do którego kierujemy zadanie")
         </div>
-        <div class="editor-field">
-            <div id="Users">@Html.Partial("_SelectUserTo", Model)</div>
-        </div>
+        @*<div class="editor-field">*@
+            <div id="UsersDropDown">
+                @Html.Partial("_SelectUserTo", Model)
+            </div>
+        @*</div>*@
 
-        <p>
+        @*<p>
             <input type="submit" value="Utwórz" />
-        </p>
+        </p>*@
     </fieldset>
 @*}*@
 
