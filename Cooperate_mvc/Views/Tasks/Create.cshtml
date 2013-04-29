@@ -4,12 +4,12 @@
     ViewBag.Title = "Utwórz zadanie";
 }
 
-@*@using (Html.BeginForm())
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    *@<fieldset>
+    <fieldset>
         <legend>Nowe zadanie</legend>
 
         <div class="editor-label">
@@ -40,21 +40,21 @@
             @Html.Label("Grupa")
         </div>
         <div class="editor-field">
-            @Html.Partial("_SelectGroup", Model)
+
         </div>
 
         <div class="editor-label">
             @Html.Label("Użytkownik, do którego kierujemy zadanie")
         </div>
         <div class="editor-field">
-            <div id="Users">@Html.Partial("_SelectUserTo", Model)</div>
+
         </div>
 
         <p>
             <input type="submit" value="Utwórz" />
         </p>
     </fieldset>
-@*}*@
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index")

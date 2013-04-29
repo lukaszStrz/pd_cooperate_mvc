@@ -16,38 +16,38 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Tasks/
 
-        //public ActionResult Index()
-        //{
-        //    var tasks = (from t in db.Tasks
-        //                 join uFrom in db.Users on t.User_from equals uFrom.User_id
-        //                 join uTo in db.Users on t.User_to equals uTo.User_id
-        //                 join uChanged in db.Users on t.User_statusChangedBy equals uChanged.User_id
-        //                 join ts in db.TaskStatus on t.TaskStatus_id equals ts.TaskStatus_id
-        //                 join g in db.Groups on t.Group_id equals g.Group_id
-        //                 where uFrom.User_login.Equals(User.Identity.Name) || uTo.User_login.Equals(User.Identity.Name)
-        //                 select new TaskModel()
-        //                 {
-        //                     ToMe = uTo.User_login.Equals(User.Identity.Name),
-        //                     CreationDate = t.Task_creationDate,
-        //                     Deadline = t.Task_deadline,
-        //                     Description = t.Task_description,
-        //                     Group_id = t.Group_id,
-        //                     Id = t.Task_id,
-        //                     StatusLastChange = t.Task_statusLastChange,
-        //                     TaskStatus_id = t.TaskStatus_id,
-        //                     TaskStatus_name = ts.TaskStatus_name,
-        //                     Title = t.Task_title,
-        //                     UserFromId = t.User_from,
-        //                     UserFrom_login = uFrom.User_login,
-        //                     UserTo_id = t.User_to,
-        //                     UserTo_login = uTo.User_login,
-        //                     UserStatusChangedBy_id = t.User_statusChangedBy,
-        //                     User_login_statusChangedBy = uChanged.User_login,
-        //                     Group_name = g.Group_name
-        //                 });
+        public ActionResult Index()
+        {
+            var tasks = (from t in db.Tasks
+                         join uFrom in db.Users on t.User_from equals uFrom.User_id
+                         join uTo in db.Users on t.User_to equals uTo.User_id
+                         join uChanged in db.Users on t.User_statusChangedBy equals uChanged.User_id
+                         join ts in db.TaskStatus on t.TaskStatus_id equals ts.TaskStatus_id
+                         join g in db.Groups on t.Group_id equals g.Group_id
+                         where uFrom.User_login.Equals(User.Identity.Name) || uTo.User_login.Equals(User.Identity.Name)
+                         select new TaskModel()
+                         {
+                             ToMe = uTo.User_login.Equals(User.Identity.Name),
+                             CreationDate = t.Task_creationDate,
+                             Deadline = t.Task_deadline,
+                             Description = t.Task_description,
+                             Group_id = t.Group_id,
+                             Id = t.Task_id,
+                             StatusLastChange = t.Task_statusLastChange,
+                             TaskStatus_id = t.TaskStatus_id,
+                             TaskStatus_name = ts.TaskStatus_name,
+                             Title = t.Task_title,
+                             UserFromId = t.User_from,
+                             UserFrom_login = uFrom.User_login,
+                             UserTo_id = t.User_to,
+                             UserTo_login = uTo.User_login,
+                             UserStatusChangedBy_id = t.User_statusChangedBy,
+                             User_login_statusChangedBy = uChanged.User_login,
+                             Group_name = g.Group_name
+                         });
 
-        //    return View(tasks.ToList());
-        //}
+            return View(tasks.ToList());
+        }
 
         //
         // GET: /Tasks/Details/5
@@ -125,25 +125,25 @@ namespace Cooperate_mvc.Controllers
             return View(task);
         }
 
-        [HttpPost]
-        public ActionResult SelectGroup(long SelectedGroupId)
-        {
-            CreateTaskModel model = new CreateTaskModel();
-            model.Users = (from u in db.Users
-                           join p in db.Participations on u.User_id equals p.User_id
-                           join g in db.Groups on p.Group_id equals g.Group_id
-                           where g.Group_id.Equals(SelectedGroupId)
-                           select new UserModel()
-                           {
-                               Birth = u.User_birth,
-                               Email = u.User_email,
-                               FirstName = u.User_firstName,
-                               LastName = u.User_lastName,
-                               Login = u.User_login
-                           }).ToList();
+        //[HttpPost]
+        //public ActionResult SelectGroup(long SelectedGroupId)
+        //{
+        //    CreateTaskModel model = new CreateTaskModel();
+        //    model.Users = (from u in db.Users
+        //                   join p in db.Participations on u.User_id equals p.User_id
+        //                   join g in db.Groups on p.Group_id equals g.Group_id
+        //                   where g.Group_id.Equals(SelectedGroupId)
+        //                   select new UserModel()
+        //                   {
+        //                       Birth = u.User_birth,
+        //                       Email = u.User_email,
+        //                       FirstName = u.User_firstName,
+        //                       LastName = u.User_lastName,
+        //                       Login = u.User_login
+        //                   }).ToList();
 
-            return PartialView("_SelectUserTo", model);
-        }
+        //    return PartialView("_SelectUserTo", model);
+        //}
 
         //
         // GET: /Tasks/Edit/5

@@ -9,7 +9,5 @@ namespace Cooperate_mvc.Models
         public List<GroupModel> Groups { get; set; }
 
         public List<UserModel> Users { get; set; }
-
-        public long SelectedGroupId { get; set; }
     }
 }
