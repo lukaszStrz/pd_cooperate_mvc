@@ -73,6 +73,16 @@ namespace Cooperate_mvc.Controllers
                 CreationDate = group.Group_creationDate,
                 Id = group.Group_id
             };
+            groupModel.Members = (from u in db.Users
+                                  join p in db.Participations on u.User_id equals p.User_id
+                                  where p.Group_id.Equals(id)
+                                  select new UserModel()
+                                  {
+                                      Login = u.User_login,
+                                      Id = u.User_id,
+                                      FirstName = u.User_firstName,
+                                      LastName = u.User_lastName
+                                  }).ToList();
 
             return View(groupModel);
         }

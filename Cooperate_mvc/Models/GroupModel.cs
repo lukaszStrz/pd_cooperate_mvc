@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cooperate_mvc.Models
 {
@@ -19,5 +20,7 @@ namespace Cooperate_mvc.Models
         public long Id { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public List<UserModel> Members { get; set; }
     }
 }

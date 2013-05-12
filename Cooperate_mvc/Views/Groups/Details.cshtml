@@ -34,7 +34,17 @@
                 @Html.DisplayFor(model => model.CreationDate)
             </div>
 
-            <p>TODO: tutaj będzie lista członków grupy</p>
+            <div class="display-label">
+                @Html.DisplayName("Lista członków")
+            </div>
+            <div class="display-field">
+                @foreach (var member in Model.Members)
+                {
+                    <div>
+                        @Html.ActionLink(member.FirstName + " " + member.LastName, "Details", "Account", new { login = member.Login }, null)
+                    </div>
+                }
+            </div>
         </fieldset>
         <p>
             @if (ViewBag.IsAdmin)
