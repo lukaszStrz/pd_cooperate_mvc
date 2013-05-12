@@ -22,7 +22,14 @@ namespace Cooperate_mvc.Controllers
             {
                 return HttpNotFound();
             }
-            UserModel userModel = new UserModel() { Birth = user.User_birth, Email = user.User_email, FirstName = user.User_firstName, LastName = user.User_lastName, Login = user.User_login };
+            UserModel userModel = new UserModel()
+            {
+                Birth = user.User_birth,
+                Email = user.User_email,
+                FirstName = user.User_firstName,
+                LastName = user.User_lastName,
+                Login = user.User_login
+            };
             return View(userModel);
         }
 
@@ -53,6 +60,8 @@ namespace Cooperate_mvc.Controllers
 
                 db.Users.Add(newUser);
                 db.SaveChanges();
+
+                FormsAuthentication.SetAuthCookie(user.Login, false);
 
                 return RedirectToAction("Index", "Home");
             }

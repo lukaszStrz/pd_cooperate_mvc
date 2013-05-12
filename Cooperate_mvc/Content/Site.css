@@ -4,9 +4,11 @@
     min-width: 1000px;
     margin: 0;
 }
+
 .userList {
-display:none;
+    display: none;
 }
+
 header {
     width: 1000px;
     margin: 0 auto;
@@ -28,14 +30,12 @@ footer {
     width: 1000px;
     margin: 0 auto;
     padding: 15px;
-    display: table;
     text-align: center;
 }
 
 #content {
     width: 1000px;
     margin: 0 auto;
-    display: table;
 }
 
     #content .realContent {
@@ -46,7 +46,7 @@ footer {
 .indexList td {
     border-collapse: collapse;
     border: 1px solid black;
-    padding:15px;
+    padding: 15px;
 }
 
     .indexList td:last-child {
@@ -104,9 +104,9 @@ textarea {
     margin-top: 1em;
 }
 
-.display-label:first-of-type {
-    margin-top: 0;
-}
+    .display-label:first-of-type {
+        margin-top: 0;
+    }
 
 .display-field {
     margin-left: 1em;

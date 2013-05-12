@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cooperate_mvc.Models;
+using System;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Cooperate_mvc.Models;
 
 namespace Cooperate_mvc.Controllers
 {
@@ -116,6 +113,12 @@ namespace Cooperate_mvc.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (task.User1.User_login != User.Identity.Name && task.User.User_login != User.Identity.Name)
+            {
+                return RedirectToAction("InsufficientRights", "Error");
+            }
+
             ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name", task.Group_id);
             ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name", task.TaskStatus_id);
             ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName", task.User_from);
@@ -155,6 +158,12 @@ namespace Cooperate_mvc.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (task.User1.User_login != User.Identity.Name && task.User.User_login != User.Identity.Name)
+            {
+                return RedirectToAction("InsufficientRights", "Error");
+            }
+
             return View(task);
         }
 

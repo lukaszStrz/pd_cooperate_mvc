@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
@@ -299,6 +300,7 @@
     <Content Include="Views\Tasks\Create.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Delete.cshtml" />
+    <Content Include="Views\Error\InsufficientRights.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

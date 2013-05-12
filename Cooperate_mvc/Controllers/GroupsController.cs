@@ -1,11 +1,11 @@
 ﻿using Cooperate_mvc.Models;
 using System;
-using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace Cooperate_mvc.Controllers
 {
+    [Authorize]
     public class GroupsController : Controller
     {
         private compact_dbEntities db = new compact_dbEntities();
@@ -13,7 +13,6 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Groups/
 
-        [Authorize]
         public ActionResult Index()
         {
             var groups = (from g in db.Groups
@@ -34,9 +33,14 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Groups/Join/5
 
-        [Authorize]
         public ActionResult Join(long id)
         {
+            Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
+
             Participation p = new Participation() { Group_id = id, Participation_isAdmin = false };
             p.User_id = (from u in db.Users
                          where u.User_login.Equals(User.Identity.Name)
@@ -49,28 +53,33 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Groups/Details/5
 
-        [Authorize]
         public ActionResult Details(long id = 0)
         {
             Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
+            if (group == null)
+            {
+                return HttpNotFound();
+            }
 
             Participation participation = group.Participations.SingleOrDefault(p => p.User.User_login.Equals(User.Identity.Name));
 
             ViewBag.IsParticipant = (participation != null);
             ViewBag.IsAdmin = (participation != null && participation.Participation_isAdmin);
 
-            if (group == null)
+            GroupModel groupModel = new GroupModel()
             {
-                return HttpNotFound();
-            }
-            GroupModel groupModel = new GroupModel() { Description = group.Group_description, Name = group.Group_name, CreationDate = group.Group_creationDate, Id = group.Group_id };
+                Description = group.Group_description,
+                Name = group.Group_name,
+                CreationDate = group.Group_creationDate,
+                Id = group.Group_id
+            };
+
             return View(groupModel);
         }
 
         //
         // GET: /Groups/Create
 
-        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -81,19 +90,28 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Create(GroupModel group)
         {
             if (ModelState.IsValid)
             {
-                Group newGroup = new Group() { Group_creationDate = DateTime.Now, Group_description = group.Description, Group_name = group.Name };
+                Group newGroup = new Group()
+                {
+                    Group_creationDate = DateTime.Now,
+                    Group_description = group.Description,
+                    Group_name = group.Name
+                };
                 db.Groups.Add(newGroup);
 
                 int userId = (from u in db.Users
                               where u.User_login.Equals(User.Identity.Name)
                               select u.User_id).Single();
 
-                Participation participation = new Participation() { User_id = userId, Group = newGroup, Participation_isAdmin = true };
+                Participation participation = new Participation()
+                {
+                    User_id = userId,
+                    Group = newGroup,
+                    Participation_isAdmin = true
+                };
                 db.Participations.Add(participation);
 
                 db.SaveChanges();
@@ -106,14 +124,23 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Groups/Edit/5
 
-        [Authorize]
         public ActionResult Edit(long id = 0)
         {
-            Group group = db.Groups.Where(g => g.Group_id.Equals(id)).SingleOrDefault();
+            Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
             if (group == null)
             {
                 return HttpNotFound();
             }
+
+            Participation part = (from p in db.Participations
+                                  join u in db.Users on p.User_id equals u.User_id
+                                  where u.User_login.Equals(User.Identity.Name) && p.Group_id.Equals(id)
+                                  select p).SingleOrDefault();
+            if (part == null || !part.Participation_isAdmin)
+            {
+                return RedirectToAction("InsufficientRights", "Error");
+            }
+
             GroupModel groupModel = new GroupModel() { Description = group.Group_description, Name = group.Group_name, CreationDate = group.Group_creationDate, Id = group.Group_id };
             return View(groupModel);
         }
@@ -123,7 +150,6 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Edit(GroupModel group)
         {
             if (ModelState.IsValid)
@@ -144,15 +170,29 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Groups/Delete/5
 
-        [Authorize]
         public ActionResult Delete(long id = 0)
         {
-            Group group = db.Groups.Where(g => g.Group_id.Equals(id)).SingleOrDefault();
+            Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
             if (group == null)
             {
                 return HttpNotFound();
             }
-            GroupModel groupModel = new GroupModel() { CreationDate = group.Group_creationDate, Name = group.Group_name, Description = group.Group_description };
+
+            Participation part = (from p in db.Participations
+                                  join u in db.Users on p.User_id equals u.User_id
+                                  where u.User_login.Equals(User.Identity.Name) && p.Group_id.Equals(id)
+                                  select p).SingleOrDefault();
+            if (part == null || !part.Participation_isAdmin)
+            {
+                return RedirectToAction("InsufficientRights", "Error");
+            }
+
+            GroupModel groupModel = new GroupModel()
+            {
+                CreationDate = group.Group_creationDate,
+                Name = group.Group_name,
+                Description = group.Group_description
+            };
             return View(groupModel);
         }
 
@@ -161,7 +201,6 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult DeleteConfirmed(long id)
         {
             Group group = db.Groups.Where(g => g.Group_id.Equals(id)).SingleOrDefault();
