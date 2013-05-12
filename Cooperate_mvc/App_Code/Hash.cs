@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -46,9 +45,8 @@ namespace HashLib
                 case HashType.SHA512:
                     hashString = GetSHA512(text);
                     break;
-                default: 
-                    hashString = "Invalid Hash Type"; 
-                    break;
+                default:
+                    throw new ArgumentException("Nieobsługiwany typ hashowania", "hashType");
             }
             return hashString;
         }
