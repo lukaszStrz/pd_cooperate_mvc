@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Cooperate_mvc.Controllers
 {
+    [Authorize]
     public class TasksController : Controller
     {
         private compact_dbEntities db = new compact_dbEntities();
