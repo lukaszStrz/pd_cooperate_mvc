@@ -71,12 +71,12 @@ header {
 
     #content #realContent {
         margin-left: 200px;
-        text-align:center;
+        /*text-align:center;*/
     }
 
         #content #realContent #realContentContent {
             display: inline-block;
-            text-align: left;
+            /*text-align: left;*/
         }
 
 .indexList td {
