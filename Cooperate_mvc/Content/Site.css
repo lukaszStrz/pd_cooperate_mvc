@@ -1,47 +1,84 @@
 ﻿body {
+    background-image: url('images/textured_paper.png');
     font-size: .85em;
     font-family: Calibri, "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    min-width: 1000px;
+    min-width: 650px;
     margin: 0;
 }
 
-.userList {
-    display: none;
+a {
+    text-decoration: none;
 }
 
 header {
-    width: 1000px;
-    margin: 0 auto;
+    background-image: url('images/top_line_bg.png');
+    width: 100%;
+    height: 98px;
+    position: fixed;
+}
+
+    header div#headerContent {
+        width: 80%;
+        min-width: 650px;
+        margin-left: 10%;
+        margin-right: 10%;
+        height: 55px;
+        margin: 4px auto;
+        padding-top: 6px;
+        display: table;
+    }
+
+        header div#headerContent div.logo {
+            float: left;
+            margin-top: 4px;
+        }
+
+            header div#headerContent div.logo a {
+                background: url('images/logo.png') no-repeat center;
+                display: block;
+                width: 250px;
+                height: 65px;
+            }
+
+                header div#headerContent div.logo a:hover {
+                    background: url('images/logo2.png') no-repeat center;
+                }
+
+        header div#headerContent #loginPartial {
+            float: right;
+            font-size: large;
+            margin-top: 20px;
+        }
+
+            header div#headerContent #loginPartial a {
+                color: #9a9a9a;
+                padding: 0 20px;
+                text-decoration: none;
+            }
+
+                header div#headerContent #loginPartial a:hover {
+                    color: #ddd;
+                }
+
+#content {
+    width: 80%;
+    min-width: 650px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 110px;
     display: table;
 }
 
-    header .logo {
-        float: left;
-        font-size: x-large;
-        font-family: 'Segoe Print';
+    #content #realContent {
+        width: 100%;
+        margin-left: 200px;
+        text-align:center;
     }
 
-    header .login {
-        float: right;
-        font-size: large;
-    }
-
-footer {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 15px;
-    text-align: center;
-}
-
-#content {
-    width: 1000px;
-    margin: 0 auto;
-}
-
-    #content .realContent {
-        float: left;
-        width: 800px;
-    }
+        #content #realContent #realContentContent {
+            display: inline-block;
+            text-align: left;
+        }
 
 .indexList td {
     border-collapse: collapse;
@@ -56,6 +93,7 @@ footer {
 nav {
     float: left;
     width: 200px;
+    position: fixed;
 }
 
     nav .navItem {
@@ -63,13 +101,22 @@ nav {
         font-size: large;
     }
 
-        nav .navItem li {
-            font-size: medium;
-        }
-
 #mainLoginForm {
     width: 300px;
     margin: 0 auto;
+}
+
+.userList {
+    display: none;
+}
+
+footer {
+    width: 80%;
+    min-width: 650px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 15px;
+    text-align: center;
 }
 
 

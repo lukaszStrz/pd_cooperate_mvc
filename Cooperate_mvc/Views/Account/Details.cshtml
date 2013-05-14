@@ -3,43 +3,41 @@
 @{
     ViewBag.Title = @Model.Login;
 }
-<div class="realContent">
-    <fieldset>
-        <legend>Profil użytkownika @Model.Login</legend>
+<fieldset>
+    <legend>Profil użytkownika @Model.Login</legend>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Login)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Login)
-        </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Login)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Login)
+    </div>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.FirstName)
-        </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.LastName)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.LastName)
-        </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Birth)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Birth)
-        </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Birth)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Birth)
+    </div>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Email)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Email)
-        </div>
-    </fieldset>
-</div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+</fieldset>

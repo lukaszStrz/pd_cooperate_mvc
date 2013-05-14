@@ -3,32 +3,30 @@
 @{
     ViewBag.Title = "Usuwanie grupy";
 }
-<div class="realContent">
-    <h3>Jesteś pewny, że chcesz usunąć tą grupę?</h3>
-    <fieldset>
-        <legend>@Html.DisplayFor(model => model.Name)</legend>
+<h3>Jesteś pewny, że chcesz usunąć tą grupę?</h3>
+<fieldset>
+    <legend>@Html.DisplayFor(model => model.Name)</legend>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Description)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Description)
-        </div>
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.CreationDate)
-        </div>
-    </fieldset>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <p>
-            <input type="submit" value="Usuń" />
-            |
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.CreationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreationDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Usuń" />
+        |
         @Html.ActionLink("Wróć do listy", "Index")
-        </p>
-    }
-</div>
+    </p>
+}

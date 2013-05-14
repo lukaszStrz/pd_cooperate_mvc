@@ -3,56 +3,55 @@
 @{
     ViewBag.Title = @Model.Name;
 }
-<div class="realContent">
-    @if (!ViewBag.IsParticipant)
-    {
-        @Html.ActionLink("Dołącz do grupy", "Join", new { id = Model.Id })
-        <fieldset>
-            <legend>@Model.Name</legend>
 
-            <div class="display-label">
-                @Html.DisplayName("Data utworzenia")
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.CreationDate)
-            </div>
-        </fieldset>
-    }
-    else
-    {
-        <fieldset>
-            <legend>@Model.Name</legend>
+@if (!ViewBag.IsParticipant)
+{
+    @Html.ActionLink("Dołącz do grupy", "Join", new { id = Model.Id })
+    <fieldset>
+        <legend>@Model.Name</legend>
 
-            <div class="display-field">
-                @Html.DisplayFor(model => model.Description)
-            </div>
+        <div class="display-label">
+            @Html.DisplayName("Data utworzenia")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreationDate)
+        </div>
+    </fieldset>
+}
+else
+{
+    <fieldset>
+        <legend>@Model.Name</legend>
 
-            <div class="display-label">
-                @Html.DisplayName("Data utworzenia")
-            </div>
-            <div class="display-field">
-                @Html.DisplayFor(model => model.CreationDate)
-            </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Description)
+        </div>
 
-            <div class="display-label">
-                @Html.DisplayName("Lista członków")
-            </div>
-            <div class="display-field">
-                @foreach (var member in Model.Members)
-                {
-                    <div>
-                        @Html.ActionLink(member.FirstName + " " + member.LastName, "Details", "Account", new { login = member.Login }, null)
-                    </div>
-                }
-            </div>
-        </fieldset>
-        <p>
-            @if (ViewBag.IsAdmin)
+        <div class="display-label">
+            @Html.DisplayName("Data utworzenia")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CreationDate)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayName("Lista członków")
+        </div>
+        <div class="display-field">
+            @foreach (var member in Model.Members)
             {
-                @Html.ActionLink("Edycja", "Edit", new { id = Model.Id })
-                @: | 
+                <div>
+                    @Html.ActionLink(member.FirstName + " " + member.LastName, "Details", "Account", new { login = member.Login }, null)
+                </div>
             }
-            @Html.ActionLink("Wróć do listy", "Index")
-        </p>
-    }
-</div>
+        </div>
+    </fieldset>
+    <p>
+        @if (ViewBag.IsAdmin)
+        {
+            @Html.ActionLink("Edycja", "Edit", new { id = Model.Id })
+            @: | 
+            }
+        @Html.ActionLink("Wróć do listy", "Index")
+    </p>
+}

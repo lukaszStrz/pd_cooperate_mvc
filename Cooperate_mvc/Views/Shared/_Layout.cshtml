@@ -13,15 +13,23 @@
 </head>
 <body>
     <header>
-        <div class="logo">@Html.ActionLink("Cooperate!", "Index", "Home")</div>
-        <div class="login">@Html.Partial("_Login")</div>
+        <div id="headerContent">
+            <div class="logo">
+                @Html.ActionLink(" ", "Index", "Home")
+            </div>
+            @Html.Partial("_Login")
+        </div>
     </header>
     <div id="content">
         @if (User.Identity.IsAuthenticated)
         {
             @Html.Partial("_Nav")
         }
-        @RenderBody()
+        <div id="realContent">
+            <div id="realContentContent">
+                @RenderBody()
+            </div>
+        </div>
     </div>
     <footer>
         &copy; 2013

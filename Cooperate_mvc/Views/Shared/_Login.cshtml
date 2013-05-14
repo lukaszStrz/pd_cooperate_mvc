@@ -1,25 +1,27 @@
-﻿@if (User.Identity.IsAuthenticated)
-{
-    <div>
-        @{
-    Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities();
-    var user = db.Users.Where(u => u.User_login.Equals(User.Identity.Name)).Single();
-            @Html.ActionLink(user.User_firstName + " " + user.User_lastName, "Details", "Account", new { login = user.User_login }, null)
-        }
-    </div>
+﻿<div id="loginPartial">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <span class="userName">
+            @{
+        Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities();
+        var user = db.Users.Where(u => u.User_login.Equals(User.Identity.Name)).Single();
+                @Html.ActionLink(user.User_firstName + " " + user.User_lastName, "Details", "Account", new { login = user.User_login }, null)
+            }
+        </span>
 
-    <div>
-        @Html.ActionLink("Wyloguj", "Logout", "Account")
-    </div>
-}
-else
-{
+        <span class="action">
+            @Html.ActionLink("Wyloguj", "Logout", "Account")
+        </span>
+    }
+    else
+    {
 
-    <div>
-        @Html.ActionLink("Zaloguj", "Login", "Account")
-    </div>
+        <span class="action">
+            @Html.ActionLink("Zaloguj", "Login", "Account")
+        </span>
 
-    <div>
-        @Html.ActionLink("Zarejestruj", "Create", "Account")
-    </div>
-}
+        <span class="action">
+            @Html.ActionLink("Zarejestruj", "Create", "Account")
+        </span>
+    }
+</div>
