@@ -1,17 +1,19 @@
 ﻿<nav>
-    <div class="navItem">
-        @Html.ActionLink("Utwórz grupę","Create","Groups")
-    </div>
-    <div class="navItem">
-        @Html.ActionLink("Nowe zadanie","Create","Tasks")
-    </div>
-    <div class="navItem">
-        Wiadomości
-    </div>
-    <div class="navItem">
-        @Html.ActionLink("Twoje grupy", "Index", "Groups")
-    </div>
-    <div class="navItem">
-        @Html.ActionLink("Twoje zadania", "Index", "Tasks")
+    <div id="navContent">
+        <div id="groupCreate">
+            @Html.ActionLink("Utwórz grupę", "Create", "Groups")
+        </div>
+        <div id="taskCreate">
+            @Html.ActionLink("Nowe zadanie", "Create", "Tasks")
+        </div>
+        <div id="messages">
+            @Html.ActionLink("Wiadomości", "", "")
+        </div>
+        <div id="groupList">
+            @Html.ActionLink("Twoje grupy", "Index", "Groups")
+        </div>
+        <div id="taskList">
+            @Html.ActionLink("Twoje zadania", "Index", "Tasks")
+        </div>
     </div>
 </nav>

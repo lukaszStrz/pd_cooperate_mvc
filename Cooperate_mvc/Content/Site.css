@@ -10,6 +10,9 @@ a {
     text-decoration: none;
 }
 
+/*  Header
+    ------------------------------------------*/
+
 header {
     background-image: url('images/top_line_bg.png');
     width: 100%;
@@ -18,10 +21,10 @@ header {
 }
 
     header div#headerContent {
-        width: 90%;
+        width: 80%;
         min-width: 650px;
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
         height: 55px;
         margin: 4px auto;
         padding-top: 6px;
@@ -61,16 +64,16 @@ header {
                 }
 
 #content {
-    width: 90%;
+    width: 80%;
     min-width: 650px;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
     padding-top: 110px;
     display: table;
 }
 
     #content #realContent {
-        margin-left: 200px;
+        margin-left: 275px;
         /*text-align:center;*/
     }
 
@@ -89,16 +92,75 @@ header {
         border: none;
     }
 
+/*  Navigation section
+    ------------------------------------------------------------*/
+
 nav {
     float: left;
-    width: 200px;
+    width: 250px;
     position: fixed;
 }
 
-    nav .navItem {
-        margin-top: 1em;
-        font-size: large;
+    nav div#navContent {
+        padding: 10px 50px 10px;
+        background: rgba(255, 255, 255, 0.50);
+        display: inline-block;
     }
+
+    nav div {
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    nav a:before {
+        padding-right: 5px;
+    }
+
+    nav div:first-child {
+        margin-top: 0;
+    }
+
+    nav div a {
+        color: black;
+    }
+
+    nav div#groupCreate a:before {
+        content: url('images/add_group.png');
+    }
+
+    nav div#groupCreate a:hover:before {
+        content: url('images/plus.png');
+    }
+
+    nav div#taskCreate a:before {
+        content: url('images/task_add.png');
+    }
+
+    nav div#taskCreate a:hover:before {
+        content: url('images/plus.png');
+    }
+
+    nav div#taskList a:before {
+        content: url('images/task.png');
+    }
+
+    nav div#groupList a:before {
+        content: url('images/groupevent.png');
+    }
+
+    nav div#messages a:before {
+        content: url('images/message.png');
+    }
+
+    nav div a:hover {
+        color: #9ca524;
+    }
+
+    nav div a:visited {
+    }
+
+/*  Sign-up and sign-in forms
+    --------------------------------------------------------*/
 
 #sign {
     width: 335px;
@@ -163,7 +225,7 @@ nav {
 footer {
     width: 90%;
     min-width: 650px;
-    margin: 20px 5%;
+    margin: 20px 10%;
     padding: 15px;
     text-align: center;
 }
