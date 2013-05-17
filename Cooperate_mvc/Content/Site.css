@@ -18,10 +18,10 @@ header {
 }
 
     header div#headerContent {
-        width: 80%;
+        width: 90%;
         min-width: 650px;
-        margin-left: 10%;
-        margin-right: 10%;
+        margin-left: 5%;
+        margin-right: 5%;
         height: 55px;
         margin: 4px auto;
         padding-top: 6px;
@@ -61,10 +61,10 @@ header {
                 }
 
 #content {
-    width: 80%;
+    width: 90%;
     min-width: 650px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding-top: 110px;
     display: table;
 }
@@ -100,20 +100,70 @@ nav {
         font-size: large;
     }
 
-#mainLoginForm {
-    width: 300px;
+#sign {
+    width: 335px;
     margin: 0 auto;
 }
+
+#sign-box {
+    margin: 12px 0 0;
+    padding: 20px 25px 15px;
+    background: #333333;
+    border: 4px solid #9ca524;
+}
+
+    #sign-box label {
+        display: block;
+        font-weight: bold;
+        margin: 0 0 .5em;
+        color: #ddd;
+    }
+
+    #sign-box div {
+        margin: 0 0 1.5em;
+    }
+
+    #sign-box label.remember {
+        display: inline-block;
+        vertical-align: top;
+        margin: 9px 0 0;
+        color: #ddd;
+    }
+
+        #sign-box label.remember:hover {
+            color: #9a9a9a;
+        }
+
+    #sign-box .remember-label {
+        font-weight: normal;
+        line-height: 0;
+        padding: 0 0 0 .4em;
+    }
+
+
+    #sign-box input[type=text], #sign-box input[type=password], #sign-box input[type=email], #sign-box input[type=datetime] {
+        width: 100%;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    #sign-box input[type=submit] {
+        margin: 0 1.5em 1.2em 0;
+        height: 32px;
+        font-size: 13px;
+    }
+
+        #sign-box input[type=submit]:hover {
+        }
 
 .userList {
     display: none;
 }
 
 footer {
-    width: 80%;
+    width: 90%;
     min-width: 650px;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 20px 5%;
     padding: 15px;
     text-align: center;
 }
@@ -170,7 +220,7 @@ textarea {
 }
 
 .input-validation-error {
-    border: 1px solid #f00;
+    border: 2px solid #f00;
     background-color: #fee;
 }
 

@@ -305,6 +305,7 @@
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Delete.cshtml" />
     <Content Include="Views\Error\InsufficientRights.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

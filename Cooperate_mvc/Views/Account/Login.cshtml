@@ -2,28 +2,32 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
-<div id="mainLoginForm">
-    <h2>Logowanie</h2>
 
-    @using (@Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <div>
-            @Html.DisplayName("Login")
+@using (@Html.BeginForm())
+{
+    <div id="sign">
+        <div id="sign-box">
+            @Html.AntiForgeryToken()
+            <div>
+                @Html.Label("Login")
+            </div>
+            <div>
+                @Html.TextBoxFor(model => model.User_login)
+            </div>
+            <div>
+                @Html.Label("Hasło")
+            </div>
+            <div>
+                @Html.PasswordFor(model => model.User_pass)
+            </div>
+            <input id="submit" type="submit" value="Zaloguj" />
+            <label class="remember" onclick="">
+                @Html.CheckBox("persistent")
+                <span class="remember-label">Zapamiętaj mnie
+                </span>
+            </label>
         </div>
-        <div>
-            @Html.TextBoxFor(model => model.User_login)
-        </div>
-        <div>
-            @Html.DisplayName("Hasło")
-        </div>
-        <div>
-            @Html.PasswordFor(model => model.User_pass)
-        </div>
-        <div>
-            @Html.CheckBox("persistent") Zapamiętaj mnie
-        </div>
-        <input type="submit" value="Zaloguj" />
-    }
-</div>
+    </div>
+}
