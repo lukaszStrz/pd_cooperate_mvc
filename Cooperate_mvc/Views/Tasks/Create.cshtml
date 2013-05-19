@@ -4,86 +4,94 @@
     ViewBag.Title = "Utwórz zadanie";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<div class="framedContent">
 
-    <fieldset>
-        <legend>Nowe zadanie</legend>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
-            @Html.ValidationMessageFor(model => model.Title)
-        </div>
+        <fieldset>
+            <legend>Nowe zadanie</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Description)
-            @Html.ValidationMessageFor(model => model.Description)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Title)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Deadline)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Deadline)
-            @Html.ValidationMessageFor(model => model.Deadline)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Grupa")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList(
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Deadline)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Deadline)
+                @Html.ValidationMessageFor(model => model.Deadline)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Grupa")
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(
             "Group_id",
             new SelectList(Model.GetGroups(User.Identity.Name), "Id", "Name"),
-           "[Wybierz grupę]", new { id = "groups" }
+           "[Wybierz grupę]", new { id = "groups", @class = "chzn-select" }
         )
-        </div>
+            </div>
 
-        <div class="editor-label">
-            @Html.Label("Użytkownik, do którego kierujemy zadanie")
-        </div>
-        <div class="editor-field">
-            @{                
-    foreach (var x in Model.GetGroups(User.Identity.Name))
-    {
-                @Html.DropDownList(
+            <div class="editor-label">
+                @Html.Label("Użytkownik, do którego kierujemy zadanie")
+            </div>
+            <div class="editor-field">
+                @{                
+        foreach (var x in Model.GetGroups(User.Identity.Name))
+        {
+                    @Html.DropDownList(
             "UserTo_id",
             new SelectList(Model.GetUsers(x.Id, User.Identity.Name), "Id", "Login"),
            "[Wybierz usera]", new { id = "users" + x.Id, @class = "userList" }
         )
-    }
-            }
-        </div>
+        }
+                }
+            </div>
 
-        <script>
-            $('#groups').change(function () {
-                $('.userList').each(function (i, e) {
-                    $(e).css('display', 'none');
-                    $(e).attr('name', 'hide');
+            <script type="text/javascript">
+                $('#groups').change(function () {
+                    $('.userList').each(function (i, e) {
+                        $(e).css('display', 'none');
+                        $(e).attr('name', 'hide');
+                    });
+                    $('#users' + $('#groups').val()).toggle();
+
+                    $('#users' + $('#groups').val()).attr('name', 'UserTo_id');
                 });
-                $('#users' + $('#groups').val()).toggle();
+            </script>
 
-                $('#users' + $('#groups').val()).attr('name', 'UserTo_id');
-            });
-        </script>
+            <p>
+                <input type="submit" value="Utwórz" />
+            </p>
+        </fieldset>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-        <p>
-            <input type="submit" value="Utwórz" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script type="text/javascript">
+    $(".chzn-select").chosen();
+    //$(".userList").chosen()
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -93,7 +101,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#Task_Deadline").datepicker({
+            $("#Deadline").datepicker({
                 changeMonth: true,
                 changeYear: true
             });

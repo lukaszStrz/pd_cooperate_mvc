@@ -1,4 +1,8 @@
-﻿body {
+﻿html, body {
+    height: 100%;
+}
+
+body {
     background-image: url('images/textured_paper.png');
     font-size: .85em;
     font-family: Calibri, "Segoe UI", Verdana, Helvetica, Sans-Serif;
@@ -7,6 +11,13 @@
 
 a {
     text-decoration: none;
+}
+
+div#mainContainer {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin-bottom: -98px; /* - height of footer */
 }
 
 /*  Header
@@ -61,7 +72,10 @@ header {
                     color: #ddd;
                 }
 
-#content {
+/*  Content
+    ------------------------------------------*/
+
+div#content {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -69,15 +83,58 @@ header {
     display: table;
 }
 
-    #content #realContent {
+    div#content div#realContent {
         margin-left: 275px;
-        /*text-align:center;*/
     }
 
-        #content #realContent #realContentContent {
-            display: inline-block;
-            /*text-align: left;*/
+        div#content div#realContent div.framedContent {
+            padding: 10px 50px 10px;
+            background: rgba(255, 255, 255, 0.50);
         }
+
+            div#content div#realContent div.framedContent fieldset {
+                border: 2px solid #cbcbcb;
+            }
+
+            div#content div#realContent div.framedContent legend {
+                font-size: x-large;
+                font-weight: normal;
+                margin-bottom: 0;
+            }
+
+            div#content div#realContent div.framedContent textarea {
+                min-height: 75px;
+                width: 100%;
+            }
+
+            div#content div#realContent div.framedContent input[type=text],
+            div#content div#realContent div.framedContent input[type=datetime],
+            div#content div#realContent div.framedContent select {
+                width: 100%;
+                height: 25px;
+            }
+
+            div#content div#realContent div.framedContent input[type=submit] {
+                width: 100px;
+                height: 30px;
+            }
+
+            div#content div#realContent div.framedContent .editor-label {
+                font-size: large;
+            }
+
+            div#content div#realContent div.framedContent .display-label {
+                font-weight: bold;
+                margin-top: 1em;
+            }
+
+                div#content div#realContent div.framedContent .display-label:first-of-type {
+                    margin-top: 0;
+                }
+
+            div#content div#realContent div.framedContent .display-field {
+                margin-left: 1em;
+            }
 
 .indexList td {
     border-collapse: collapse;
@@ -223,15 +280,28 @@ nav {
     display: none;
 }
 
-footer {
-    width: 80%;
-    margin: 20px 10%;
-    padding: 15px;
-    text-align: center;
+footer, div#push {
+    clear: both;
+    height: 98px;
 }
 
+footer {
+    background-image: url('images/bottom_line_bg.png');
+    width: 100%;
+}
 
-/* Styles for basic forms
+    footer div#footerContent {
+        color: #9a9a9a;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 40px;
+        display: inline-block;
+        text-align: center;
+    }
+
+
+/* Default Styles for basic forms
 -----------------------------------------------------------*/
 fieldset {
     border: 1px solid #ddd;
@@ -322,28 +392,27 @@ textarea {
                 height: 65px;
             }
 
-    #content {
+    div#content {
         width: 90%;
         margin-left: 5%;
         margin-right: 5%;
         display: table;
-        padding-top: 0;
+        padding-top: 10px;
     }
 
-        #content #realContent {
+        div#content div#realContent {
             margin-left: 0;
-            /*text-align:center;*/
+            display: table-row;
         }
 
     /*  Navigation section
     ------------------------------------------------------------*/
 
     nav {
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
+        width: 100%;
         margin-bottom: 10px;
-        position: initial;
+        position: static;
+        display: table-row;
     }
 
         nav div#navContent {
@@ -408,9 +477,10 @@ textarea {
         nav div a:visited {
         }
 
-    footer {
+    div#footerContent {
         width: 90%;
-        margin: 20px 5%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 }
 
@@ -421,12 +491,12 @@ textarea {
     }
 
     header div#headerContent #loginPartial {
-            float: none;
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-            text-align: center;
-        }
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        text-align: center;
+    }
 
     nav div#home {
         display: inherit;

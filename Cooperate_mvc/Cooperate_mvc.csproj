@@ -184,7 +184,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\compact_db.sdf" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
     <Content Include="Content\images\add_group.png" />
+    <Content Include="Content\images\bottom_line_bg.png" />
     <Content Include="Content\images\groupevent.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo2.png" />
@@ -268,6 +271,8 @@
       <LastGenOutput>model_db.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

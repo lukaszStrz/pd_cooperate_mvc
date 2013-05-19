@@ -5,34 +5,39 @@
     <meta name="viewport" content="width=device-width" />
     <title>Cooperate! - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Content/chosen.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
 </head>
 <body>
-    <header>
-        <div id="headerContent">
-            <div class="logo">
-                @Html.ActionLink(" ", "Index", "Home")
+    <div id="mainContainer">
+        <header>
+            <div id="headerContent">
+                <div class="logo">
+                    @Html.ActionLink(" ", "Index", "Home")
+                </div>
+                @Html.Partial("_Login")
             </div>
-            @Html.Partial("_Login")
-        </div>
-    </header>
-    <div id="content">
-        @if (User.Identity.IsAuthenticated)
-        {
-            @Html.Partial("_Nav")
-        }
-        <div id="realContent">
-            <div id="realContentContent">
+        </header>
+        <div id="content">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.Partial("_Nav")
+            }
+            <div id="realContent">
                 @RenderBody()
             </div>
         </div>
+        <div id="push"></div>
     </div>
     <footer>
-        &copy; 2013
+        <div id="footerContent">
+            &copy; 2013
+        </div>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
