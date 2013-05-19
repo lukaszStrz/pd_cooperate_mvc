@@ -2,7 +2,6 @@
     background-image: url('images/textured_paper.png');
     font-size: .85em;
     font-family: Calibri, "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    min-width: 650px;
     margin: 0;
 }
 
@@ -22,7 +21,6 @@ header {
 
     header div#headerContent {
         width: 80%;
-        min-width: 650px;
         margin-left: 10%;
         margin-right: 10%;
         height: 55px;
@@ -65,7 +63,6 @@ header {
 
 #content {
     width: 80%;
-    min-width: 650px;
     margin-left: 10%;
     margin-right: 10%;
     padding-top: 110px;
@@ -122,6 +119,10 @@ nav {
 
     nav div a {
         color: black;
+    }
+
+    nav div#home {
+        display: none;
     }
 
     nav div#groupCreate a:before {
@@ -223,8 +224,7 @@ nav {
 }
 
 footer {
-    width: 90%;
-    min-width: 650px;
+    width: 80%;
     margin: 20px 10%;
     padding: 15px;
     text-align: center;
@@ -293,4 +293,142 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+
+
+/********************
+*   Mobile Styles   *
+********************/
+@media only screen and (max-width: 850px) {
+
+    /*  Header
+    ------------------------------------------*/
+
+    header {
+        position: initial;
+    }
+
+        header div#headerContent {
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+            margin: 0 auto;
+        }
+
+            header div#headerContent div.logo a {
+                background: url('images/logo2.png') no-repeat center;
+                display: block;
+                width: 250px;
+                height: 65px;
+            }
+
+    #content {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        display: table;
+        padding-top: 0;
+    }
+
+        #content #realContent {
+            margin-left: 0;
+            /*text-align:center;*/
+        }
+
+    /*  Navigation section
+    ------------------------------------------------------------*/
+
+    nav {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 10px;
+        position: initial;
+    }
+
+        nav div#navContent {
+            padding: 10px 50px 10px;
+            background: rgba(255, 255, 255, 0.50);
+            display: block;
+            text-align: center;
+        }
+
+        nav div {
+            margin-top: 0;
+            font-size: 20px;
+            display: inline-block;
+        }
+
+        nav a:before {
+            padding-right: 0;
+        }
+
+        nav div:first-child {
+            margin-top: 0;
+        }
+
+        nav div a {
+            color: black;
+            white-space: nowrap;
+            padding: 0 30px;
+        }
+
+        nav div#groupCreate a:before {
+            content: none;
+        }
+
+        nav div#groupCreate a:hover:before {
+            content: none;
+        }
+
+        nav div#taskCreate a:before {
+            content: none;
+        }
+
+        nav div#taskCreate a:hover:before {
+            content: none;
+        }
+
+        nav div#taskList a:before {
+            content: none;
+        }
+
+        nav div#groupList a:before {
+            content: none;
+        }
+
+        nav div#messages a:before {
+            content: none;
+        }
+
+        nav div a:hover {
+            color: #9ca524;
+        }
+
+        nav div a:visited {
+        }
+
+    footer {
+        width: 90%;
+        margin: 20px 5%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    header div#headerContent div.logo {
+        display: none;
+    }
+
+    header div#headerContent #loginPartial {
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            text-align: center;
+        }
+
+    nav div#home {
+        display: inherit;
+    }
 }
