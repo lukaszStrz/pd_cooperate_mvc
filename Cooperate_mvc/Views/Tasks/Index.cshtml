@@ -3,172 +3,99 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<div class="indexList">
-    <h2>Zadania do wykonania</h2>
-    @{
-        var tasks = Model.Where(m => m.ToMe.Equals(true));
-        if (tasks.ToArray().Length > 0)
-        {
-        <table>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreationDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Deadline)
-                </th>
-                <th>
-                    @Html.DisplayName("Login")
-                </th>
-                <th>
-                    @Html.DisplayName("Status")
-                </th>
-                <th>
-                    @Html.DisplayName("Zmieniony")
-                </th>
-                <th>
-                    @Html.DisplayName("Zmieniony przez")
-                </th>
-                <th>
-                    @Html.DisplayName("Grupa")
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in tasks)
+<div class="framedContent">
+    <div class="indexList">
+        <div class="header">
+            Zadania do wykonania
+        </div>
+        @{
+            var tasks = Model.Where(m => m.ToMe.Equals(true)).ToArray();
+            if (tasks.Length > 0)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreationDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Deadline)
-                    </td>
-                    <td>
-                        @Html.ActionLink(item.UserFrom_login, "Details", "Account", new { login = item.UserFrom_login }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaskStatus_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StatusLastChange)
-                    </td>
-                    <td>
-                        @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null)
-                    </td>
-                    <td>
-                        @Html.ActionLink(item.Group_name, "Details", "Groups", new { id = item.Group_id }, null)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                foreach (var item in tasks)
+                {
+            <fieldset>
+                <legend>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </legend>
+                <div class="description">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+                <div class="info">
+                    Utworzono @Html.DisplayFor(modelItem => item.CreationDate)
+                </div>
+                <div class="info">
+                    Termin wykonania: @Html.DisplayFor(modelItem => item.Deadline)
+                </div>
+                <div class="info">
+                    Zlecone przez @Html.ActionLink(item.UserFrom_login, "Details", "Account", new { login = item.UserFrom_login }, null)
+                </div>
+                <div class="info">
+                    Aktualny status: @Html.DisplayFor(modelItem => item.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => item.StatusLastChange) przez @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null))
+                </div>
+                <div class="info">
+                    Należy do grupy @Html.ActionLink(item.Group_name, "Details", "Groups", new { id = item.Group_id }, null)
+                </div>
+                <div class="links">
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Wyświetl", "Details", new { id = item.Id }) |
             @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
-                    </td>
-                </tr>
-            }
+                </div>
+            </fieldset>
+                }
 
-        </table>
+            }
+            else
+            {
+            <p>brak zadań</p>
+            }
         }
-        else
-        {
-        <p>brak zadań</p>
-        }
-    }
+    </div>
 </div>
-
-<div class="indexList">
-    <h2>Zlecone zadania</h2>
-    @{
-        var tasks2 = Model.Where(m => m.ToMe.Equals(false));
-        if (tasks2.ToArray().Length > 0)
-        {
-        <table>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CreationDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Deadline)
-                </th>
-                <th>
-                    @Html.DisplayName("Login")
-                </th>
-                <th>
-                    @Html.DisplayName("Status")
-                </th>
-                <th>
-                    @Html.DisplayName("Zmieniony")
-                </th>
-                <th>
-                    @Html.DisplayName("Zmieniony przez")
-                </th>
-                <th>
-                    @Html.DisplayName("Grupa")
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in tasks2)
+<div class="framedContent">
+    <div class="indexList">
+        <div class="header">
+            Zlecone zadania
+        </div>
+        @{
+            var tasks2 = Model.Where(m => m.ToMe.Equals(false)).ToArray();
+            if (tasks2.Length > 0)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreationDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Deadline)
-                    </td>
-                    <td>
-                        @Html.ActionLink(item.UserTo_login, "Details", "Account", new { login = item.UserTo_login }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TaskStatus_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StatusLastChange)
-                    </td>
-                    <td>
-                        @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null)
-                    </td>
-                    <td>
-                        @Html.ActionLink(item.Group_name, "Details", "Groups", new { id = item.Group_id }, null)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
-                    </td>
-                </tr>
+                foreach (var item in tasks2)
+                {
+            <fieldset>
+                <legend>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </legend>
+                <div class="description">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+                <div class="info">
+                    Utworzono @Html.DisplayFor(modelItem => item.CreationDate)
+                </div>
+                <div class="info">
+                    Termin wykonania: @Html.DisplayFor(modelItem => item.Deadline)
+                </div>
+                <div class="info">
+                    Zlecone przez @Html.ActionLink(item.UserTo_login, "Details", "Account", new { login = item.UserTo_login }, null)
+                </div>
+                <div class="info">
+                    Aktualny status: @Html.DisplayFor(modelItem => item.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => item.StatusLastChange) przez @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null))
+                </div>
+                <div class="info">
+                    Należy do grupy @Html.ActionLink(item.Group_name, "Details", "Groups", new { id = item.Group_id }, null)
+                </div>
+                <div class="links">
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id })
+                </div>
+            </fieldset>
+                }
             }
-        </table>
+            else
+            {
+            <p>brak zadań</p>
+            }
         }
-        else
-        {
-        <p>brak zadań</p>
-        }
-    }
+    </div>
 </div>

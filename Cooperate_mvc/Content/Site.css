@@ -11,7 +11,12 @@ body {
 
 a {
     text-decoration: none;
+    color: #023c03;
 }
+
+    a:hover {
+        color: #9ea82b;
+    }
 
 div#mainContainer {
     min-height: 100%;
@@ -90,7 +95,31 @@ div#content {
         div#content div#realContent div.framedContent {
             padding: 10px 50px 10px;
             background: rgba(255, 255, 255, 0.50);
+            margin-top: 10px;
         }
+
+            div#content div#realContent div.framedContent:first-child {
+                margin-top: 0;
+            }
+
+            div#content div#realContent div.framedContent div.header {
+                text-align: center;
+                font-size: large;
+                font-weight: bold;
+            }
+
+            div#content div#realContent div.framedContent .indexList .create {
+                font-size: large;
+                margin-bottom: 10px;
+            }
+
+            div#content div#realContent div.framedContent .indexList div {
+                padding: 10px;
+            }
+
+                div#content div#realContent div.framedContent .indexList div.description {
+                    margin-left: 20px;
+                }
 
             div#content div#realContent div.framedContent fieldset {
                 border: 2px solid #cbcbcb;
@@ -99,7 +128,7 @@ div#content {
             div#content div#realContent div.framedContent legend {
                 font-size: x-large;
                 font-weight: normal;
-                margin-bottom: 0;
+                margin-bottom: 5px;
             }
 
             div#content div#realContent div.framedContent textarea {
@@ -126,6 +155,7 @@ div#content {
             div#content div#realContent div.framedContent .display-label {
                 font-weight: bold;
                 margin-top: 1em;
+                font-size: large;
             }
 
                 div#content div#realContent div.framedContent .display-label:first-of-type {
@@ -134,17 +164,17 @@ div#content {
 
             div#content div#realContent div.framedContent .display-field {
                 margin-left: 1em;
+                padding: 10px;
             }
 
-.indexList td {
-    border-collapse: collapse;
-    border: 1px solid black;
-    padding: 15px;
-}
+                div#content div#realContent div.framedContent .display-field li {
+                    font-size: medium;
+                    padding-top: 5px;
+                }
 
-    .indexList td:last-child {
-        border: none;
-    }
+                    div#content div#realContent div.framedContent .display-field li:first-child {
+                        padding-top: 0;
+                    }
 
 /*  Navigation section
     ------------------------------------------------------------*/

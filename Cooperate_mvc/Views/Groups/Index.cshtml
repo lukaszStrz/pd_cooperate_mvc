@@ -3,38 +3,25 @@
 @{
     ViewBag.Title = "Twoje grupy";
 }
-
-<p>
-    @Html.ActionLink("Utwórz nową", "Create")
-</p>
-<div class="indexList">
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayName("Nazwa")
-            </th>
-            <th>
-                @Html.DisplayName("Opis")
-            </th>
-            <th>
-                @Html.DisplayName("Data utworzenia")
-            </th>
-            <th></th>
-        </tr>
+<div class="framedContent">
+    <div class="indexList">
+        <div class="create">
+            @Html.ActionLink("Utwórz nową", "Create")
+        </div>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <fieldset>
+                <legend>
                     @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
+                </legend>
+                <div class="description">
                     @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreationDate)
-                </td>
-                <td>
+                </div>
+                <div class="info">
+                    Utworzono @Html.DisplayFor(modelItem => item.CreationDate)
+                </div>
+                <div class="links">
                     @Html.ActionLink("Wyświetl", "Details", new { id = item.Id })
                     @if (item.IsAdmin)
                     {
@@ -43,9 +30,8 @@
                         @: | 
                         @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
                     }
-                </td>
-            </tr>
+                </div>
+            </fieldset>
         }
-
-    </table>
+    </div>
 </div>

@@ -3,41 +3,35 @@
 @{
     ViewBag.Title = @Model.Login;
 }
-<fieldset>
-    <legend>Profil użytkownika @Model.Login</legend>
+<div class="framedContent">
+    <fieldset>
+        <legend>@Model.Login</legend>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Login)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Login)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Login)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Login)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.FirstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FirstName)
-    </div>
+        <div class="display-label">
+            @Html.DisplayName("Imię i nazwisko")
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName)
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Birth)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Birth)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.LastName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LastName)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Birth)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Birth)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
-</fieldset>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Email)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Email)
+        </div>
+    </fieldset>
+</div>
