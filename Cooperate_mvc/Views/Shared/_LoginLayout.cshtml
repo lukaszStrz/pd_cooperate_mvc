@@ -12,19 +12,24 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-    <header>
-        <div id="headerContent">
-            <div class="logo">
-                @Html.ActionLink(" ", "Index", "Home")
+    <div id="mainContainer">
+        <header>
+            <div id="headerContent">
+                <div class="logo">
+                    @Html.ActionLink(" ", "Index", "Home")
+                </div>
+                @Html.Partial("_Login")
             </div>
-            @*@Html.Partial("_Login")*@
+        </header>
+        <div id="content">
+            @RenderBody()
         </div>
-    </header>
-    <div id="content">
-        @RenderBody()
+        <div id="push"></div>
     </div>
     <footer>
-        &copy; 2013
+        <div id="footerContent">
+            &copy; 2013
+        </div>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")
