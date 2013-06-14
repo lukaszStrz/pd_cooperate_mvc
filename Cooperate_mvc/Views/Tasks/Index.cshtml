@@ -38,8 +38,7 @@
                 </div>
                 <div class="links">
                     @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id })
                 </div>
             </fieldset>
                 }
@@ -87,7 +86,8 @@
                 </div>
                 <div class="links">
                     @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id })
+            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id }) |
+                     @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
                 </div>
             </fieldset>
                 }

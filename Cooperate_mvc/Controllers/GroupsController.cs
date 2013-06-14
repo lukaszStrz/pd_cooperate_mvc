@@ -26,8 +26,8 @@ namespace Cooperate_mvc.Controllers
                               Id = g.Group_id,
                               CreationDate = g.Group_creationDate,
                               IsAdmin = p.Participation_isAdmin
-                          });
-            return View(groups.ToList());
+                          }).ToList();
+            return View(groups);
         }
 
         //
@@ -164,7 +164,7 @@ namespace Cooperate_mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                Group editGroup = db.Groups.Where(g => g.Group_id.Equals(group.Id)).SingleOrDefault();
+                Group editGroup = db.Groups.SingleOrDefault(g => g.Group_id.Equals(group.Id));
                 if (editGroup == null)
                 {
                     return HttpNotFound();
@@ -213,7 +213,7 @@ namespace Cooperate_mvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Group group = db.Groups.Where(g => g.Group_id.Equals(id)).SingleOrDefault();
+            Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
             db.Groups.Remove(group);
             db.SaveChanges();
             return RedirectToAction("Index");

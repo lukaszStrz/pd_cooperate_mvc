@@ -17,7 +17,7 @@ namespace Cooperate_mvc.Controllers
         [Authorize]
         public ActionResult Details(string login = "")
         {
-            User user = db.Users.Where(u => u.User_login.Equals(login)).SingleOrDefault();
+            User user = db.Users.SingleOrDefault(u => u.User_login.Equals(login));
             if (user == null)
             {
                 return HttpNotFound();
@@ -72,7 +72,7 @@ namespace Cooperate_mvc.Controllers
         [HttpPost]
         public JsonResult LoginExist(string Login)
         {
-            var user = db.Users.Where(u => u.User_login.Equals(Login)).SingleOrDefault();
+            var user = db.Users.SingleOrDefault(u => u.User_login.Equals(Login));
 
             return Json(user == null);
         }
@@ -80,7 +80,7 @@ namespace Cooperate_mvc.Controllers
         [HttpPost]
         public JsonResult MailExist(string Email)
         {
-            var user = db.Users.Where(u => u.User_email.Equals(Email)).SingleOrDefault();
+            var user = db.Users.SingleOrDefault(u => u.User_email.Equals(Email));
 
             return Json(user == null);
         }
