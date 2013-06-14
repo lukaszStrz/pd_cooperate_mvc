@@ -131,23 +131,39 @@ namespace Cooperate_mvc.Controllers
 
         public ActionResult Edit(long id = 0)
         {
-            Task task = db.Tasks.Find(id);
+            Task task = db.Tasks.SingleOrDefault(t => t.Task_id.Equals(id));
             if (task == null)
             {
                 return HttpNotFound();
             }
+
+            TaskModel tm = new TaskModel()
+            {
+                ToMe = task.User1.User_login.Equals(User.Identity.Name),
+                CreationDate = task.Task_creationDate,
+                Deadline = task.Task_deadline,
+                Description = task.Task_description,
+                Group_id = task.Group_id,
+                Id = task.Task_id,
+                StatusLastChange = task.Task_statusLastChange,
+                TaskStatus_id = task.TaskStatus_id,
+                TaskStatus_name = task.TaskStatu.TaskStatus_name,
+                Title = task.Task_title,
+                UserFromId = task.User_from,
+                UserFrom_login = task.User.User_login,
+                UserTo_id = task.User_to,
+                UserTo_login = task.User1.User_login,
+                UserStatusChangedBy_id = task.User_statusChangedBy,
+                User_login_statusChangedBy = task.User2.User_login,
+                Group_name = task.Group.Group_name
+            };
 
             if (task.User1.User_login != User.Identity.Name && task.User.User_login != User.Identity.Name)
             {
                 return RedirectToAction("InsufficientRights", "Error");
             }
 
-            ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name", task.Group_id);
-            ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name", task.TaskStatus_id);
-            ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName", task.User_from);
-            ViewBag.User_to = new SelectList(db.Users, "User_id", "User_firstName", task.User_to);
-            ViewBag.User_statusChangedBy = new SelectList(db.Users, "User_id", "User_firstName", task.User_statusChangedBy);
-            return View(task);
+            return View(tm);
         }
 
         //
