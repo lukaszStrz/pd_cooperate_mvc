@@ -92,6 +92,14 @@ div#content {
         margin-left: 275px;
     }
 
+        div#content div#realContent div.welcomeText {
+            font-size: x-large;
+        }
+
+        div#content div#realContent div.welcomeImg {
+            display: none;
+        }
+
         div#content div#realContent div.framedContent {
             padding: 10px 50px 10px;
             background: rgba(255, 255, 255, 0.50);
@@ -399,6 +407,21 @@ textarea {
 /********************
 *   Mobile Styles   *
 ********************/
+@media only screen and (min-width: 1200px) {
+
+    div#content div#realContent div.welcomeText {
+        width: 50%;
+        float: left;
+    }
+
+    div#content div#realContent div.welcomeImg {
+        display: initial;
+        width: 50%;
+        float: left;
+    }
+}
+
+
 @media only screen and (max-width: 850px) {
 
     /*  Header

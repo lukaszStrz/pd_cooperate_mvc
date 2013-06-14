@@ -39,12 +39,17 @@
 }
 else
 {
-    <h2>Witaj w Cooperate!</h2>
-    <p>
-        Aplikacji, która sprawi, że współpraca w grupie stanie się łatwiejsza i bardziej zorganizowana.
-    </p>
-    <p>
-        @Html.ActionLink("Zaloguj się", "Login", "Account"), lub @Html.ActionLink("załóż konto", "Create", "Account"), aby korzystać ze wszystkich możliwości.
+    <div class="welcomeText">
+        <h2>Witaj w Cooperate!</h2>
+        <p>
+            Aplikacji, która sprawi, że współpraca w grupie stanie się łatwiejsza i bardziej zorganizowana.
+        </p>
+        <p>
+            @Html.ActionLink("Zaloguj się", "Login", "Account"), lub @Html.ActionLink("załóż konto", "Create", "Account"), aby korzystać ze wszystkich możliwości.
         Załóż nową grupę lup dołącz do istniejącej. Przydzielaj nowe zadania lub wykonuj te, przydzielone przez innych.
-    </p>
+        </p>
+    </div>
+    <div class="welcomeImg">
+        <img src="~/Content/images/population.png" />
+    </div>
 }

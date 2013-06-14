@@ -193,6 +193,7 @@
     <Content Include="Content\images\logo2.png" />
     <Content Include="Content\images\message.png" />
     <Content Include="Content\images\plus.png" />
+    <Content Include="Content\images\population.png" />
     <Content Include="Content\images\task.png" />
     <Content Include="Content\images\task_add.png" />
     <Content Include="Content\images\textured_paper.png" />
