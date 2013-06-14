@@ -76,7 +76,7 @@
                     Termin wykonania: @Html.DisplayFor(modelItem => item.Deadline)
                 </div>
                 <div class="info">
-                    Zlecone przez @Html.ActionLink(item.UserTo_login, "Details", "Account", new { login = item.UserTo_login }, null)
+                    Zlecone użytkownikowi @Html.ActionLink(item.UserTo_login, "Details", "Account", new { login = item.UserTo_login }, null)
                 </div>
                 <div class="info">
                     Aktualny status: @Html.DisplayFor(modelItem => item.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => item.StatusLastChange) przez @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null))

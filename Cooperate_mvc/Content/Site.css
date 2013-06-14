@@ -121,17 +121,17 @@ div#content {
                 margin-bottom: 10px;
             }
 
-            div#content div#realContent div.framedContent .indexList div {
-                padding: 10px;
-            }
-
-                div#content div#realContent div.framedContent .indexList div.description {
-                    margin-left: 20px;
-                }
-
             div#content div#realContent div.framedContent fieldset {
                 border: 2px solid #cbcbcb;
             }
+
+                div#content div#realContent div.framedContent fieldset div {
+                    padding: 10px;
+                }
+
+                    div#content div#realContent div.framedContent fieldset div.description {
+                        margin-left: 20px;
+                    }
 
             div#content div#realContent div.framedContent legend {
                 font-size: x-large;

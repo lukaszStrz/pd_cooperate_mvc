@@ -1,92 +1,44 @@
-﻿@model Cooperate_mvc.Models.Task
+﻿@model Cooperate_mvc.Models.TaskModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Szczegóły zadania";
 }
+<div class="framedContent">
+    <fieldset>
+        <legend>@Model.Title</legend>
 
-<h2>Details</h2>
+        <div class="description">
+            @Html.DisplayFor(modelItem => Model.Description)
+        </div>
+        <div class="info">
+            Utworzono @Html.DisplayFor(modelItem => Model.CreationDate)
+        </div>
+        <div class="info">
+            Termin wykonania: @Html.DisplayFor(modelItem => Model.Deadline)
+        </div>
 
-<fieldset>
-    <legend>Task</legend>
+        @if (Model.ToMe)
+        {
+            <div class="info">
+                Zlecone przez @Html.ActionLink(Model.UserFrom_login, "Details", "Account", new { login = Model.UserFrom_login }, null)
+            </div>
+        }
+        else
+        {
+            <div class="info">
+                Zlecone użytkownikowi @Html.ActionLink(Model.UserTo_login, "Details", "Account", new { login = Model.UserTo_login }, null)
+            </div>
+        }
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Task_id)
+        <div class="info">
+            Aktualny status: @Html.DisplayFor(modelItem => Model.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => Model.StatusLastChange) przez @Html.ActionLink(Model.User_login_statusChangedBy, "Details", "Account", new { login = Model.User_login_statusChangedBy }, null))
+        </div>
+        <div class="info">
+            Należy do grupy @Html.ActionLink(Model.Group_name, "Details", "Groups", new { id = Model.Group_id }, null)
+        </div>
+    </fieldset>
+    <div class="links">
+        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Wyświetl", "Details", new { id = Model.Id })
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Task_id)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Task_title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Task_title)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Task_description)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Task_description)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Task_creationDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Task_creationDate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Task_deadline)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Task_deadline)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User.User_firstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User.User_firstName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User1.User_firstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User1.User_firstName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TaskStatu.TaskStatus_name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TaskStatu.TaskStatus_name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Task_statusLastChange)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Task_statusLastChange)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.User2.User_firstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.User2.User_firstName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Group.Group_name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Group.Group_name)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
