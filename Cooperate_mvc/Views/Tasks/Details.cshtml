@@ -38,7 +38,11 @@
         </div>
     </fieldset>
     <div class="links">
-        @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Wyświetl", "Details", new { id = Model.Id })
+        @Html.ActionLink("Wróć do listy", "Index")
+        @if (Model.UserFrom_login.Equals(User.Identity.Name))
+        {
+            @: |
+            @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })
+        }
     </div>
 </div>

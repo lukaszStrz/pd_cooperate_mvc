@@ -16,29 +16,16 @@
                 {
             <fieldset>
                 <legend>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.ActionLink(item.Title, "Details", new { id = item.Id })
                 </legend>
                 <div class="description">
                     @Html.DisplayFor(modelItem => item.Description)
                 </div>
                 <div class="info">
-                    Utworzono @Html.DisplayFor(modelItem => item.CreationDate)
-                </div>
-                <div class="info">
                     Termin wykonania: @Html.DisplayFor(modelItem => item.Deadline)
                 </div>
                 <div class="info">
-                    Zlecone przez @Html.ActionLink(item.UserFrom_login, "Details", "Account", new { login = item.UserFrom_login }, null)
-                </div>
-                <div class="info">
                     Aktualny status: @Html.DisplayFor(modelItem => item.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => item.StatusLastChange) przez @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null))
-                </div>
-                <div class="info">
-                    Należy do grupy @Html.ActionLink(item.Group_name, "Details", "Groups", new { id = item.Group_id }, null)
-                </div>
-                <div class="links">
-                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id })
                 </div>
             </fieldset>
                 }
@@ -64,29 +51,19 @@
                 {
             <fieldset>
                 <legend>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.ActionLink(item.Title, "Details", new { id = item.Id })
                 </legend>
                 <div class="description">
                     @Html.DisplayFor(modelItem => item.Description)
                 </div>
                 <div class="info">
-                    Utworzono @Html.DisplayFor(modelItem => item.CreationDate)
-                </div>
-                <div class="info">
                     Termin wykonania: @Html.DisplayFor(modelItem => item.Deadline)
-                </div>
-                <div class="info">
-                    Zlecone użytkownikowi @Html.ActionLink(item.UserTo_login, "Details", "Account", new { login = item.UserTo_login }, null)
                 </div>
                 <div class="info">
                     Aktualny status: @Html.DisplayFor(modelItem => item.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => item.StatusLastChange) przez @Html.ActionLink(item.User_login_statusChangedBy, "Details", "Account", new { login = item.User_login_statusChangedBy }, null))
                 </div>
-                <div class="info">
-                    Należy do grupy @Html.ActionLink(item.Group_name, "Details", "Groups", new { id = item.Group_id }, null)
-                </div>
                 <div class="links">
                     @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Wyświetl", "Details", new { id = item.Id }) |
                      @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
                 </div>
             </fieldset>

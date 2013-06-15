@@ -132,8 +132,9 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Account/Login
 
-        public ActionResult Login()
+        public ActionResult Login(bool error = false)
         {
+            ViewBag.ValidationError = error;
             return View();
         }
 
@@ -148,7 +149,7 @@ namespace Cooperate_mvc.Controllers
                     return Redirect(returnUrl);
                 return RedirectToAction("Index", "Home");
             }
-            return Login();
+            return Login(true);
         }
 
         [Authorize]

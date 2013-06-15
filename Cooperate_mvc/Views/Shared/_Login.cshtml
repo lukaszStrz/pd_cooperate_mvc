@@ -1,20 +1,28 @@
 ﻿<div id="loginPartial">
-    @if (User.Identity.IsAuthenticated)
-    {
+    @{
+        bool authenticated = false;
+        if (User.Identity.IsAuthenticated)
+        {
+            Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities();
+            var user = db.Users.SingleOrDefault(u => u.User_login.Equals(User.Identity.Name));
+            if (user != null)
+            {
+                authenticated = true;
         <span class="userName">
-            @{
-        Cooperate_mvc.Models.compact_dbEntities db = new Cooperate_mvc.Models.compact_dbEntities();
-        var user = db.Users.Where(u => u.User_login.Equals(User.Identity.Name)).Single();
-                @Html.ActionLink(user.User_firstName + " " + user.User_lastName, "Details", "Account", new { login = user.User_login }, null)
-            }
+            @Html.ActionLink(user.User_firstName + " " + user.User_lastName, "Details", "Account", new { login = user.User_login }, null)
         </span>
 
         <span class="action">
             @Html.ActionLink("Wyloguj", "Logout", "Account")
         </span>
-    }
-    else
-    {
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
+            }
+        }
+        if (!authenticated)
+        {
         <span class="action">
             @Html.ActionLink("Zaloguj", "Login", "Account")
         </span>
@@ -22,5 +30,6 @@
         <span class="action">
             @Html.ActionLink("Zarejestruj", "Create", "Account")
         </span>
+        }
     }
 </div>

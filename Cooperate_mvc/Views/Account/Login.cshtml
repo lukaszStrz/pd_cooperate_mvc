@@ -28,6 +28,12 @@
                 <span class="remember-label">Zapamiętaj mnie
                 </span>
             </label>
+            @if (ViewBag.ValidationError == true)
+            {
+                <p style="color: red;">
+                    Zły login lub hasło
+                </p>
+            }
         </div>
     </div>
 }
