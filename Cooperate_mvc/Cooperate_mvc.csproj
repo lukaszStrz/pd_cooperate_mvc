@@ -318,6 +318,7 @@
     <Content Include="Views\Tasks\Delete.cshtml" />
     <Content Include="Views\Error\InsufficientRights.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
