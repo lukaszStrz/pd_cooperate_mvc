@@ -169,8 +169,12 @@ namespace Cooperate_mvc.Controllers
                 {
                     return HttpNotFound();
                 }
-                editGroup.Group_name = group.Name;
-                editGroup.Group_description = group.Description;
+
+                if (group.Name != editGroup.Group_name)
+                    editGroup.Group_name = group.Name;
+                if (group.Description != editGroup.Group_description)
+                    editGroup.Group_description = group.Description;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
