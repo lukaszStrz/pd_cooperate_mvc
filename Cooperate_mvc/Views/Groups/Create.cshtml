@@ -29,17 +29,11 @@
                 @Html.TextAreaFor(model => model.Description)
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
-
-            <p>
+            <div>
                 <input type="submit" value="Create" />
-            </p>
+            </div>
         </fieldset>
     }
-
-    <div>
-        @Html.ActionLink("Wróć do listy", "Index")
-    </div>
-
 </div>
 
 @section Scripts {

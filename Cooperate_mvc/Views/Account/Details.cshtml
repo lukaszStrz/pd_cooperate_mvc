@@ -8,13 +8,6 @@
         <legend>@Model.Login</legend>
 
         <div class="display-label">
-            @Html.DisplayNameFor(model => model.Login)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Login)
-        </div>
-
-        <div class="display-label">
             @Html.DisplayName("Imię i nazwisko")
         </div>
         <div class="display-field">
@@ -24,7 +17,7 @@
             @Html.DisplayNameFor(model => model.Birth)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model => model.Birth)
+            @Model.Birth.ToLongDateString()
         </div>
 
         <div class="display-label">
