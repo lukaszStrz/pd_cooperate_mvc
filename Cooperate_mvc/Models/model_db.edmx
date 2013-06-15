@@ -173,7 +173,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Task">
-          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="1" />
+          <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Comment" Type="compact_dbModel.Store.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Task">
@@ -249,7 +251,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Post_Group">
-          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1" />
+          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Post" Type="compact_dbModel.Store.Post" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
@@ -285,7 +289,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Task_Group">
-          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1" />
+          <End Role="Group" Type="compact_dbModel.Store.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Task" Type="compact_dbModel.Store.Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
@@ -546,7 +552,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Task">
-          <End Type="compact_dbModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="compact_dbModel.Task" Role="Task" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="compact_dbModel.Comment" Role="Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Task">
@@ -584,7 +592,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Post_Group">
-          <End Type="compact_dbModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="compact_dbModel.Group" Role="Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="compact_dbModel.Post" Role="Post" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">
@@ -596,7 +606,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Task_Group">
-          <End Type="compact_dbModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="compact_dbModel.Group" Role="Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="compact_dbModel.Task" Role="Task" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Group">

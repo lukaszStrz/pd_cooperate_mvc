@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="71b3527be0ab4e1f9de8c6702685161b" Name="Diagram1">
-        <EntityTypeShape EntityType="compact_dbModel.Comment" Width="1.5" PointX="8.4024597762164017" PointY="0.8223798278823401" />
-        <EntityTypeShape EntityType="compact_dbModel.Group" Width="1.5" PointX="4.4226960616291953" PointY="16.66295247555848" />
-        <EntityTypeShape EntityType="compact_dbModel.Message" Width="1.5" PointX="2.5650038135075026" PointY="27.227670086188088" />
-        <EntityTypeShape EntityType="compact_dbModel.Participation" Width="1.5" PointX="11.878663156125072" PointY="13.771085879658855" />
-        <EntityTypeShape EntityType="compact_dbModel.Post" Width="1.5" PointX="0.62995813257524658" PointY="20.694228792886356" />
-        <EntityTypeShape EntityType="compact_dbModel.Task" Width="1.5" PointX="5.3866031530250815" PointY="19.186873027676192" />
-        <EntityTypeShape EntityType="compact_dbModel.TaskStatu" Width="1.5" PointX="11.317117781991659" PointY="15.17568453362942" />
-        <EntityTypeShape EntityType="compact_dbModel.User" Width="1.5" PointX="8.41158291344139" PointY="22.742066811184429" />
+        <EntityTypeShape EntityType="compact_dbModel.Comment" Width="1.5" PointX="9.604935361819777" PointY="18.835489088127151" />
+        <EntityTypeShape EntityType="compact_dbModel.Group" Width="1.5" PointX="1.1286907368938861" PointY="0.39955429751405225" />
+        <EntityTypeShape EntityType="compact_dbModel.Message" Width="1.5" PointX="1.2087596157606504" PointY="3.4014438406571017" />
+        <EntityTypeShape EntityType="compact_dbModel.Participation" Width="1.5" PointX="1.870018753162594" PointY="23.941492896499806" />
+        <EntityTypeShape EntityType="compact_dbModel.Post" Width="1.5" PointX="6.3732367075855088" PointY="2.7192524237182236" />
+        <EntityTypeShape EntityType="compact_dbModel.Task" Width="1.5" PointX="6.1359704035036131" PointY="17.742928602613009" />
+        <EntityTypeShape EntityType="compact_dbModel.TaskStatu" Width="1.5" PointX="0.81762027778551927" PointY="20.138917693932967" />
+        <EntityTypeShape EntityType="compact_dbModel.User" Width="1.5" PointX="11.441360391416289" PointY="21.664907033399171" />
         <AssociationConnector Association="compact_dbModel.FK_Comment_Comment" />
         <AssociationConnector Association="compact_dbModel.FK_Comment_Task" />
         <AssociationConnector Association="compact_dbModel.FK_Comment_User" />
