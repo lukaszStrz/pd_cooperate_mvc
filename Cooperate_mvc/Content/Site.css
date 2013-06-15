@@ -129,6 +129,14 @@ div#content {
                     padding: 10px;
                 }
 
+                    div#content div#realContent div.framedContent fieldset div.chzn-container {
+                        padding: 0;
+                    }
+
+                        div#content div#realContent div.framedContent fieldset div.chzn-container div {
+                            padding: 0;
+                        }
+
                     div#content div#realContent div.framedContent fieldset div.description {
                         margin-left: 20px;
                     }

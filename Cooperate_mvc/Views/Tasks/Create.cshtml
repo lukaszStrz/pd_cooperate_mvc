@@ -44,8 +44,7 @@
             <div class="editor-field">
                 @Html.DropDownList(
             "Group_id",
-            new SelectList(Model.GetGroups(User.Identity.Name), "Id", "Name"),
-           "[Wybierz grupę]", new { id = "groups", @class = "chzn-select" }
+            new SelectList(ViewBag.GroupsList, "Id", "Name"), new { @class = "chzn-select", id = "Group_id" }
         )
             </div>
 
@@ -53,29 +52,11 @@
                 @Html.Label("Użytkownik, do którego kierujemy zadanie")
             </div>
             <div class="editor-field">
-                @{                
-        foreach (var x in Model.GetGroups(User.Identity.Name))
-        {
-                    @Html.DropDownList(
+                @Html.DropDownList(
             "UserTo_id",
-            new SelectList(Model.GetUsers(x.Id, User.Identity.Name), "Id", "Login"),
-           "[Wybierz usera]", new { id = "users" + x.Id, @class = "userList" }
+            new SelectList(ViewBag.UsersList, "Id", "Login"), new { @class = "STOPchzn-select", id = "UserTo_id" }
         )
-        }
-                }
             </div>
-
-            <script type="text/javascript">
-                $('#groups').change(function () {
-                    $('.userList').each(function (i, e) {
-                        $(e).css('display', 'none');
-                        $(e).attr('name', 'hide');
-                    });
-                    $('#users' + $('#groups').val()).toggle();
-
-                    $('#users' + $('#groups').val()).attr('name', 'UserTo_id');
-                });
-            </script>
 
             <div>
                 <input type="submit" value="Utwórz" />
@@ -85,8 +66,44 @@
 </div>
 
 <script type="text/javascript">
+    $("#Group_id").change(
+    function () {
+        loadLevelTwo(this);
+    });
+    loadLevelTwo($("#Group_id"));
+    function loadLevelTwo(selectList) {
+        var selectedId = $(selectList).val();
+        $.ajax(
+        {
+            url: "@Url.Action("GetUsersByGroupId", "Tasks")",
+            type: "POST",
+            data: { id: selectedId },
+            error: function (xhr) {
+                alert("Prawdopodobnie wystąpił błąd, spróbuj ponownie...");
+            }
+        }).done(function (data) {
+            $("#UserTo_id").children().each(function (index, option) {
+                $(option).remove();
+            });
+
+            //blank option
+            //var items = "<option selected value=\"\"></option>";
+            var items = "";
+
+            $.each(data,
+                function () {
+                    items += "<option value=\"" + this[0] + "\">" + this[1] + "</option>";
+                });
+            //debugger;
+            $("#UserTo_id").html(items);
+            //$("#UserTo_id").trigger("liszt:updated");
+            //$("#UserTo_id").change();
+        });
+    }
+</script>
+
+<script type="text/javascript">
     $(".chzn-select").chosen();
-    //$(".userList").chosen()
 </script>
 
 @section Scripts {

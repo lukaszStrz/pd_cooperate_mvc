@@ -1,5 +1,6 @@
 ﻿using Cooperate_mvc.Models;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
@@ -82,12 +83,59 @@ namespace Cooperate_mvc.Controllers
             return View(tm);
         }
 
+        private List<GroupModel> GetGroups(string UserLogin)
+        {
+            return (from g in db.Groups
+                    join p in db.Participations on g.Group_id equals p.Group_id
+                    join u in db.Users on p.User_id equals u.User_id
+                    where u.User_login.Equals(UserLogin)
+                    select new GroupModel()
+                    {
+                        IsAdmin = p.Participation_isAdmin,
+                        CreationDate = g.Group_creationDate,
+                        Description = g.Group_description,
+                        Id = g.Group_id,
+                        Name = g.Group_name
+                    }).ToList();
+        }
+
+        private List<UserModel> GetUsers(long forGroup, string UserMeLogin)
+        {
+            return (from u in db.Users
+                    join p in db.Participations on u.User_id equals p.User_id
+                    join g in db.Groups on p.Group_id equals g.Group_id
+                    where g.Group_id.Equals(forGroup) && !u.User_login.Equals(UserMeLogin)
+                    select new UserModel()
+                    {
+                        Birth = u.User_birth,
+                        Email = u.User_email,
+                        FirstName = u.User_firstName,
+                        LastName = u.User_lastName,
+                        Login = u.User_login,
+                        Id = u.User_id
+                    }).ToList();
+        }
+
+        [HttpPost]
+        public JsonResult GetUsersByGroupId(long id)
+        {
+            var result = GetUsers(id, User.Identity.Name);
+            //build JSON.  
+            var modelDataStore = from m in result
+                                 select new[] { m.Id.ToString(),
+                                                m.Login };
+
+            return Json(modelDataStore, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // GET: /Tasks/Create
 
         public ActionResult Create()
         {
-            return View(new TaskModel());
+            ViewBag.GroupsList = GetGroups(User.Identity.Name);
+            ViewBag.UsersList = new List<UserModel>();
+            return View();
         }
 
         //
