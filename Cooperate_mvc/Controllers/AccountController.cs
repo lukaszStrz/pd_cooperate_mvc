@@ -1,5 +1,6 @@
 ﻿using Cooperate_mvc.Models;
 using HashLib;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,6 +67,49 @@ namespace Cooperate_mvc.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            return View(user);
+        }
+
+        //
+        // GET: /Account/Edit/login
+
+        [Authorize]
+        public ActionResult Edit(string login = "")
+        {
+            User user = db.Users.SingleOrDefault(u => u.User_login.Equals(login));
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        //
+        // POST: /Account/Edit/
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Edit(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                User u2 = db.Users.SingleOrDefault(u => u.User_login.Equals(User.Identity.Name));
+                if (u2 == null)
+                    return HttpNotFound();
+
+                if (u2.User_firstName != user.User_firstName)
+                    u2.User_firstName = user.User_firstName;
+                if (u2.User_lastName != user.User_lastName)
+                    u2.User_lastName = user.User_lastName;
+                if (u2.User_birth != user.User_birth)
+                    u2.User_birth = user.User_birth;
+
+                db.Entry(u2).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return RedirectToAction("Details", new { login = u2.User_login });
+            }
             return View(user);
         }
 

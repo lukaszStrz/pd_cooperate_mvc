@@ -1,0 +1,61 @@
+﻿@model Cooperate_mvc.Models.User
+
+@{
+    ViewBag.Title = "Edycja danych";
+}
+<div class="framedContent">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Aktualizuj dane</legend>
+
+            <div class="editor-label">
+                @Html.Label("Imię")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.User_firstName)
+                @Html.ValidationMessageFor(model => model.User_firstName)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Nazwisko")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.User_lastName)
+                @Html.ValidationMessageFor(model => model.User_lastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.Label("Data urodzenia")
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.User_birth)
+                @Html.ValidationMessageFor(model => model.User_birth)
+            </div>
+
+            <div>
+                <input type="submit" value="Zapisz" />
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/themes/base/css")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#User_birth").datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}

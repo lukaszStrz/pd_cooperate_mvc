@@ -26,5 +26,12 @@
         <div class="display-field">
             @Html.DisplayFor(model => model.Email)
         </div>
+
+        @if (Model.Login.Equals(User.Identity.Name))
+        {
+            <div>
+                @Html.ActionLink("Edytuj dane", "Edit", new { login = Model.Login })
+            </div>
+        }
     </fieldset>
 </div>

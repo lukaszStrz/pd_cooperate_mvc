@@ -14,10 +14,15 @@ namespace Cooperate_mvc
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "AccountRoute",
+                name: "AccountDetailsRoute",
                 url: "Account/Details/{login}",
                 defaults: new { controller = "Account", action = "Details", login = UrlParameter.Optional }
                 );
+            routes.MapRoute(
+               name: "AccountEditRoute",
+               url: "Account/Edit/{login}",
+               defaults: new { controller = "Account", action = "Edit", login = UrlParameter.Optional }
+               );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
