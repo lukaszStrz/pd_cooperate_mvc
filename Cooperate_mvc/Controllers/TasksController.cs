@@ -80,7 +80,32 @@ namespace Cooperate_mvc.Controllers
                 Group_name = task.Group.Group_name
             };
 
+            ViewBag.StatusList = db.TaskStatus.ToList();
+
             return View(tm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitStatusChange(byte? TaskStatus_id, long? Id)
+        {
+            //if (TaskStatus_id == null || Id == null)
+            //    return HttpNotFound();
+
+            Task task = db.Tasks.SingleOrDefault(t => t.Task_id.Equals((long)Id));
+            //if (task == null)
+            //    return HttpNotFound();
+
+            task.TaskStatus_id = (byte)TaskStatus_id;
+            task.Task_statusLastChange = DateTime.Now;
+            var changedBy = (from u in db.Users
+                             where u.User_login.Equals(User.Identity.Name)
+                             select u).SingleOrDefault();
+            //if (changedBy == null)
+            //    return HttpNotFound();
+            task.User_statusChangedBy = changedBy.User_id;
+            db.SaveChanges();
+            return PartialView("_TaskStatusPartial", new TaskStatusPartialModel() { Login = changedBy.User_login, LastChange = task.Task_statusLastChange });
         }
 
         private List<GroupModel> GetGroups(string UserLogin)

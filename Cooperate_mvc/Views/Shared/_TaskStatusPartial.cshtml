@@ -1,0 +1,4 @@
+﻿@model Cooperate_mvc.Models.TaskStatusPartialModel
+
+(ostatnio zmieniony @Html.DisplayFor(model => model.LastChange)
+przez @Html.ActionLink(Model.Login, "Details", "Account", new { login = Model.Login }, null))
