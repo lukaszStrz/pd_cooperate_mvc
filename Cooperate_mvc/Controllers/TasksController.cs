@@ -95,7 +95,49 @@ namespace Cooperate_mvc.Controllers
             if (tm.ToMe || tm.UserFrom_login.Equals(User.Identity.Name))
                 ViewBag.StatusList = db.TaskStatus.ToList();
 
+            ViewBag.Posts = GetPosts(id);
+
             return View(tm);
+        }
+
+        private List<PostModel> GetPosts(long id)
+        {
+            return (from c in db.Comments
+                    where c.Task_id.Equals(id)
+                    select new PostModel()
+                    {
+                        Author_login = c.User.User_login,
+                        Datetime = c.Comment_datetime,
+                        Id = c.Comment_id,
+                        Text = c.Comment_text
+                    }).ToList();
+        }
+
+        [HttpPost]
+        public PartialViewResult AddComment(string PostText, long? Id)
+        {
+            if (!Request.IsAjaxRequest() || PostText == null || Id == null)
+                return null;
+
+            Comment comment = new Comment()
+            {
+                Task_id = (long)Id,
+                Comment_datetime = DateTime.Now,
+                Comment_text = PostText,
+                User_author = (from u in db.Users
+                               where u.User_login.Equals(User.Identity.Name)
+                               select u.User_id).Single()
+            };
+            db.Comments.Add(comment);
+            db.SaveChanges();
+
+            return PartialView("_Post", new PostModel()
+            {
+                Author_login = User.Identity.Name,
+                Text = PostText,
+                Datetime = comment.Comment_datetime,
+                Id = comment.Comment_id
+            });
         }
 
         [HttpPost]

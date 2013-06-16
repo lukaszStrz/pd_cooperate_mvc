@@ -45,13 +45,28 @@
         <div class="info">
             Należy do grupy @Html.ActionLink(Model.Group_name, "Details", "Groups", new { id = Model.Group_id }, null)
         </div>
+        <div class="links">
+            @Html.ActionLink("Wróć do listy", "Index")
+            @if (Model.UserFrom_login.Equals(User.Identity.Name))
+            {
+                @: |
+                @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })
+            }
+        </div>
     </fieldset>
-    <div class="links">
-        @Html.ActionLink("Wróć do listy", "Index")
-        @if (Model.UserFrom_login.Equals(User.Identity.Name))
+    <hr />
+    <div id="Posts">
+        @using (Ajax.BeginForm("AddComment", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "PostsList", InsertionMode = InsertionMode.InsertBefore, OnComplete = "$('#PostText').val('');" }))
         {
-            @: |
-            @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id })
+            @Html.HiddenFor(model => model.Id)
+            <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
+            <input type="submit" value="Dodaj komentarz" />
         }
+        <div id="PostsList">
+            @foreach (var post in ViewBag.Posts)
+            {
+                @Html.Partial("_Post", (Cooperate_mvc.Models.PostModel)post)
+            }
+        </div>
     </div>
 </div>
