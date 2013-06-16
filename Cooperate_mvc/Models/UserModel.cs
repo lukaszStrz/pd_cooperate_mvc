@@ -18,6 +18,7 @@ namespace Cooperate_mvc.Models
 
         [Required(ErrorMessage = "Pole obowiązkowe")]
         [Display(Name = "Data urodzenia")]
+        [DataType(DataType.Date)]
         public System.DateTime Birth { get; set; }
 
         [Required(ErrorMessage = "Pole obowiązkowe")]

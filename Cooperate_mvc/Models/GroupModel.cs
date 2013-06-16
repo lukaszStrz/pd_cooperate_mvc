@@ -15,6 +15,7 @@ namespace Cooperate_mvc.Models
         public string Description { get; set; }
 
         [Display(Name = "Data utworzenia")]
+        [DataType(DataType.DateTime)]
         public System.DateTime CreationDate { get; set; }
 
         public long Id { get; set; }

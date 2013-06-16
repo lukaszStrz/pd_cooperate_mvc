@@ -27,10 +27,12 @@ namespace Cooperate_mvc.Models
         public string Description { get; set; }
 
         [Display(Name = "Data utworzenia")]
+        [DataType(DataType.DateTime)]
         public DateTime CreationDate { get; set; }
 
         [Required(ErrorMessage = "Pole obowiązkowe")]
         [Display(Name = "Termin wykonania")]
+        [DataType(DataType.Date)]
         public DateTime Deadline { get; set; }
 
         [Display(Name = "Ostatnio zmienione")]
