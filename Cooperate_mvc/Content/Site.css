@@ -322,10 +322,6 @@ nav {
         #sign-box input[type=submit]:hover {
         }
 
-.userList {
-    display: none;
-}
-
 footer, div#push {
     clear: both;
     height: 98px;

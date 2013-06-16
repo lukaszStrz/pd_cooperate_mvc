@@ -31,7 +31,24 @@
         }
 
         <div class="info">
-            Aktualny status: @Html.DisplayFor(modelItem => Model.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => Model.StatusLastChange) przez @Html.ActionLink(Model.User_login_statusChangedBy, "Details", "Account", new { login = Model.User_login_statusChangedBy }, null))
+            Aktualny status:
+            <span class="ajaxFormDisplay">
+                @Html.DisplayFor(modelItem => Model.TaskStatus_name) (ostatnio zmieniony @Html.DisplayFor(modelItem => Model.StatusLastChange) przez @Html.ActionLink(Model.User_login_statusChangedBy, "Details", "Account", new { login = Model.User_login_statusChangedBy }, null))
+                 @if (Model.UserFrom_login.Equals(User.Identity.Name))
+                 {
+                     <input type="button" name="EditStatus" value="Zmień" onclick="doEditStatus();" />
+                 }
+            </span>
+            @if (Model.UserFrom_login.Equals(User.Identity.Name))
+            {
+                <span class="ajaxFormEdit" style="display: none">
+                    @using (Ajax.BeginForm("TODO", "TODO", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "TODO" }))
+                    {
+                        //@Html.DropDownList("TODO")
+                        <input type="submit" value="Zapisz" onclick="doSaveStatus();" />
+                    }
+                </span>
+            }
         </div>
         <div class="info">
             Należy do grupy @Html.ActionLink(Model.Group_name, "Details", "Groups", new { id = Model.Group_id }, null)
@@ -46,3 +63,14 @@
         }
     </div>
 </div>
+
+<script type="text/javascript">
+    function doEditStatus() {
+        $(".ajaxFormDisplay").toggle();
+        $(".ajaxFormEdit").toggle();
+    }
+    function doSaveStatus() {
+        $(".ajaxFormDisplay").toggle();
+        $(".ajaxFormEdit").toggle();
+    }
+</script>
