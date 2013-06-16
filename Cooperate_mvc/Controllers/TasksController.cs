@@ -58,6 +58,19 @@ namespace Cooperate_mvc.Controllers
                 return HttpNotFound();
             }
 
+            var pp = task.Group.Participations.ToList();
+            bool isPp = false;
+            foreach (var p in pp)
+            {
+                if (p.User.User_login.Equals(User.Identity.Name))
+                {
+                    isPp = true;
+                    break;
+                }
+            }
+            if (!isPp)
+                return RedirectToAction("InsufficientRights", "Error");
+
             TaskModel tm = new TaskModel()
             {
                 ToMe = task.User1.User_login.Equals(User.Identity.Name),
@@ -79,9 +92,7 @@ namespace Cooperate_mvc.Controllers
                 Group_name = task.Group.Group_name
             };
 
-            ViewBag.FromMe = tm.UserFrom_login.Equals(User.Identity.Name);
-
-            if (tm.ToMe || ViewBag.FromMe)
+            if (tm.ToMe || tm.UserFrom_login.Equals(User.Identity.Name))
                 ViewBag.StatusList = db.TaskStatus.ToList();
 
             return View(tm);

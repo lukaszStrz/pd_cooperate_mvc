@@ -32,24 +32,16 @@
 
         <div class="info">
             Aktualny status:
-            @{
-                if (Model.ToMe || ViewBag.FromMe)
-                {
-                    using (Ajax.BeginForm("SubmitStatusChange", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "StatusPartial", InsertionMode = InsertionMode.Replace }))
+                    @using (Ajax.BeginForm("SubmitStatusChange", null, new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "StatusPartial", InsertionMode = InsertionMode.Replace }, new { style = "display: inline;" }))
                     {
-                @Html.HiddenFor(model => model.Id)
-                @Html.DropDownList("TaskStatus_id", new SelectList(ViewBag.StatusList, "TaskStatus_id", "TaskStatus_name"), new { id = "TaskStatus_id", onchange = "$( '#SubmitAjax' ).click()" })
-                <input type="submit" id="SubmitAjax" style="display: none;" value="Submit" />
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.DropDownList("TaskStatus_id", new SelectList(ViewBag.StatusList, "TaskStatus_id", "TaskStatus_name"), new { @class = "NormalWidth", id = "TaskStatus_id", onchange = "$( '#SubmitAjax' ).click()" })
+                        <input type="submit" id="SubmitAjax" style="display: none;" value="Submit" />
                     }
-                }
-                else
-                {
-                @Html.DisplayFor(model => model.TaskStatus_name)
-                }
-            }
             <span id="StatusPartial">
                 @Html.Partial("_TaskStatusPartial", new Cooperate_mvc.Models.TaskStatusPartialModel { Login = Model.User_login_statusChangedBy, LastChange = Model.StatusLastChange })
             </span>
+            </>
         </div>
         <div class="info">
             Należy do grupy @Html.ActionLink(Model.Group_name, "Details", "Groups", new { id = Model.Group_id }, null)
