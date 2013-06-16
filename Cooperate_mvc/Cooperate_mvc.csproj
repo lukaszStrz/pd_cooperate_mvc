@@ -344,6 +344,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Shared\_TaskStatusPartial.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

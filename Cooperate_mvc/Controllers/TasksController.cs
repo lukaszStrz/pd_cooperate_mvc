@@ -1,7 +1,6 @@
 ﻿using Cooperate_mvc.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -80,33 +79,41 @@ namespace Cooperate_mvc.Controllers
                 Group_name = task.Group.Group_name
             };
 
-            ViewBag.StatusList = db.TaskStatus.ToList();
+            ViewBag.FromMe = tm.UserFrom_login.Equals(User.Identity.Name);
+
+            if (tm.ToMe || ViewBag.FromMe)
+                ViewBag.StatusList = db.TaskStatus.ToList();
 
             return View(tm);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SubmitStatusChange(byte? TaskStatus_id, long? Id)
+        public PartialViewResult SubmitStatusChange(byte? TaskStatus_id, long? Id)
         {
-            //if (TaskStatus_id == null || Id == null)
-            //    return HttpNotFound();
+            if (!Request.IsAjaxRequest())
+                return null;
+            if (TaskStatus_id == null || Id == null)
+                return null;
 
             Task task = db.Tasks.SingleOrDefault(t => t.Task_id.Equals((long)Id));
-            //if (task == null)
-            //    return HttpNotFound();
+            if (task == null)
+                return null;
+            if (task.User.User_login != User.Identity.Name && task.User1.User_login != User.Identity.Name)
+                return null;
 
             task.TaskStatus_id = (byte)TaskStatus_id;
             task.Task_statusLastChange = DateTime.Now;
             var changedBy = (from u in db.Users
                              where u.User_login.Equals(User.Identity.Name)
                              select u).SingleOrDefault();
-            //if (changedBy == null)
-            //    return HttpNotFound();
+            if (changedBy == null)
+                return null;
             task.User_statusChangedBy = changedBy.User_id;
             db.SaveChanges();
             return PartialView("_TaskStatusPartial", new TaskStatusPartialModel() { Login = changedBy.User_login, LastChange = task.Task_statusLastChange });
         }
+
+        #region Private functions
 
         private List<GroupModel> GetGroups(string UserLogin)
         {
@@ -140,6 +147,8 @@ namespace Cooperate_mvc.Controllers
                         Id = u.User_id
                     }).ToList();
         }
+
+        #endregion
 
         [HttpPost]
         public JsonResult GetUsersByGroupId(long id)

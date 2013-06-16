@@ -12,5 +12,10 @@ namespace Cooperate_mvc.Controllers
             return View();
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
+
     }
 }

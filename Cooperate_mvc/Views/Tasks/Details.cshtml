@@ -32,15 +32,24 @@
 
         <div class="info">
             Aktualny status:
-            @using (Ajax.BeginForm("SubmitStatusChange", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "StatusPartial", InsertionMode = InsertionMode.InsertAfter }))
-            {
-                @Html.AntiForgeryToken()
+            @{
+                if (Model.ToMe || ViewBag.FromMe)
+                {
+                    using (Ajax.BeginForm("SubmitStatusChange", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "StatusPartial", InsertionMode = InsertionMode.Replace }))
+                    {
                 @Html.HiddenFor(model => model.Id)
-                @Html.DropDownList("TaskStatus_id", new SelectList(ViewBag.StatusList, "TaskStatus_id", "TaskStatus_name"), new { id = "TaskStatus_id", onchange = "this.form.submit()" })
+                @Html.DropDownList("TaskStatus_id", new SelectList(ViewBag.StatusList, "TaskStatus_id", "TaskStatus_name"), new { id = "TaskStatus_id", onchange = "$( '#SubmitAjax' ).click()" })
+                <input type="submit" id="SubmitAjax" style="display: none;" value="Submit" />
+                    }
+                }
+                else
+                {
+                @Html.DisplayFor(model => model.TaskStatus_name)
+                }
             }
-            <div id="StatusPartial">
+            <span id="StatusPartial">
                 @Html.Partial("_TaskStatusPartial", new Cooperate_mvc.Models.TaskStatusPartialModel { Login = Model.User_login_statusChangedBy, LastChange = Model.StatusLastChange })
-            </div>
+            </span>
         </div>
         <div class="info">
             Należy do grupy @Html.ActionLink(Model.Group_name, "Details", "Groups", new { id = Model.Group_id }, null)
