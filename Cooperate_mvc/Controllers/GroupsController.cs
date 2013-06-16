@@ -151,7 +151,13 @@ namespace Cooperate_mvc.Controllers
                 return RedirectToAction("InsufficientRights", "Error");
             }
 
-            GroupModel groupModel = new GroupModel() { Description = group.Group_description, Name = group.Group_name, CreationDate = group.Group_creationDate, Id = group.Group_id };
+            GroupModel groupModel = new GroupModel()
+            {
+                Description = group.Group_description,
+                Name = group.Group_name,
+                CreationDate = group.Group_creationDate,
+                Id = group.Group_id
+            };
             return View(groupModel);
         }
 
@@ -176,7 +182,7 @@ namespace Cooperate_mvc.Controllers
                     editGroup.Group_description = group.Description;
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = group.Id });
             }
             return View(group);
         }
