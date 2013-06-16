@@ -7,41 +7,6 @@ namespace Cooperate_mvc.Models
 {
     public class TaskModel
     {
-        //compact_dbEntities db = new compact_dbEntities();
-
-        //public List<GroupModel> GetGroups(string UserLogin)
-        //{
-        //    return (from g in db.Groups
-        //            join p in db.Participations on g.Group_id equals p.Group_id
-        //            join u in db.Users on p.User_id equals u.User_id
-        //            where u.User_login.Equals(UserLogin)
-        //            select new GroupModel()
-        //            {
-        //                IsAdmin = p.Participation_isAdmin,
-        //                CreationDate = g.Group_creationDate,
-        //                Description = g.Group_description,
-        //                Id = g.Group_id,
-        //                Name = g.Group_name
-        //            }).ToList();
-        //}
-
-        //public List<UserModel> GetUsers(long forGroup, string UserMeLogin)
-        //{
-        //    return (from u in db.Users
-        //            join p in db.Participations on u.User_id equals p.User_id
-        //            join g in db.Groups on p.Group_id equals g.Group_id
-        //            where g.Group_id.Equals(forGroup) && !u.User_login.Equals(UserMeLogin)
-        //            select new UserModel()
-        //            {
-        //                Birth = u.User_birth,
-        //                Email = u.User_email,
-        //                FirstName = u.User_firstName,
-        //                LastName = u.User_lastName,
-        //                Login = u.User_login,
-        //                Id = u.User_id
-        //            }).ToList();
-        //}
-
         /// <summary>
         /// Czy task dla mnie (true), czy zlecony przeze mnie (false)
         /// </summary>

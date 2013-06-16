@@ -211,6 +211,9 @@ namespace Cooperate_mvc.Controllers
                 return RedirectToAction("InsufficientRights", "Error");
             }
 
+            ViewBag.GroupsList = GetGroups(User.Identity.Name);
+            ViewBag.UsersList = new List<UserModel>();
+
             return View(tm);
         }
 
@@ -219,19 +222,26 @@ namespace Cooperate_mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Task task)
+        public ActionResult Edit(TaskModel task)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(task).State = EntityState.Modified;
+                Task editTask = db.Tasks.SingleOrDefault(t => t.Task_id.Equals(task.Id));
+
+                if (task.Deadline != editTask.Task_deadline)
+                    editTask.Task_deadline = task.Deadline;
+                if (task.Description != editTask.Task_description)
+                    editTask.Task_description = task.Description;
+                if (task.Title != editTask.Task_title)
+                    editTask.Task_title = task.Title;
+                if (task.UserTo_id != editTask.User_to)
+                    editTask.User_to = task.UserTo_id;
+                if (task.Group_id != editTask.Group_id)
+                    editTask.Group_id = task.Group_id;
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = task.Id });
             }
-            ViewBag.Group_id = new SelectList(db.Groups, "Group_id", "Group_name", task.Group_id);
-            ViewBag.TaskStatus_id = new SelectList(db.TaskStatus, "TaskStatus_id", "TaskStatus_name", task.TaskStatus_id);
-            ViewBag.User_from = new SelectList(db.Users, "User_id", "User_firstName", task.User_from);
-            ViewBag.User_to = new SelectList(db.Users, "User_id", "User_firstName", task.User_to);
-            ViewBag.User_statusChangedBy = new SelectList(db.Users, "User_id", "User_firstName", task.User_statusChangedBy);
             return View(task);
         }
 
