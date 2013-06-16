@@ -147,9 +147,24 @@ div#content {
                 margin-bottom: 5px;
             }
 
+            div#content div#realContent div.framedContent div#Posts fieldset {
+                border: 1px dotted #9a9a9a;
+            }
+
+                div#content div#realContent div.framedContent div#Posts fieldset legend span.Author {
+                    font-size: large;
+                    font-weight: bold;
+                }
+
+                div#content div#realContent div.framedContent div#Posts fieldset legend span.Datetime {
+                    font-size: medium;
+                    color: #9a9a9a;
+                }
+
             div#content div#realContent div.framedContent textarea {
                 min-height: 75px;
                 width: 100%;
+                resize: vertical;
             }
 
             div#content div#realContent div.framedContent input[type=text],
@@ -159,9 +174,9 @@ div#content {
                 height: 25px;
             }
 
-                div#content div#realContent div.framedContent .NormalWidth {
-                    width: auto;
-                }
+            div#content div#realContent div.framedContent .NormalWidth {
+                width: auto;
+            }
 
             div#content div#realContent div.framedContent input[type=submit] {
                 width: 100px;

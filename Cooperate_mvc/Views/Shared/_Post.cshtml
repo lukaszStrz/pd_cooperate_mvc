@@ -2,10 +2,10 @@
 
 <fieldset>
     <legend>
-        <span class="postAuthor">
+        <span class="Author">
             @Html.ActionLink(Model.Author_login, "Details", "Account", new { login = Model.Author_login }, null)
         </span>
-        <span class="postDatetime">
+        <span class="Datetime">
             @Html.DisplayFor(model => model.Datetime)
         </span>
     </legend>
