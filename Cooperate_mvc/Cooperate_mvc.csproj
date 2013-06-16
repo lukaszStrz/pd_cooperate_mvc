@@ -180,6 +180,7 @@
     <Compile Include="Models\Post.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PostModel.cs" />
     <Compile Include="Models\Task.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
@@ -343,6 +344,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Shared\_TaskStatusPartial.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Shared\_Post.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

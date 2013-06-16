@@ -1,5 +1,6 @@
 ﻿using Cooperate_mvc.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -50,6 +51,20 @@ namespace Cooperate_mvc.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+        private List<PostModel> GetPosts(long groupId)
+        {
+            return (from p in db.Posts
+                    where p.Group_id.Equals(groupId) && p.Post_inResponseTo == null
+                    orderby p.Post_datetime descending
+                    select new PostModel()
+                    {
+                        Author_login = p.User.User_login,
+                        Datetime = p.Post_datetime,
+                        Id = p.Post_id,
+                        Text = p.Post_text,
+                    }).ToList();
+        }
+
         //
         // GET: /Groups/Details/5
 
@@ -84,7 +99,38 @@ namespace Cooperate_mvc.Controllers
                                       LastName = u.User_lastName
                                   }).ToList();
 
+            ViewBag.Posts = GetPosts(id);
+
             return View(groupModel);
+        }
+
+        [HttpPost]
+        public PartialViewResult AddPost(string PostText, long? Id)
+        {
+            if (!Request.IsAjaxRequest() || PostText == null || Id == null)
+                return null;
+
+            Post post = new Post()
+            {
+                Group_id = (long)Id,
+                Post_datetime = DateTime.Now,
+                Post_text = PostText,
+                User_author = (from u in db.Users
+                               where u.User_login.Equals(User.Identity.Name)
+                               select u.User_id).Single()
+            };
+            db.Posts.Add(post);
+            db.SaveChanges();
+
+            var pv = PartialView("_Post", new PostModel()
+            {
+                Author_login = User.Identity.Name,
+                Text = PostText,
+                Datetime = post.Post_datetime,
+                Id = post.Post_id
+            });
+
+            return pv;
         }
 
         //

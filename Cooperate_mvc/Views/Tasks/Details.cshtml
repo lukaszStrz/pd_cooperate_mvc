@@ -41,7 +41,6 @@
             <span id="StatusPartial">
                 @Html.Partial("_TaskStatusPartial", new Cooperate_mvc.Models.TaskStatusPartialModel { Login = Model.User_login_statusChangedBy, LastChange = Model.StatusLastChange })
             </span>
-            </>
         </div>
         <div class="info">
             Należy do grupy @Html.ActionLink(Model.Group_name, "Details", "Groups", new { id = Model.Group_id }, null)

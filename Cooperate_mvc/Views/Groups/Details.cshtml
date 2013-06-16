@@ -48,11 +48,26 @@
                 </ul>
             </div>
         </fieldset>
-        <p>
+        <div>
             @if (ViewBag.IsAdmin)
             {
                 @Html.ActionLink("Edycja", "Edit", new { id = Model.Id })
             }
-        </p>
+        </div>
+        <hr />
+        <div class="GroupPosts">
+            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "Posts", InsertionMode = InsertionMode.InsertBefore, OnComplete = "$('#PostText').val('');" }))
+            {
+                @Html.HiddenFor(model => model.Id)
+                <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
+                <input type="submit" value="Dodaj post" />
+            }
+            <div id="Posts">
+                @foreach (var post in ViewBag.Posts)
+                {
+                    @Html.Partial("_Post", (Cooperate_mvc.Models.PostModel)post)
+                }
+            </div>
+        </div>
     }
 </div>

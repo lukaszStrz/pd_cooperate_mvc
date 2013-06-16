@@ -1,0 +1,13 @@
+﻿@model Cooperate_mvc.Models.PostModel
+
+<fieldset>
+    <legend>
+        <span class="postAuthor">
+            @Html.ActionLink(Model.Author_login, "Details", "Account", new { login = Model.Author_login }, null)
+        </span>
+        <span class="postDatetime">
+            @Html.DisplayFor(model => model.Datetime)
+        </span>
+    </legend>
+    @Html.DisplayFor(model => model.Text)
+</fieldset>
