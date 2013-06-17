@@ -56,7 +56,7 @@
         </fieldset>
         <hr />
         <div id="Posts">
-            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "PostsList", InsertionMode = InsertionMode.InsertBefore, OnComplete = "$('#PostText').val('');" }))
+            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "PostsList", InsertionMode = InsertionMode.InsertBefore, OnComplete = "$('PostText').val('');" })) // TODO: OnComplete coś nie działa
             {
                 @Html.HiddenFor(model => model.Id)
                 <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
@@ -65,7 +65,9 @@
             <div id="PostsList">
                 @foreach (var post in ViewBag.Posts)
                 {
-                    @Html.Partial("_Post", (Cooperate_mvc.Models.PostModel)post)
+                    <span>
+                        @Html.Partial("_Post", (Cooperate_mvc.Models.PostModel)post)
+                    </span>
                 }
             </div>
         </div>
@@ -81,33 +83,33 @@
 
     function createSpan(text) {
         var span = document.createElement('span');
-        span.innerHTML = text + '<br />';
+        span.innerHTML = text;
         return span;
     }
 
     window.onload = function () {
-        var websocketDebug = $('websocketDebug');
+        //var websocketDebug = $('websocketDebug');
         var comments = $('PostsList');
         var url = 'ws://localhost:58930/GroupsSocketHandler.ashx?login=@User.Identity.Name';
 
         ws = new WebSocket(url);
 
-        ws.onerror = function (e) {
-            websocketDebug.appendChild(createSpan('Problem with connection: ' + e.message));
-        };
+        //ws.onerror = function (e) {
+        //    websocketDebug.appendChild(createSpan('Problem with connection: ' + e.message));
+        //};
 
-        ws.onopen = function () {
-            websocketDebug.innerHTML = 'Client connected <br/>';
-        };
+        //ws.onopen = function () {
+        //    websocketDebug.innerHTML = 'Client connected <br/>';
+        //};
 
         ws.onmessage = function (e) {
             comments.insertBefore(createSpan(e.data.toString()), comments.firstChild);
 
         };
 
-        ws.onclose = function () {
-            websocketDebug.innerHTML = 'Closed connection!';
-        };
+        //ws.onclose = function () {
+        //    websocketDebug.innerHTML = 'Closed connection!';
+        //};
 
     };
 </script>
