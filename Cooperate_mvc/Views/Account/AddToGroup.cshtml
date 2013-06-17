@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Dodaj członka grupy";
+}
+
+<div class="framedContent">
+    @if (ViewBag.Groups.Count > 0)
+    {
+        <h2>Do której grupy dodać użytkownika @Html.ActionLink("@" + (string)ViewBag.UserLogin, "Details", new { login = ViewBag.UserLogin })?</h2>
+        <ul>
+            @foreach (var item in ViewBag.Groups)
+            {
+                var i = (Cooperate_mvc.Models.GroupModel)item;
+                <li>
+                    @Html.ActionLink(i.Name, "AddUser", "Groups", new { login = ViewBag.UserLogin, groupId = i.Id }, null)
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h2>Brak grupy, do której możesz dodać tego użytkownika</h2>
+    }
+</div>

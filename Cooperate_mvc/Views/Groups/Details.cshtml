@@ -6,7 +6,7 @@
 <div class="framedContent">
     @if (!ViewBag.IsParticipant)
     {
-        @Html.ActionLink("Dołącz do grupy", "Join", new { id = Model.Id })
+@*@Html.ActionLink("Dołącz do grupy", "Join", new { id = Model.Id })*@
         <fieldset>
             <legend>@Model.Name</legend>
 
@@ -42,7 +42,16 @@
                     @foreach (var member in Model.Members)
                     {
                         <li>
-                            @Html.ActionLink(member.FirstName + " " + member.LastName, "Details", "Account", new { login = member.Login }, null)
+                            <span>
+                                @Html.ActionLink(member.FirstName + " " + member.LastName, "Details", "Account", new { login = member.Login }, null)
+                            </span>
+                            @if (ViewBag.IsAdmin && !member.Login.Equals(User.Identity.Name))
+                            {
+                                <span>
+                                    |
+                                    @Html.ActionLink("Usuń z grupy", "DeleteUser", new { login = member.Login, groupId = Model.Id })
+                                </span>
+                            }
                         </li>
                     }
                 </ul>

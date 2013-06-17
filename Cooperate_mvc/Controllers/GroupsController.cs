@@ -35,21 +35,85 @@ namespace Cooperate_mvc.Controllers
         //
         // GET: /Groups/Join/5
 
-        public ActionResult Join(long id)
-        {
-            Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
-            if (group == null)
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult Join(long id)
+        //{
+        //    Group group = db.Groups.SingleOrDefault(g => g.Group_id.Equals(id));
+        //    if (group == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            Participation p = new Participation() { Group_id = id, Participation_isAdmin = false };
-            p.User_id = (from u in db.Users
-                         where u.User_login.Equals(User.Identity.Name)
-                         select u.User_id).Single();
-            db.Participations.Add(p);
+        //    Participation p = new Participation() { Group_id = id, Participation_isAdmin = false };
+        //    p.User_id = (from u in db.Users
+        //                 where u.User_login.Equals(User.Identity.Name)
+        //                 select u.User_id).Single();
+        //    db.Participations.Add(p);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Details", new { id = id });
+        //}
+
+        public ActionResult AddUser(string login, long? groupId)
+        {
+            if (string.IsNullOrWhiteSpace(login) || groupId == null)
+                return HttpNotFound();
+
+            var user = db.Users.SingleOrDefault(u => u.User_login.Equals(login));
+
+            var group = db.Groups.SingleOrDefault(g => g.Group_id.Equals((long)groupId));
+
+            if (user == null || group == null)
+                return HttpNotFound();
+
+            var part = (from p in db.Participations
+                        join u in db.Users on p.User_id equals u.User_id
+                        where p.Group_id.Equals((long)groupId) && u.User_login.Equals(User.Identity.Name)
+                        select p).SingleOrDefault();
+
+            if (part == null)
+                return RedirectToAction("InsufficientRights", "Error");
+
+            Participation newPart = new Participation()
+            {
+                Group_id = (long)groupId,
+                Participation_isAdmin = false,
+                User_id = user.User_id
+            };
+            db.Participations.Add(newPart);
             db.SaveChanges();
-            return RedirectToAction("Details", new { id = id });
+
+            return RedirectToAction("Details", new { id = (long)groupId });
+        }
+
+        public ActionResult DeleteUser(string login, long? groupId)
+        {
+            if (string.IsNullOrWhiteSpace(login) || groupId == null)
+                return HttpNotFound();
+
+            var user = db.Users.SingleOrDefault(u => u.User_login.Equals(login));
+
+            var group = db.Groups.SingleOrDefault(g => g.Group_id.Equals((long)groupId));
+
+            if (user == null || group == null)
+                return HttpNotFound();
+
+            var part = (from p in db.Participations
+                        join u in db.Users on p.User_id equals u.User_id
+                        where p.Group_id.Equals((long)groupId) && u.User_login.Equals(User.Identity.Name)
+                        select p).SingleOrDefault();
+
+            if (part == null || !part.Participation_isAdmin)
+                return RedirectToAction("InsufficientRights", "Error");
+
+            var partToDel = (from p in db.Participations
+                             join u in db.Users on p.User_id equals u.User_id
+                             where p.Group_id.Equals((long)groupId) && u.User_login.Equals(login)
+                             select p).SingleOrDefault();
+            if (partToDel == null)
+                return HttpNotFound();
+            db.Participations.Remove(partToDel);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = (long)groupId });
         }
 
         private List<PostModel> GetPosts(long groupId)
@@ -87,7 +151,7 @@ namespace Cooperate_mvc.Controllers
                 Description = group.Group_description,
                 Name = group.Group_name,
                 CreationDate = group.Group_creationDate,
-                Id = group.Group_id
+                Id = group.Group_id,
             };
             groupModel.Members = (from u in db.Users
                                   join p in db.Participations on u.User_id equals p.User_id

@@ -14,6 +14,10 @@
             </div>
         }
 
+        <div>
+            @Html.ActionLink("Dodaj użytkownika do grupy, której jesteś członkiem", "AddToGroup", new { login = Model.Login })
+        </div>
+
         <div class="display-label">
             @Html.DisplayName("Imię i nazwisko")
         </div>
