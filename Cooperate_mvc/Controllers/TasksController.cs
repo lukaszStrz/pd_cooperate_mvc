@@ -59,17 +59,7 @@ namespace Cooperate_mvc.Controllers
                 return HttpNotFound();
             }
 
-            var pp = task.Group.Participations.ToList();
-            bool isPp = false;
-            foreach (var p in pp)
-            {
-                if (p.User.User_login.Equals(User.Identity.Name))
-                {
-                    isPp = true;
-                    break;
-                }
-            }
-            if (!isPp)
+            if (task.User.User_login != User.Identity.Name && task.User1.User_login != User.Identity.Name)
                 return RedirectToAction("InsufficientRights", "Error");
 
             TaskModel tm = new TaskModel()
