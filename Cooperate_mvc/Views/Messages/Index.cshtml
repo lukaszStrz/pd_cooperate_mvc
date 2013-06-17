@@ -1,7 +1,22 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model Cooperate_mvc.Models.MessagesIndexModel
+
+@{
+    ViewBag.Title = "Centrum wiadomości";
 }
 
 <div class="framedContent">
-
+    <div class="LastConversations">
+        <fieldset>
+            <legend>Ostatni rozmówcy
+            </legend>
+            <div class="LastConversationsContent">
+                @foreach (var item in Model.Conversations)
+                {
+                    <span class="person">
+                        @Html.ActionLink(item, "Chat", "Messages", new { login = item }, null)
+                    </span>
+                }
+            </div>
+        </fieldset>
+    </div>
 </div>

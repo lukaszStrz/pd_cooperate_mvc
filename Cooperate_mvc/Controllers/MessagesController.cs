@@ -17,7 +17,36 @@ namespace Cooperate_mvc.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var conversationsFromMe = (from m in db.Messages
+                                       join u1 in db.Users on m.User_from equals u1.User_id
+                                       join u2 in db.Users on m.User_to equals u2.User_id
+                                       where u1.User_login.Equals(User.Identity.Name)
+                                       orderby m.Message_datetimt descending
+                                       group m by u2.User_login into g
+                                       select g.Key).ToList();
+
+            var conversationsToMe = (from m in db.Messages
+                                     join u1 in db.Users on m.User_from equals u1.User_id
+                                     join u2 in db.Users on m.User_to equals u2.User_id
+                                     where u2.User_login.Equals(User.Identity.Name)
+                                     orderby m.Message_datetimt descending
+                                     group m by u1.User_login into g
+                                     select g.Key).ToList();
+
+            var conversations = new List<string>();
+            conversations.AddRange(conversationsFromMe);
+            foreach (var conv in conversationsToMe)
+            {
+                if (!conversations.Contains(conv))
+                    conversations.Add(conv);
+            }
+
+            var model = new MessagesIndexModel()
+            {
+                Conversations = conversations
+            };
+
+            return View(model);
         }
 
         private List<ChatMessageModel> GetMessages(string withUser)

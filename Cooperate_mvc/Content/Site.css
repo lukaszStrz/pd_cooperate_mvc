@@ -229,6 +229,20 @@ div#content {
                         padding-top: 0;
                     }
 
+            div#content div#realContent div.framedContent div.LastConversations span.person {
+                font-size: x-large;
+                padding: 10px;
+            }
+
+
+            div#content div#realContent div.framedContent div.LastConversations fieldset {
+                border: 1px dotted;
+            }
+
+                div#content div#realContent div.framedContent div.LastConversations fieldset div.LastConversationsContent {
+                    text-align: center;
+                }
+
 /*  Navigation section
     ------------------------------------------------------------*/
 

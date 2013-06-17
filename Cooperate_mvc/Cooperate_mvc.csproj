@@ -158,6 +158,7 @@
     <Compile Include="App_Code\Hash.cs" />
     <Compile Include="Models\ChatMessageModel.cs" />
     <Compile Include="Models\ChatModel.cs" />
+    <Compile Include="Models\MessagesIndexModel.cs" />
     <Compile Include="TasksSocketHandler.ashx.cs">
       <DependentUpon>TasksSocketHandler.ashx</DependentUpon>
     </Compile>
