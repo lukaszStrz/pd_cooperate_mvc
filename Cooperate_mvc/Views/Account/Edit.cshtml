@@ -52,10 +52,12 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#User_birth").datepicker({
-                changeMonth: true,
-                changeYear: true
-            });
+            if (!Modernizr.inputtypes['date']) {
+                $("#User_birth").datepicker({
+                    changeMonth: true,
+                    changeYear: true
+                });
+            }
         });
     </script>
 }

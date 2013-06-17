@@ -11,7 +11,8 @@ namespace Cooperate_mvc.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         public User()
@@ -25,15 +26,17 @@ namespace Cooperate_mvc.Models
             this.Tasks1 = new HashSet<Task>();
             this.Tasks2 = new HashSet<Task>();
         }
-    
+
         public int User_id { get; set; }
         public string User_firstName { get; set; }
         public string User_lastName { get; set; }
+
+        [DataType(DataType.Date)]
         public System.DateTime User_birth { get; set; }
         public string User_email { get; set; }
         public string User_pass { get; set; }
         public string User_login { get; set; }
-    
+
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Message> Messages1 { get; set; }
