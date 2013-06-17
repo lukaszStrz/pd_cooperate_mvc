@@ -5,6 +5,7 @@
 }
 
 <div class="framedContent">
+    <h2>Rozmowa z @Html.ActionLink(Model.UserLogin, "Details", "Account", new { login = Model.UserLogin }, null)</h2>
     <div id="Messages">
         @using (Ajax.BeginForm("SendMessage", new AjaxOptions() { HttpMethod = "POST", OnComplete = "$('#MessageText').val('');" }))
         {
@@ -40,15 +41,15 @@
         //var websocketDebug = $('websocketDebug');
         var messages = getEl('MessagesList');
         var url = 'ws://localhost:58930/ChatSocketHandler.ashx?L1=@User.Identity.Name&L2=@Model.UserLogin';
-            ws = new WebSocket(url);
+        ws = new WebSocket(url);
 
-            ws.onmessage = function (e) {
-                messages.insertBefore(createSpan(e.data.toString()), messages.firstChild);
-            };
-
-            //ws.onclose = function () {
-            //    websocketDebug.innerHTML = 'Closed connection!';
-            //};
-
+        ws.onmessage = function (e) {
+            messages.insertBefore(createSpan(e.data.toString()), messages.firstChild);
         };
+
+        //ws.onclose = function () {
+        //    websocketDebug.innerHTML = 'Closed connection!';
+        //};
+
+    };
 </script>

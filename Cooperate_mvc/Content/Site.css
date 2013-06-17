@@ -147,6 +147,24 @@ div#content {
                 margin-bottom: 5px;
             }
 
+            div#content div#realContent div.framedContent div#Messages fieldset legend span.Author {
+                font-size: large;
+                font-weight: bold;
+            }
+
+            div#content div#realContent div.framedContent div#Messages fieldset legend span.Datetime {
+                font-size: small;
+                color: #9a9a9a;
+            }
+
+            div#content div#realContent div.framedContent div#Messages div.MessageFromMe fieldset {
+                border: 1px dashed black;
+            }
+
+            div#content div#realContent div.framedContent div#Messages div.MessageToMe fieldset {
+                border: 1px dashed #9ca524;
+            }
+
             div#content div#realContent div.framedContent div#Posts fieldset {
                 border: 1px dotted #9a9a9a;
             }

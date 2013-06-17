@@ -2,21 +2,33 @@
 
 @if (Model.SenderLogin.Equals(User.Identity.Name))
 {
-    @: <div class="MessageFromMe">
+    <div class="MessageFromMe">
+        <fieldset>
+            <legend>
+                <span class="Author">
+                    @Html.ActionLink("Ja", "Details", "Account", new { login = Model.SenderLogin }, null)
+                </span>
+                <span class="Datetime">
+                    @Html.DisplayFor(model => model.Datetime)
+                </span>
+            </legend>
+            @Html.DisplayFor(model => model.Text)
+        </fieldset>
+    </div>
 }
 else
 {
-    @: <div class="MessageToMe">
+    <div class="MessageToMe">
+        <fieldset>
+            <legend>
+                <span class="Author">
+                    @Html.ActionLink(Model.SenderLogin, "Details", "Account", new { login = Model.SenderLogin }, null)
+                </span>
+                <span class="Datetime">
+                    @Html.DisplayFor(model => model.Datetime)
+                </span>
+            </legend>
+            @Html.DisplayFor(model => model.Text)
+        </fieldset>
+    </div>
 }
-<fieldset>
-    <legend>
-        <span class="Author">
-            @Html.ActionLink(Model.SenderLogin, "Details", "Account", new { login = Model.SenderLogin }, null)
-        </span>
-        <span class="Datetime">
-            @Html.DisplayFor(model => model.Datetime)
-        </span>
-    </legend>
-    @Html.DisplayFor(model => model.Text)
-</fieldset>
-</div>
