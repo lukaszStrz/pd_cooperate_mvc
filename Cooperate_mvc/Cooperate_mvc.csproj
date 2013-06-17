@@ -142,18 +142,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
-    <Compile Include="CooperateWebsocket.ashx.cs">
-      <DependentUpon>CooperateWebsocket.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Hash.cs" />
+    <Compile Include="GroupsSocket.cs" />
+    <Compile Include="GroupsSocketHandler.ashx.cs">
+      <DependentUpon>GroupsSocketHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Comment.cs">
       <DependentUpon>model_db.tt</DependentUpon>
     </Compile>
@@ -300,7 +302,7 @@
     </Content>
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
-    <Content Include="CooperateWebsocket.ashx" />
+    <Content Include="GroupsSocketHandler.ashx" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
     <Content Include="Scripts\jquery-2.0.2.min.js" />

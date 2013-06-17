@@ -60,7 +60,7 @@
             {
                 @Html.HiddenFor(model => model.Id)
                 <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
-                <input type="submit" value="Dodaj post" />
+                <input type="submit" id="PostSubmit" value="Dodaj post" />
             }
             <div id="PostsList">
                 @foreach (var post in ViewBag.Posts)
@@ -71,3 +71,43 @@
         </div>
     }
 </div>
+
+<script type="text/javascript">
+    var ws;
+
+    function $(id) {
+        return document.getElementById(id);
+    }
+
+    function createSpan(text) {
+        var span = document.createElement('span');
+        span.innerHTML = text + '<br />';
+        return span;
+    }
+
+    window.onload = function () {
+        var websocketDebug = $('websocketDebug');
+        var comments = $('PostsList');
+        var url = 'ws://localhost:58930/GroupsSocketHandler.ashx?login=@User.Identity.Name';
+
+        ws = new WebSocket(url);
+
+        ws.onerror = function (e) {
+            websocketDebug.appendChild(createSpan('Problem with connection: ' + e.message));
+        };
+
+        ws.onopen = function () {
+            websocketDebug.innerHTML = 'Client connected <br/>';
+        };
+
+        ws.onmessage = function (e) {
+            comments.insertBefore(createSpan(e.data.toString()), comments.firstChild);
+
+        };
+
+        ws.onclose = function () {
+            websocketDebug.innerHTML = 'Closed connection!';
+        };
+
+    };
+</script>

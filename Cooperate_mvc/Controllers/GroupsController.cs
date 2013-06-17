@@ -122,15 +122,28 @@ namespace Cooperate_mvc.Controllers
             db.Posts.Add(post);
             db.SaveChanges();
 
-            var pv = PartialView("_Post", new PostModel()
+            var postModel = new PostModel()
             {
                 Author_login = User.Identity.Name,
                 Text = PostText,
                 Datetime = post.Post_datetime,
                 Id = post.Post_id
-            });
+            };
 
-            return pv;
+            var users = (from u in db.Users
+                         join p in db.Participations on u.User_id equals p.User_id
+                         join g in db.Groups on p.Group_id equals g.Group_id
+                         where g.Group_id.Equals((long)Id) && !u.User_login.Equals(User.Identity.Name)
+                         select u.User_login).ToList();
+
+            string message = this.PartialViewToString("_Post", postModel);
+
+            foreach (var login in users)
+            {
+                GroupsSocket.SendTo(login, message);
+            }
+
+            return PartialView("_Post", postModel); ;
         }
 
         //
