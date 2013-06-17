@@ -105,10 +105,10 @@ namespace Cooperate_mvc.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult AddPost(string PostText, long? Id)
+        public /*PartialViewResult*/ void AddPost(string PostText, long? Id)
         {
             if (!Request.IsAjaxRequest() || PostText == null || Id == null)
-                return null;
+                return;
 
             Post post = new Post()
             {
@@ -133,7 +133,7 @@ namespace Cooperate_mvc.Controllers
             var users = (from u in db.Users
                          join p in db.Participations on u.User_id equals p.User_id
                          join g in db.Groups on p.Group_id equals g.Group_id
-                         where g.Group_id.Equals((long)Id) && !u.User_login.Equals(User.Identity.Name)
+                         where g.Group_id.Equals((long)Id) //&& !u.User_login.Equals(User.Identity.Name)
                          select u.User_login).ToList();
 
             string message = this.PartialViewToString("_Post", postModel);
@@ -143,7 +143,7 @@ namespace Cooperate_mvc.Controllers
                 GroupsSocket.SendTo(login, message);
             }
 
-            return PartialView("_Post", postModel); ;
+            //return PartialView("_Post", postModel); ;
         }
 
         //
