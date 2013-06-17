@@ -12,6 +12,27 @@ namespace Cooperate_mvc.Controllers
     {
         private compact_dbEntities db = new compact_dbEntities();
 
+        [HttpPost]
+        public PartialViewResult SearchUser(string SearchQuery)
+        {
+            if (!Request.IsAjaxRequest())
+                return null;
+
+            var users = (from u in db.Users
+                         where u.User_login.Contains(SearchQuery) || u.User_firstName.Contains(SearchQuery) || u.User_lastName.Contains(SearchQuery)
+                         orderby u.User_login ascending
+                         select new UserPrimModel()
+                         {
+                             FirstName = u.User_firstName,
+                             LastName = u.User_lastName,
+                             Login = u.User_login
+                         }).ToList();
+
+            var model = new SearchResultsModel() { Results = users };
+
+            return PartialView("_SearchResults", model);
+        }
+
         //
         // GET: /Account/Details/login
 

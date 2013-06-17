@@ -71,6 +71,9 @@ namespace Cooperate_mvc.Controllers
 
         public ActionResult Chat(string login = "")
         {
+            if (login.Equals(User.Identity.Name))
+                return RedirectToAction("InsufficientRights", "Error");
+
             User user = db.Users.SingleOrDefault(u => u.User_login.Equals(login));
 
             if (user == null)

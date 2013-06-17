@@ -159,6 +159,8 @@
     <Compile Include="Models\ChatMessageModel.cs" />
     <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\MessagesIndexModel.cs" />
+    <Compile Include="Models\SearchResultsModel.cs" />
+    <Compile Include="Models\UserPrimModel.cs" />
     <Compile Include="TasksSocketHandler.ashx.cs">
       <DependentUpon>TasksSocketHandler.ashx</DependentUpon>
     </Compile>
@@ -371,6 +373,8 @@
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Messages\Chat.cshtml" />
     <Content Include="Views\Shared\_Message.cshtml" />
+    <Content Include="Views\Shared\_UserSearch.cshtml" />
+    <Content Include="Views\Shared\_SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

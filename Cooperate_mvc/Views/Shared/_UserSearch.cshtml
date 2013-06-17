@@ -1,0 +1,9 @@
+﻿<div class="UserSearch">
+    @using (Ajax.BeginForm("SearchUser", "Account", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId = "SearchResults", InsertionMode = InsertionMode.Replace }))
+    {
+        <input type="text" name="SearchQuery" id="SearchQuery" />
+        <input type="submit" name="SubmitButton" id="SubmitButton" value="Szukaj" />
+    }
+    <div id="SearchResults">
+    </div>
+</div>
