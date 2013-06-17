@@ -29,53 +29,18 @@
                 @Html.Partial("_Nav")
             }
             <div id="realContent">
-                <div id="websocketDebug"></div>
+                @*                <div id="websocketDebug"></div>*@
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="framedContent">
+                        @Html.Partial("_UserSearch")
+                    </div>
+                }
                 @RenderBody()
             </div>
         </div>
         <div id="push"></div>
     </div>
-
-   @* @if (User.Identity.IsAuthenticated)
-    {
-        <script type="text/javascript">
-            var ws;
-
-            function $(id) {
-                return document.getElementById(id);
-            }
-
-            function createSpan(text) {
-                var span = document.createElement('span');
-                span.innerHTML = text + '<br />';
-                return span;
-            }
-
-            window.onload = function () {
-                var websocketDebug = $('websocketDebug');
-                var url = 'ws://localhost:58930/CooperateWebsocket.ashx?login=@User.Identity.Name';
-                ws = new WebSocket(url);
-
-                ws.onerror = function (e) {
-                    websocketDebug.appendChild(createSpan('Problem with connection: ' + e.message));
-                };
-
-                ws.onopen = function () {
-                    websocketDebug.innerHTML = 'Client connected <br/>';
-                };
-
-                ws.onmessage = function (e) {
-                    websocketDebug.appendChild(createSpan(e.data.toString()));
-                };
-
-                ws.onclose = function () {
-                    websocketDebug.innerHTML = 'Closed connection!';
-                };
-
-            };
-        </script>
-    }*@
-
     <footer>
         @Html.Partial("_Footer")
     </footer>

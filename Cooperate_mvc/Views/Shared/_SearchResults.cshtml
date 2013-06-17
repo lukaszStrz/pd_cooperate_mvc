@@ -1,11 +1,14 @@
 ﻿@model Cooperate_mvc.Models.SearchResultsModel
 
-<fieldset>
-    <legend>Wyniki wyszukiwania</legend>
-    @foreach (var item in Model.Results)
-    {
-        <div class="Result">
-            @Html.ActionLink(item.ToString(), "Chat", "Messages", new { login = item.Login }, null)
-        </div>
-    }
-</fieldset>
+@if (Model.Results.Count > 0)
+{
+    <fieldset>
+        <legend>Wyniki wyszukiwania</legend>
+        @foreach (var item in Model.Results)
+        {
+            <div class="Result">
+                @Html.ActionLink(item.ToString(), "Details", "Account", new { login = item.Login }, null)
+            </div>
+        }
+    </fieldset>
+}
