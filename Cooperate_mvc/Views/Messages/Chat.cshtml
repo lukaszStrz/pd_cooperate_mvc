@@ -1,0 +1,54 @@
+﻿@model Cooperate_mvc.Models.ChatModel
+
+@{
+    ViewBag.Title = "Chat";
+}
+
+<div class="framedContent">
+    <div id="Messages">
+        @using (Ajax.BeginForm("SendMessage", new AjaxOptions() { HttpMethod = "POST", OnComplete = "$('#MessageText').val('');" }))
+        {
+            @Html.HiddenFor(model => model.UserLogin)
+            <textarea cols="20" id="MessageText" name="MessageText" rows="2"></textarea>
+            <input type="submit" value="Wyślij" />
+        }
+        <div id="MessagesList">
+            @foreach (var message in Model.Messages)
+            {
+                <span>
+                    @Html.Partial("_Message", message)
+                </span>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var ws;
+
+    function getEl(id) {
+        return document.getElementById(id);
+    }
+
+    function createSpan(text) {
+        var span = document.createElement('span');
+        span.innerHTML = text;
+        return span;
+    }
+
+    window.onload = function () {
+        //var websocketDebug = $('websocketDebug');
+        var messages = getEl('MessagesList');
+        var url = 'ws://localhost:58930/ChatSocketHandler.ashx?L1=@User.Identity.Name&L2=@Model.UserLogin';
+            ws = new WebSocket(url);
+
+            ws.onmessage = function (e) {
+                messages.insertBefore(createSpan(e.data.toString()), messages.firstChild);
+            };
+
+            //ws.onclose = function () {
+            //    websocketDebug.innerHTML = 'Closed connection!';
+            //};
+
+        };
+</script>

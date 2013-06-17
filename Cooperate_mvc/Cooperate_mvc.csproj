@@ -142,19 +142,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ChatSocketHandler.ashx.cs">
+      <DependentUpon>ChatSocketHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="ControllerExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Hash.cs" />
+    <Compile Include="Models\ChatMessageModel.cs" />
+    <Compile Include="Models\ChatModel.cs" />
     <Compile Include="TasksSocketHandler.ashx.cs">
       <DependentUpon>TasksSocketHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="WebSockets\ChatSocket.cs" />
     <Compile Include="WebSockets\GroupsSocket.cs" />
     <Compile Include="GroupsSocketHandler.ashx.cs">
       <DependentUpon>GroupsSocketHandler.ashx</DependentUpon>
@@ -307,6 +314,7 @@
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="GroupsSocketHandler.ashx" />
+    <Content Include="ChatSocketHandler.ashx" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.2.js" />
     <Content Include="Scripts\jquery-2.0.2.min.js" />
@@ -359,6 +367,9 @@
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
     <Content Include="TasksSocketHandler.ashx" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Messages\Chat.cshtml" />
+    <Content Include="Views\Shared\_Message.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

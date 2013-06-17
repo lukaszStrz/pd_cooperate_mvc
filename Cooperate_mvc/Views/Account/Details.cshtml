@@ -7,6 +7,13 @@
     <fieldset>
         <legend>@Model.Login</legend>
 
+        @if (!@Model.Login.Equals(User.Identity.Name))
+        {
+            <div class="sendMessage">
+                @Html.ActionLink("Napisz wiadomość do @" + Model.Login, "Chat", "Messages", new { login = Model.Login }, null)
+            </div>
+        }
+
         <div class="display-label">
             @Html.DisplayName("Imię i nazwisko")
         </div>
@@ -17,18 +24,18 @@
             @Html.DisplayNameFor(model => model.Birth)
         </div>
         <div class="display-field">
-            @Html.DisplayFor(model =>model.Birth)
-        </div>
-
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Email)
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Birth)
         </div>
 
         @if (Model.Login.Equals(User.Identity.Name))
         {
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.Email)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.Email)
+            </div>
+
             <div>
                 @Html.ActionLink("Edytuj dane", "Edit", new { login = Model.Login })
             </div>

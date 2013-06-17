@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Cooperate_mvc
@@ -22,6 +18,11 @@ namespace Cooperate_mvc
                name: "AccountEditRoute",
                url: "Account/Edit/{login}",
                defaults: new { controller = "Account", action = "Edit", login = UrlParameter.Optional }
+               );
+            routes.MapRoute(
+               name: "ChatRoute",
+               url: "Messages/Chat/{login}",
+               defaults: new { controller = "Messages", action = "Chat", login = UrlParameter.Optional }
                );
             routes.MapRoute(
                 name: "Default",
