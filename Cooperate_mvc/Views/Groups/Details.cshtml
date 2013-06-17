@@ -56,7 +56,7 @@
         </fieldset>
         <hr />
         <div id="Posts">
-            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", @*UpdateTargetId = "PostsList", InsertionMode = InsertionMode.InsertBefore,*@ OnComplete = "$('#PostText').val('');" })) // TODO: OnComplete coś nie działa
+            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", @*UpdateTargetId = "PostsList", InsertionMode = InsertionMode.InsertBefore,*@ OnComplete = "$('#PostText').val('');" })) // zmienione, teraz komentarz pojawia się po otrzymaniu go z WS, a nie dzięki ajaxowi
             {
                 @Html.HiddenFor(model => model.Id)
                 <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
