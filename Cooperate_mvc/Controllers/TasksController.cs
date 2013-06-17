@@ -1,4 +1,5 @@
 ﻿using Cooperate_mvc.Models;
+using Cooperate_mvc.WebSockets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,6 +105,7 @@ namespace Cooperate_mvc.Controllers
         {
             return (from c in db.Comments
                     where c.Task_id.Equals(id)
+                    orderby c.Comment_datetime descending
                     select new PostModel()
                     {
                         Author_login = c.User.User_login,
@@ -114,10 +116,10 @@ namespace Cooperate_mvc.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult AddComment(string PostText, long? Id)
+        public void AddComment(string PostText, long? Id)
         {
             if (!Request.IsAjaxRequest() || PostText == null || Id == null)
-                return null;
+                return;
 
             Comment comment = new Comment()
             {
@@ -131,13 +133,17 @@ namespace Cooperate_mvc.Controllers
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            return PartialView("_Post", new PostModel()
+            var commentModel = new PostModel()
             {
                 Author_login = User.Identity.Name,
                 Text = PostText,
                 Datetime = comment.Comment_datetime,
                 Id = comment.Comment_id
-            });
+            };
+
+            string message = this.PartialViewToString("_Post", commentModel);
+
+            TasksSocket.SendTo((long)Id, message);
         }
 
         [HttpPost]

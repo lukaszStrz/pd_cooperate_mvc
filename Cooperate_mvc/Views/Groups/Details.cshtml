@@ -57,10 +57,7 @@
         <hr />
         <div id="Posts">
             @*            zmienione, teraz post pojawia się po otrzymaniu go z WS, a nie dzięki ajaxowi*@
-            @using (Ajax.BeginForm("AddPost", new AjaxOptions()
-            {
-                HttpMethod = "POST", OnComplete = "$('#PostText').val('');"
-            }))
+            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", OnComplete = "$('#PostText').val('');" }))
             {
                 @Html.HiddenFor(model => model.Id)
                 <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
