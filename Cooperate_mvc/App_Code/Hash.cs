@@ -33,11 +33,11 @@ namespace HashLib
             string hashString;
             switch (hashType)
             {
-                case HashType.MD5: 
-                    hashString = GetMD5(text); 
+                case HashType.MD5:
+                    hashString = GetMD5(text);
                     break;
-                case HashType.SHA1: 
-                    hashString = GetSHA1(text); 
+                case HashType.SHA1:
+                    hashString = GetSHA1(text);
                     break;
                 case HashType.SHA256:
                     hashString = GetSHA256(text);
@@ -50,7 +50,7 @@ namespace HashLib
             }
             return hashString;
         }
-        
+
         /// <summary>
         /// Sprawdza, czy tekst jest zgodny z podanym hashem.
         /// </summary>
@@ -105,7 +105,7 @@ namespace HashLib
             UnicodeEncoding UE = new UnicodeEncoding();
             byte[] hashValue;
             byte[] message = UE.GetBytes(text);
-            
+
             SHA256Managed hashString = new SHA256Managed();
             string hex = "";
 
@@ -119,10 +119,14 @@ namespace HashLib
 
         private static string GetSHA512(string text)
         {
+            if (string.IsNullOrEmpty(text))
+            {
+                text = "";
+            }
             UnicodeEncoding UE = new UnicodeEncoding();
             byte[] hashValue;
             byte[] message = UE.GetBytes(text);
-            
+
             SHA512Managed hashString = new SHA512Managed();
             string hex = "";
 
