@@ -56,7 +56,11 @@
         </fieldset>
         <hr />
         <div id="Posts">
-            @using (Ajax.BeginForm("AddPost", new AjaxOptions() { HttpMethod = "POST", @*UpdateTargetId = "PostsList", InsertionMode = InsertionMode.InsertBefore,*@ OnComplete = "$('#PostText').val('');" })) // zmienione, teraz komentarz pojawia się po otrzymaniu go z WS, a nie dzięki ajaxowi
+            @*            zmienione, teraz post pojawia się po otrzymaniu go z WS, a nie dzięki ajaxowi*@
+            @using (Ajax.BeginForm("AddPost", new AjaxOptions()
+            {
+                HttpMethod = "POST", OnComplete = "$('#PostText').val('');"
+            }))
             {
                 @Html.HiddenFor(model => model.Id)
                 <textarea cols="20" id="PostText" name="PostText" rows="2"></textarea>
@@ -74,42 +78,44 @@
     }
 </div>
 
-<script type="text/javascript">
-    var ws;
+@if (ViewBag.IsParticipant)
+{
+    <script type="text/javascript">
+        var ws;
 
-    function getEl(id) {
-        return document.getElementById(id);
-    }
+        function getEl(id) {
+            return document.getElementById(id);
+        }
 
-    function createSpan(text) {
-        var span = document.createElement('span');
-        span.innerHTML = text;
-        return span;
-    }
+        function createSpan(text) {
+            var span = document.createElement('span');
+            span.innerHTML = text;
+            return span;
+        }
 
-    window.onload = function () {
-        //var websocketDebug = $('websocketDebug');
-        var comments = getEl('PostsList');
-        var url = 'ws://localhost:58930/GroupsSocketHandler.ashx?login=@User.Identity.Name';
+        window.onload = function () {
+            //var websocketDebug = $('websocketDebug');
+            var comments = getEl('PostsList');
+            var url = 'ws://localhost:58930/GroupsSocketHandler.ashx?id=@Model.Id';
+            ws = new WebSocket(url);
 
-        ws = new WebSocket(url);
+            //ws.onerror = function (e) {
+            //    websocketDebug.appendChild(createSpan('Problem with connection: ' + e.message));
+            //};
 
-        //ws.onerror = function (e) {
-        //    websocketDebug.appendChild(createSpan('Problem with connection: ' + e.message));
-        //};
+            //ws.onopen = function () {
+            //    websocketDebug.innerHTML = 'Client connected <br/>';
+            //};
 
-        //ws.onopen = function () {
-        //    websocketDebug.innerHTML = 'Client connected <br/>';
-        //};
+            ws.onmessage = function (e) {
+                comments.insertBefore(createSpan(e.data.toString()), comments.firstChild);
 
-        ws.onmessage = function (e) {
-            comments.insertBefore(createSpan(e.data.toString()), comments.firstChild);
+            };
+
+            //ws.onclose = function () {
+            //    websocketDebug.innerHTML = 'Closed connection!';
+            //};
 
         };
-
-        //ws.onclose = function () {
-        //    websocketDebug.innerHTML = 'Closed connection!';
-        //};
-
-    };
-</script>
+    </script>
+}

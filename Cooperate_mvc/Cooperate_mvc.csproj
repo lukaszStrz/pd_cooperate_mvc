@@ -152,7 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Hash.cs" />
-    <Compile Include="GroupsSocket.cs" />
+    <Compile Include="WebSockets\GroupsSocket.cs" />
     <Compile Include="GroupsSocketHandler.ashx.cs">
       <DependentUpon>GroupsSocketHandler.ashx</DependentUpon>
     </Compile>

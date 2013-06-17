@@ -1,4 +1,5 @@
 ﻿using Cooperate_mvc.Models;
+using Cooperate_mvc.WebSockets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,7 +106,7 @@ namespace Cooperate_mvc.Controllers
         }
 
         [HttpPost]
-        public /*PartialViewResult*/ void AddPost(string PostText, long? Id)
+        public void AddPost(string PostText, long? Id)
         {
             if (!Request.IsAjaxRequest() || PostText == null || Id == null)
                 return;
@@ -130,20 +131,9 @@ namespace Cooperate_mvc.Controllers
                 Id = post.Post_id
             };
 
-            var users = (from u in db.Users
-                         join p in db.Participations on u.User_id equals p.User_id
-                         join g in db.Groups on p.Group_id equals g.Group_id
-                         where g.Group_id.Equals((long)Id) //&& !u.User_login.Equals(User.Identity.Name)
-                         select u.User_login).ToList();
-
             string message = this.PartialViewToString("_Post", postModel);
 
-            foreach (var login in users)
-            {
-                GroupsSocket.SendTo(login, message);
-            }
-
-            //return PartialView("_Post", postModel); ;
+            GroupsSocket.SendTo((long)Id, message);
         }
 
         //
